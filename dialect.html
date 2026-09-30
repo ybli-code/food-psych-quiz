@@ -6,798 +6,960 @@
 <title>山东方言大测评 | 测测你是哪市人</title>
 <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --bg: #FFF5EB; --card: #FFFFFF; --ink: #2D1B14; --ink-soft: #7A6558;
-    --accent: #FF6B35; --accent-soft: #FFE8D6;
-    --green: #6BBF59; --green-soft: #E2F4DC;
-    --pink: #E85D75; --pink-soft: #FBE0E6;
-    --blue: #4A90D9; --blue-soft: #DCEAFB;
-    --yellow: #F7B801; --yellow-soft: #FFF3D0;
-    --radius: 20px;
-  }
-  html, body {
-    height: 100%; font-family: 'Noto Sans SC', -apple-system, sans-serif;
-    background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased;
-  }
-  body { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 16px; }
-  #app { width: 100%; max-width: 420px; }
-  .view { display: none; animation: fadeIn 0.4s ease; }
-  .view.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-
-  .start-card { background: var(--card); border-radius: var(--radius); padding: 28px 24px; text-align: center; box-shadow: 0 8px 32px rgba(255,107,53,.12); }
-  .start-img { width: 100%; border-radius: 16px; margin-bottom: 18px; }
-  .start-title { font-size: 26px; font-weight: 900; line-height: 1.3; margin-bottom: 10px; }
-  .start-sub { font-size: 14px; color: var(--ink-soft); line-height: 1.7; margin-bottom: 26px; }
-  .btn-primary { display: inline-block; background: var(--accent); color: #fff; border: none; font-size: 17px; font-weight: 700; padding: 14px 42px; border-radius: 50px; cursor: pointer; font-family: inherit; box-shadow: 0 4px 16px rgba(255,107,53,.35); transition: transform .15s; }
-  .btn-primary:active { transform: scale(.96); }
-
-  .progress-bar { height: 6px; background: var(--accent-soft); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
-  .progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width .4s ease; }
-  .q-tag { display: inline-block; font-size: 11px; font-weight: 700; color: var(--accent); background: var(--accent-soft); padding: 3px 12px; border-radius: 20px; margin-bottom: 12px; }
-  .q-emoji { font-size: 52px; text-align: center; margin-bottom: 14px; line-height: 1; }
-  .question-text { font-size: 21px; font-weight: 900; line-height: 1.4; margin-bottom: 22px; text-align: center; }
-  .options { display: flex; flex-direction: column; gap: 12px; }
-  .option-card { background: var(--card); border-radius: 16px; padding: 18px 20px; cursor: pointer; border: 3px solid transparent; transition: transform .15s, border-color .2s; box-shadow: 0 4px 12px rgba(45,27,20,.06); }
-  .option-card:active { transform: scale(.97); }
-  .option-card .opt-text { font-size: 16px; font-weight: 700; line-height: 1.4; }
-  .opt-c1 { border-left: 4px solid var(--accent); }
-  .opt-c2 { border-left: 4px solid var(--blue); }
-  .opt-c3 { border-left: 4px solid var(--green); }
-  .opt-c4 { border-left: 4px solid var(--pink); }
-
-  .result-card { background: var(--card); border-radius: var(--radius); padding: 32px 26px; text-align: center; box-shadow: 0 8px 32px rgba(45,27,20,.1); }
-  .result-badge { display: inline-block; padding: 6px 20px; border-radius: 50px; font-size: 13px; font-weight: 700; margin-bottom: 18px; background: var(--accent-soft); color: var(--accent); }
-  .result-city { font-size: 36px; font-weight: 900; margin-bottom: 14px; color: var(--accent); }
-  .result-emoji { font-size: 64px; margin-bottom: 14px; }
-  .result-desc { font-size: 15px; color: var(--ink-soft); line-height: 1.8; margin-bottom: 14px; }
-  .result-fact { background: var(--accent-soft); border-radius: 12px; padding: 14px 16px; font-size: 13px; color: var(--ink); line-height: 1.7; margin-bottom: 26px; text-align: left; }
-  .btn-restart { display: inline-block; background: var(--accent-soft); color: var(--accent); border: none; font-size: 15px; font-weight: 700; padding: 13px 32px; border-radius: 50px; cursor: pointer; font-family: inherit; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#FFF5EB;--card:#fff;--ink:#2D1B14;--soft:#7A6558;--accent:#FF6B35;--accent-s:#FFE8D6;--g:#6BBF59;--b:#4A90D9;--p:#E85D75;--r:20px}
+  html,body{height:100%;font-family:'Noto Sans SC',-apple-system,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+  body{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:16px}
+  #app{width:100%;max-width:420px}
+  .view{display:none;animation:fi .4s ease}.view.active{display:block}
+  @keyframes fi{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .sc{background:var(--card);border-radius:var(--r);padding:28px 24px;text-align:center;box-shadow:0 8px 32px rgba(255,107,53,.12)}
+  .si{width:100%;border-radius:16px;margin-bottom:18px}
+  .st{font-size:26px;font-weight:900;line-height:1.3;margin-bottom:10px}
+  .ss{font-size:14px;color:var(--soft);line-height:1.7;margin-bottom:26px}
+  .bp{display:inline-block;background:var(--accent);color:#fff;border:none;font-size:17px;font-weight:700;padding:14px 42px;border-radius:50px;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(255,107,53,.35)}
+  .bp:active{transform:scale(.96)}
+  .pb{height:6px;background:var(--accent-s);border-radius:3px;margin-bottom:16px;overflow:hidden}
+  .pf{height:100%;background:var(--accent);border-radius:3px;transition:width .4s ease}
+  .qt{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-s);padding:3px 12px;border-radius:20px;margin-bottom:12px}
+  .qe{font-size:48px;text-align:center;margin-bottom:14px;line-height:1}
+  .qt2{font-size:20px;font-weight:900;line-height:1.45;margin-bottom:22px;text-align:center}
+  .op{display:flex;flex-direction:column;gap:12px}
+  .oc{background:var(--card);border-radius:16px;padding:18px 20px;cursor:pointer;border:3px solid transparent;transition:transform .15s;box-shadow:0 4px 12px rgba(45,27,20,.06)}
+  .oc:active{transform:scale(.97)}
+  .oc .ot{font-size:16px;font-weight:700;line-height:1.4}
+  .c1{border-left:4px solid var(--accent)}.c2{border-left:4px solid var(--b)}.c3{border-left:4px solid var(--g)}.c4{border-left:4px solid var(--p)}
+  .rc{background:var(--card);border-radius:var(--r);padding:32px 26px;text-align:center;box-shadow:0 8px 32px rgba(45,27,20,.1)}
+  .rb{display:inline-block;padding:6px 20px;border-radius:50px;font-size:13px;font-weight:700;margin-bottom:18px;background:var(--accent-s);color:var(--accent)}
+  .rc2{font-size:36px;font-weight:900;margin-bottom:8px;color:var(--accent)}
+  .rq{font-size:13px;color:var(--soft);margin-bottom:14px}
+  .rd{font-size:15px;color:var(--soft);line-height:1.8;margin-bottom:14px}
+  .rf{background:var(--accent-s);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--ink);line-height:1.7;margin-bottom:26px;text-align:left}
+  .br{display:inline-block;background:var(--accent-s);color:var(--accent);border:none;font-size:15px;font-weight:700;padding:13px 32px;border-radius:50px;cursor:pointer;font-family:inherit}
 </style>
 </head>
 <body>
 <div id="app">
-
-  <div class="view active" id="view-start">
-    <div class="start-card">
-      <img class="start-img" src="images/cover.png" alt="山东方言测评">
-      <div class="start-title">山东方言大测评</div>
-      <div class="start-sub">
-        从100+道方言题里随机抽6-8道，<br>
-        层层缩小范围，测出你是哪市人。<br>
-        每测一次题目都不一样。
-      </div>
-      <button class="btn-primary" onclick="startQuiz()">开始测试</button>
+  <div class="view active" id="vs">
+    <div class="sc">
+      <img class="si" src="images/cover.png" alt="山东方言测评">
+      <div class="st">山东方言大测评</div>
+      <div class="ss">纯方言版——不考地理不考特产，<br>只通过你说话的用词和发音，<br>从三大官话区逐层缩小到具体市。<br>每次抽6-8题，答案不重复。</div>
+      <button class="bp" onclick="startQuiz()">开始测试</button>
     </div>
   </div>
-
-  <div class="view" id="view-quiz">
-    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="q-tag" id="qTag">第 1 题 / 共 7 题</div>
-    <div class="q-emoji" id="qEmoji">🌽</div>
-    <div class="question-text" id="qText"></div>
-    <div class="options" id="qOptions"></div>
+  <div class="view" id="vq">
+    <div class="pb"><div class="pf" id="pf"></div></div>
+    <div class="qt" id="qt">第1题</div>
+    <div class="qe" id="qe">🗣️</div>
+    <div class="qt2" id="q2"></div>
+    <div class="op" id="op"></div>
   </div>
-
-  <div class="view" id="view-result">
-    <div class="result-card">
-      <div class="result-badge">测试结果</div>
-      <div class="result-emoji" id="rEmoji"></div>
-      <div class="result-city" id="rCity"></div>
-      <div class="result-desc" id="rDesc"></div>
-      <div class="result-fact" id="rFact"></div>
-      <button class="btn-restart" onclick="restart()">再测一次</button>
+  <div class="view" id="vr">
+    <div class="rc">
+      <div class="rb">测试结果</div>
+      <div class="qe" id="re" style="font-size:64px;margin-bottom:14px"></div>
+      <div class="rc2" id="rc"></div>
+      <div class="rq" id="rq"></div>
+      <div class="rd" id="rd"></div>
+      <div class="rf" id="rf"></div>
+      <button class="br" onclick="restart()">再测一次</button>
     </div>
   </div>
-
 </div>
-
 <script>
-// ========== 全16市 ==========
-var ALL_CITIES = ["济南","青岛","淄博","枣庄","东营","烟台","潍坊","济宁","泰安","威海","日照","临沂","德州","聊城","滨州","菏泽"];
+// ===== 山东方言知识图谱：三大官话区 =====
+// 冀鲁官话: 济南 淄博 泰安 滨州 德州 聊城 东营
+// 胶辽官话: 青岛 烟台 威海 潍坊 日照
+// 中原官话: 菏泽 济宁 枣庄 临沂
+var ALL=["济南","青岛","淄博","枣庄","东营","烟台","潍坊","济宁","泰安","威海","日照","临沂","德州","聊城","滨州","菏泽"];
+var QH={"济南":"冀鲁官话","淄博":"冀鲁官话","泰安":"冀鲁官话","滨州":"冀鲁官话","德州":"冀鲁官话","聊城":"冀鲁官话","东营":"冀鲁官话","青岛":"胶辽官话","烟台":"胶辽官话","威海":"胶辽官话","潍坊":"胶辽官话","日照":"胶辽官话","菏泽":"中原官话","济宁":"中原官话","枣庄":"中原官话","临沂":"中原官话"};
 
-// ========== 题库 ==========
-// 每题: { emoji, q, options: [{text, cities:[...]}] }
-var bank = [
-// ---- L1 大区区分题 ----
-{emoji:"🌽", q:"玉米在你老家话里叫什么？", options:[
-  {text:"棒子", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"苞米", cities:["青岛","烟台","威海","潍坊"]},
-  {text:"玉豆", cities:["日照"]},
-  {text:"玉蜀黍", cities:["菏泽","济宁","枣庄","临沂"]}
+// 题库：l=层级(1大区/2片内/3定市)
+// 全部为纯方言词汇/语音差异，不考地理特产
+var bank=[
+// ===== L1 三大官话区核心区分（语音特征）=====
+{l:1,e:"🧍",q:"\"人\"字在你老家话里怎么读？",o:[
+ {t:"rén（跟普通话差不多）",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"yín（像\"银\"）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"lén/lún（像\"仑\"）",c:["菏泽","临沂"]},
+ {t:"rēn",c:["济南","淄博","泰安"]}
 ]},
-{emoji:"💧", q:"你很渴，拿起杯子说我要——", options:[
-  {text:"喝水", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"哈水", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"喝非", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"喝汤", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:1,e:"🍽️",q:"\"吃饭\"的\"吃\"，你怎么说？",o:[
+ {t:"chī",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"jí（像\"急\"）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"qiá",c:["菏泽","济宁"]},
+ {t:"qiě",c:["枣庄","临沂"]}
 ]},
-{emoji:"🤔", q:"问别人\"你在干什么\"，你怎么说？", options:[
-  {text:"干什么", cities:["济南","淄博","泰安","滨州"]},
-  {text:"揍什么", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"咋", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"做啥", cities:["德州","聊城","东营"]}
+{l:1,e:"💧",q:"\"水\"字在你老家话里怎么读？",o:[
+ {t:"shuǐ",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"fěi（像\"匪\"）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"fèi",c:["菏泽","临沂"]},
+ {t:"shuí",c:["济南","淄博"]}
 ]},
-{emoji:"🌙", q:"太阳落山了，你说的是？", options:[
-  {text:"后晌", cities:["滨州","东营","淄博"]},
-  {text:"晚航", cities:["菏泽"]},
-  {text:"夜来哄上", cities:["德州"]},
-  {text:"晚司", cities:["聊城"]}
+{l:1,e:"⚪",q:"\"白\"字在你老家话里怎么读？",o:[
+ {t:"bái",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"béi",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"bó",c:["烟台","威海"]},
+ {t:"bā",c:["菏泽","济宁"]}
 ]},
-{emoji:"🍞", q:"那个白面做的圆馒头，你们叫？", options:[
-  {text:"馒头", cities:["济南","泰安","滨州","德州","聊城","东营"]},
-  {text:"馍馍", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"饽饽", cities:["青岛","烟台","威海","潍坊"]},
-  {text:"卷子", cities:["淄博"]}
+{l:1,e:"🗣️",q:"\"说话\"的\"说\"，你怎么说？",o:[
+ {t:"shuō",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"xué（像\"学\"）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"shuāi",c:["济南","淄博","泰安"]},
+ {t:"fó",c:["菏泽","济宁"]}
 ]},
-{emoji:"🍚", q:"早上那碗稀粥，你叫它？", options:[
-  {text:"喝粥", cities:["济南","泰安","菏泽","济宁","枣庄","临沂","滨州","德州","聊城","东营"]},
-  {text:"喝米汤", cities:["烟台"]},
-  {text:"喝黏煮", cities:["潍坊"]},
-  {text:"喝稀饭", cities:["威海","日照"]}
+{l:1,e:"🚪",q:"\"我去\"的\"去\"，你怎么说？",o:[
+ {t:"qù",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"kǎi/kè",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"qi",c:["济南","淄博","泰安"]},
+ {t:"qie",c:["菏泽","济宁"]}
 ]},
-{emoji:"👍", q:"吃到好吃的，你会说——", options:[
-  {text:"刚赛了", cities:["淄博"]},
-  {text:"真不孬", cities:["济南"]},
-  {text:"杠赛咧", cities:["泰安"]},
-  {text:"不糙", cities:["滨州"]}
+{l:1,e:"🔪",q:"\"割麦子\"的\"割\"，你怎么说？",o:[
+ {t:"gē",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"gá（像\"嘎\"）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"guá",c:["青岛","日照"]},
+ {t:"gěi",c:["菏泽","济宁"]}
 ]},
-{emoji:"👉", q:"指着不远处那个东西，你说？", options:[
-  {text:"捏个", cities:["临沂","菏泽"]},
-  {text:"那户", cities:["济宁"]},
-  {text:"过儿", cities:["枣庄"]},
-  {text:"捏过", cities:["日照"]}
+{l:1,e:"📌",q:"\"知道\"在你老家话里怎么说？",o:[
+ {t:"zhī dào",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"dào（只说\"道\"）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"zhidao",c:["济南","淄博"]},
+ {t:"zhedao",c:["菏泽","济宁"]}
 ]},
-{emoji:"👨‍🏫", q:"路上想问个路，你称呼人家——", options:[
-  {text:"老师儿", cities:["济南"]},
-  {text:"师傅", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"老师", cities:["淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"大哥", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:1,e:"📅",q:"\"今天\"在你老家话里怎么说？",o:[
+ {t:"jīn tiān",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"jīn měi / jīn meí",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"jīn mén",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"jīn'r",c:["济南","淄博","泰安"]}
 ]},
-{emoji:"🥵", q:"夸人长得好看，你说？", options:[
-  {text:"真俊", cities:["济南","淄博","泰安"]},
-  {text:"真靓", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"真排场", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"真带劲", cities:["德州","聊城","滨州","东营"]}
+{l:1,e:"📆",q:"\"昨天\"在你老家话里怎么说？",o:[
+ {t:"zuó tiān",c:["济南","淄博","泰安","滨州"]},
+ {t:"yè lái（夜来）",c:["德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"yè'r lǐ",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"zuó yè",c:["济南","淄博"]}
 ]},
-
-// ---- L2 片区细分题 ----
-{emoji:"🥟", q:"那盘带馅的水煮饺，你们叫？", options:[
-  {text:"饺子", cities:["济南","泰安","德州","聊城","东营","滨州","菏泽","济宁","枣庄","临沂"]},
-  {text:"扁食", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"包子", cities:["淄博"]},
-  {text:"馄饨", cities:["枣庄"]}
+{l:1,e:"🌽",q:"玉米在你老家话里叫什么？",o:[
+ {t:"bàng zi（棒子）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"bāo mǐ（苞米）",c:["青岛","烟台","威海","潍坊"]},
+ {t:"yù dòu（玉豆）",c:["日照"]},
+ {t:"yù shǔ shǔ（玉蜀黍）",c:["菏泽","济宁","枣庄","临沂"]}
 ]},
-{emoji:"😋", q:"\"很香\"这个意思，你怎么说？", options:[
-  {text:"刚香", cities:["淄博"]},
-  {text:"真香", cities:["济南","泰安"]},
-  {text:"奇香", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"杠香", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:1,e:"🍞",q:"馒头在你老家话里叫什么？",o:[
+ {t:"mán tou（馒头）",c:["济南","泰安","滨州","德州","聊城","东营"]},
+ {t:"bō bō（饽饽）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"mó mó（馍馍）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"juǎn zi（卷子）",c:["淄博"]}
 ]},
-{emoji:"👴", q:"你爷爷，你当面叫？", options:[
-  {text:"爷爷", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"爷爷", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"爹爹", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"老爷", cities:["临沂"]}
+{l:1,e:"🥣",q:"早上那碗稀粥，你叫它？",o:[
+ {t:"zhōu（粥）",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"mǐ tāng（米汤）",c:["烟台"]},
+ {t:"nián zhǔ（黏煮）",c:["潍坊"]},
+ {t:"xī fàn（稀饭）",c:["威海","日照"]}
 ]},
-{emoji:"👵", q:"你奶奶，你当面叫？", options:[
-  {text:"奶奶", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"娘娘", cities:["青岛","烟台","威海"]},
-  {text:"奶奶", cities:["潍坊","日照"]},
-  {text:"奶奶", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:1,e:"🤷",q:"\"什么\"在你老家话里怎么说？",o:[
+ {t:"shén me",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"me（么）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"shá（啥）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"zǎ（咋）",c:["菏泽","临沂"]}
 ]},
-{emoji:"🌅", q:"明天早上，你们说？", options:[
-  {text:"明儿", cities:["济南","淄博","泰安","德州","聊城","滨州","东营"]},
-  {text:"早起来", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"明里", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"赶明", cities:["德州"]}
+{l:1,e:"🚶",q:"\"走路\"在你老家话里怎么说？",o:[
+ {t:"zǒu dào（走道）",c:["济南","淄博","泰安","滨州"]},
+ {t:"zǒu jiā（走家）",c:["青岛","烟台","威海"]},
+ {t:"zǒu lù（走路）",c:["菏泽","济宁","枣庄","临沂","德州","聊城","东营"]},
+ {t:"nuó（挪）",c:["潍坊","日照"]}
 ]},
-{emoji:"🤏", q:"形容东西很小，你说？", options:[
-  {text:"刚小", cities:["淄博"]},
-  {text:"真小", cities:["济南","泰安"]},
-  {text:"血小", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"刚小", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:1,e:"😴",q:"\"睡觉\"在你老家话里怎么说？",o:[
+ {t:"kùn jiào（困觉）",c:["济南","淄博","泰安","滨州"]},
+ {t:"shuì jiào",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"shuì jiào",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"tǎng tǎng（躺躺）",c:["德州","聊城","东营"]}
 ]},
-{emoji:"🚶", q:"\"走路\"这个动作，你说？", options:[
-  {text:"走道", cities:["济南","淄博","泰安","滨州"]},
-  {text:"走家", cities:["青岛","烟台","威海"]},
-  {text:"赶路", cities:["潍坊","日照"]},
-  {text:"行路", cities:["菏泽","济宁","枣庄","临沂","德州","聊城","东营"]}
+{l:1,e:"🤏",q:"形容东西\"很小\"，你怎么说？",o:[
+ {t:"hěn xiǎo / zhēn xiǎo",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"xiě xiǎo（血小）",c:["青岛","烟台","威海"]},
+ {t:"qí xiǎo（奇小）",c:["青岛","潍坊","日照"]},
+ {t:"gàng xiǎo（杠小）",c:["菏泽","济宁","枣庄","临沂"]}
 ]},
-{emoji:"🛏️", q:"该睡觉了，你说？", options:[
-  {text:"困觉", cities:["济南","淄博","泰安","滨州"]},
-  {text:"睡觉得", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"睡觉", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"躺躺", cities:["德州","聊城","东营"]}
+{l:1,e:"👍",q:"形容东西\"很好\"，你怎么说？",o:[
+ {t:"hěn hǎo / zhēn hǎo",c:["济南","泰安","德州","聊城","滨州","东营"]},
+ {t:"gāng sài（刚赛）",c:["淄博"]},
+ {t:"qí hǎo（奇好）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"gàng hǎo（杠好）",c:["菏泽","济宁","枣庄","临沂"]}
 ]},
-{emoji:"🧺", q:"那个装东西的竹筐，你们叫？", options:[
-  {text:"筐", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"笸箩", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"簸箕", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"篮子", cities:["日照"]}
+{l:1,e:"👨‍🏫",q:"路上想问个路，你称呼人家？",o:[
+ {t:"lǎo shī'r（老师儿）",c:["济南"]},
+ {t:"shī fu（师傅）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"lǎo shī（老师）",c:["淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"dà gē（大哥）",c:["菏泽","济宁","枣庄","临沂"]}
 ]},
-{emoji:"🌧️", q:"下小雨了，你说？", options:[
-  {text:"下小雨", cities:["济南","淄博","泰安","滨州"]},
-  {text:"下星子", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"蒙蒙雨", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"淅淅雨", cities:["德州","聊城","东营"]}
+{l:1,e:"🥵",q:"夸人长得\"好看\"，你怎么说？",o:[
+ {t:"jùn（俊）",c:["济南","淄博","泰安"]},
+ {t:"liàng（靓）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"pái chǎng（排场）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"dài jìn（带劲）",c:["德州","聊城","滨州","东营"]}
 ]},
-{emoji:"🐖", q:"那只大白猪，你们叫？", options:[
-  {text:"猪", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"豚", cities:["青岛","烟台","威海"]},
-  {text:"猪", cities:["潍坊","日照"]},
-  {text:"肉猪", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:1,e:"🤕",q:"摔了一跤\"磕破了\"，你怎么说？",o:[
+ {t:"kē pò le（磕破了）",c:["济南","淄博","泰安","滨州"]},
+ {t:"kǎ pò le（卡破了）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"shuāi pò le（摔破了）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"cèng pò le（蹭破了）",c:["德州","聊城","东营"]}
 ]},
-{emoji:"🐔", q:"那只大公鸡，你们叫？", options:[
-  {text:"公鸡", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"公鸡", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"鸡", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"公鸡", cities:["枣庄"]}
+{l:1,e:"🧺",q:"那个装东西的竹筐，你们叫？",o:[
+ {t:"kuāng（筐）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"pǒ luó（笸箩）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"bò ji（簸箕）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"lán zi（篮子）",c:["日照"]}
 ]},
-{emoji:"🌳", q:"那棵大树，你们叫？", options:[
-  {text:"树", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"木", cities:["青岛","烟台","威海"]},
-  {text:"树", cities:["潍坊","日照"]},
-  {text:"树棵", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:1,e:"🌧️",q:"下小雨了，你说？",o:[
+ {t:"xià xiǎo yǔ",c:["济南","淄博","泰安","滨州"]},
+ {t:"xià xīng zi（下星子）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"méng méng yǔ（蒙蒙雨）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xī xī yǔ（淅淅雨）",c:["德州","聊城","东营"]}
 ]},
-{emoji:"💰", q:"花钱大手大脚，你说这人？", options:[
-  {text:"大款", cities:["济南","淄博","泰安","滨州"]},
-  {text:"敞派", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"浪张", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"大手", cities:["德州","聊城","东营"]}
+{l:1,e:"🐖",q:"那只大白猪，你们叫？",o:[
+ {t:"zhū（猪）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"tún（豚）",c:["青岛","烟台","威海"]},
+ {t:"zhū ròu（肉猪）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"hái zhū（孩猪）",c:["潍坊","日照"]}
 ]},
-{emoji:"😴", q:"形容人很懒，你说？", options:[
-  {text:"懒汉", cities:["济南","淄博","泰安","滨州"]},
-  {text:"懒肉", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"懒虫", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"懒蛋", cities:["德州","聊城","东营"]}
-]},
-{emoji:"🤕", q:"摔了一跤磕破了，你说？", options:[
-  {text:"磕破了", cities:["济南","淄博","泰安","滨州"]},
-  {text:"卡破了", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"摔破了", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"蹭破了", cities:["德州","聊城","东营"]}
-]},
-{emoji:"🧊", q:"冰窖里那东西，你们叫？", options:[
-  {text:"冰块", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"冰凉", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"冰凌", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"冻冻", cities:["德州"]}
-]},
-{emoji:"🔥", q:"做饭生火，你们说？", options:[
-  {text:"生火", cities:["济南","淄博","泰安","滨州"]},
-  {text:"烧火", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"起火", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"点火", cities:["德州","聊城","东营"]}
-]},
-{emoji:"🍵", q:"倒杯热水，你们说？", options:[
-  {text:"倒水", cities:["济南","淄博","泰安","滨州"]},
-  {text:"滗水", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"倒水", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"斟水", cities:["德州","聊城","东营"]}
-]},
-{emoji:"🧂", q:"炒菜放那个白色调料，你们叫？", options:[
-  {text:"盐", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"盐巴", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"盐", cities:["菏泽","济宁","枣庄","临沂"]},
-  {text:"盐面", cities:["临沂"]}
+{l:1,e:"🌳",q:"那棵大树，你们叫？",o:[
+ {t:"shù（树）",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"mù（木）",c:["青岛","烟台","威海"]},
+ {t:"shù kē（树棵）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"dà mù（大木）",c:["潍坊","日照"]}
 ]},
 
-// ---- L3 定市题 ----
-{emoji:"🍺", q:"夏天路边摊，你就着蛤蜊喝——", options:[
-  {text:"啤酒", cities:["青岛"]},
-  {text:"啤酒", cities:["烟台","威海","潍坊","日照"]},
-  {text:"白酒", cities:["济南","淄博","泰安"]},
-  {text:"散酒", cities:["菏泽","济宁","枣庄","临沂","德州","聊城","滨州","东营"]}
+// ===== L2 片内细分 =====
+{l:2,e:"👉",q:"指着不远处那个东西，你说？",o:[
+ {t:"niè ge（捏个）",c:["临沂","菏泽"]},
+ {t:"nà hù（那户）",c:["济宁"]},
+ {t:"guò'r（过儿）",c:["枣庄"]},
+ {t:"niè guò（捏过）",c:["日照"]}
 ]},
-{emoji:"🍢", q:"晚上出门撸串，你们叫？", options:[
-  {text:"烧烤", cities:["淄博"]},
-  {text:"撸串", cities:["济南","泰安"]},
-  {text:"烤串", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"烤串子", cities:["菏泽","济宁","枣庄","临沂","德州","聊城","滨州","东营"]}
+{l:2,e:"🌙",q:"太阳落山了，你说的是？",o:[
+ {t:"hòu shǎng（后晌）",c:["滨州","东营","淄博"]},
+ {t:"wǎn hang（晚航）",c:["菏泽"]},
+ {t:"yè lái hǒng shàng（夜来哄上）",c:["德州"]},
+ {t:"wǎn sī（晚司）",c:["聊城"]}
 ]},
-{emoji:"🐟", q:"黄河里那种大鲤鱼，你们说？", options:[
-  {text:"黄河鲤", cities:["济南","泰安"]},
-  {text:"鲤鱼", cities:["淄博","滨州"]},
-  {text:"海鱼", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"河鱼", cities:["菏泽","济宁","枣庄","临沂","德州","聊城","东营"]}
+{l:2,e:"👍",q:"吃到好吃的，你会说——",o:[
+ {t:"gāng sài le（刚赛了）",c:["淄博"]},
+ {t:"zhēn bù nāo（真不孬）",c:["济南"]},
+ {t:"gàng sài liě（杠赛咧）",c:["泰安"]},
+ {t:"bù cāo（不糙）",c:["滨州"]}
 ]},
-{emoji:"🍎", q:"秋天那又大又红的苹果，你们说？", options:[
-  {text:"苹果", cities:["烟台"]},
-  {text:"苹果", cities:["青岛","威海","潍坊","日照"]},
-  {text:"苹果", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"大苹果", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🥟",q:"那盘带馅的水煮饺，你们叫？",o:[
+ {t:"jiǎo zi（饺子）",c:["济南","泰安","德州","聊城","东营","滨州","菏泽","济宁","枣庄","临沂"]},
+ {t:"biǎn shí（扁食）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"bāo zi（包子）",c:["淄博"]},
+ {t:"hún tun（馄饨）",c:["枣庄"]}
 ]},
-{emoji:"🎈", q:"春天放风筝，你们说？", options:[
-  {text:"放风筝", cities:["潍坊"]},
-  {text:"放鸢", cities:["青岛","烟台","威海","日照"]},
-  {text:"放风筝", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"放纸鸢", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"😋",q:"\"很香\"这个意思，你怎么说？",o:[
+ {t:"gāng xiāng（刚香）",c:["淄博"]},
+ {t:"zhēn xiāng（真香）",c:["济南","泰安"]},
+ {t:"qí xiāng（奇香）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"gàng xiāng（杠香）",c:["菏泽","济宁","枣庄","临沂"]}
 ]},
-{emoji:"🌺", q:"春天开的那大朵花，你们说？", options:[
-  {text:"牡丹", cities:["菏泽"]},
-  {text:"芍药", cities:["济宁","枣庄","临沂"]},
-  {text:"鲜花", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"大花", cities:["青岛","烟台","威海","潍坊","日照"]}
+{l:2,e:"👴",q:"你爷爷，你当面叫？",o:[
+ {t:"yé ye（爷爷）",c:["济南","淄博","泰安","滨州","德州","聊城","东营","潍坊","日照"]},
+ {t:"yé ye（爷爷）",c:["青岛","烟台","威海"]},
+ {t:"diē diē（爹爹）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"lǎo yé（老爷）",c:["临沂"]}
 ]},
-{emoji:"🐔", q:"那个辣炒的鸡块，你们说？", options:[
-  {text:"辣子鸡", cities:["枣庄"]},
-  {text:"炒鸡", cities:["济南","淄博","泰安"]},
-  {text:"炖鸡", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"烧鸡", cities:["菏泽","济宁","临沂","德州","聊城","滨州","东营"]}
+{l:2,e:"👵",q:"你奶奶，你当面叫？",o:[
+ {t:"nǎi nai（奶奶）",c:["济南","淄博","泰安","滨州","德州","聊城","东营","潍坊","日照","菏泽","济宁","枣庄","临沂"]},
+ {t:"niāng niang（娘娘）",c:["青岛","烟台","威海"]},
+ {t:"nǎi nai（奶奶）",c:["青岛"]},
+ {t:"wà pó（外婆）",c:["日照"]}
 ]},
-{emoji:"🍗", q:"那个真空包装的扒鸡，你们说？", options:[
-  {text:"扒鸡", cities:["德州"]},
-  {text:"烧鸡", cities:["济南","淄博","泰安","滨州"]},
-  {text:"熏鸡", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"烧鸡", cities:["菏泽","济宁","枣庄","临沂","聊城","东营"]}
+{l:2,e:"🌅",q:"明天早上，你们说？",o:[
+ {t:"míng'r（明儿）",c:["济南","淄博","泰安","德州","聊城","滨州","东营"]},
+ {t:"zǎo qǐ lái（早起来）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"míng lǐ（明里）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"gǎn míng（赶明）",c:["德州"]}
 ]},
-{emoji:"🏔️", q:"那座五岳之首的山，你们说？", options:[
-  {text:"泰山", cities:["泰安"]},
-  {text:"山", cities:["济南","淄博","滨州"]},
-  {text:"大山", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"岳", cities:["菏泽","济宁","枣庄","临沂","德州","聊城","东营"]}
+{l:2,e:"🧊",q:"冰窖里那东西，你们叫？",o:[
+ {t:"bīng kuài（冰块）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"bīng liáng（冰凉）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"bīng líng（冰凌）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"dòng dòng（冻冻）",c:["德州"]}
 ]},
-{emoji:"🌊", q:"黄河最终从哪儿入海？", options:[
-  {text:"东营", cities:["东营"]},
-  {text:"滨州", cities:["滨州"]},
-  {text:"大海", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"黄河", cities:["济南","淄博","泰安","菏泽","济宁","枣庄","临沂","德州","聊城"]}
+{l:2,e:"🍵",q:"倒杯热水，你们说？",o:[
+ {t:"dào shuǐ（倒水）",c:["济南","淄博","泰安","滨州","菏泽","济宁","枣庄","临沂"]},
+ {t:"bì shuǐ（滗水）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"zhēn shuǐ（斟水）",c:["德州","聊城","东营"]},
+ {t:"guàn shuǐ（灌水）",c:["滨州"]}
 ]},
-{emoji:"🎓", q:"孔子的老家在哪个市？", options:[
-  {text:"曲阜（济宁）", cities:["济宁"]},
-  {text:"曲阜", cities:["枣庄","临沂"]},
-  {text:"曲阜", cities:["菏泽","德州","聊城","滨州","东营"]},
-  {text:"曲阜", cities:["济南","淄博","泰安","青岛","烟台","威海","潍坊","日照"]}
+{l:2,e:"🌾",q:"\"玉米粥\"在你老家话里叫什么？",o:[
+ {t:"chá fàn（茶饭）",c:["淄博"]},
+ {t:"xiǎo mǐ zhōu（小米粥）",c:["济南","泰安"]},
+ {t:"chēng fàn（秫饭）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"cháng shēng zhōu（长生粥）",c:["菏泽","济宁","枣庄","临沂"]}
 ]},
-{emoji:"🎭", q:"那个唱大戏的地方，你们说？", options:[
-  {text:"戏台", cities:["菏泽"]},
-  {text:"剧院", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"剧场", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"戏园子", cities:["济宁","枣庄","临沂"]}
+{l:2,e:"🐔",q:"那只下蛋的母鸡，你们叫？",o:[
+ {t:"mǔ jī（母鸡）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"chǎn dàn jī（蛋鸡）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"huá jī（花鸡）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"mǔ chǎ（母衩）",c:["日照"]}
 ]},
-{emoji:"🛶", q:"北方那个水城，你们说？", options:[
-  {text:"聊城", cities:["聊城"]},
-  {text:"水城", cities:["德州","滨州","东营"]},
-  {text:"江南", cities:["济南","淄博","泰安"]},
-  {text:"水乡", cities:["青岛","烟台","威海","潍坊","日照","菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🥩",q:"那块猪肉，你们叫？",o:[
+ {t:"ròu（肉）",c:["济南","淄博","泰安","滨州","德州","聊城","东营","潍坊","日照"]},
+ {t:"dà ròu（大肉）",c:["青岛","烟台","威海"]},
+ {t:"zhū ròu（猪肉）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xián ròu（咸肉）",c:["临沂"]}
 ]},
-{emoji:"⛰️", q:"沂蒙山区在哪个市？", options:[
-  {text:"临沂", cities:["临沂"]},
-  {text:"蒙山", cities:["枣庄","日照"]},
-  {text:"沂山", cities:["潍坊","淄博"]},
-  {text:"泰山", cities:["济南","泰安","菏泽","济宁","德州","聊城","滨州","东营","青岛","烟台","威海"]}
+{l:2,e:"🍎",q:"那个苹果很红，你怎么形容？",o:[
+ {t:"hóng（红）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"hóng yān（红嫣）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"hóng tōng tōng（红彤彤）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"hóng bù jīn（红不禁）",c:["日照"]}
 ]},
-{emoji:"🦀", q:"秋天那肥美的大闸蟹/梭子蟹，你们说？", options:[
-  {text:"梭子蟹", cities:["青岛","烟台","威海","日照"]},
-  {text:"螃蟹", cities:["潍坊"]},
-  {text:"河蟹", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"毛蟹", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🌬️",q:"刮风了，你说？",o:[
+ {t:"guā fēng（刮风）",c:["济南","淄博","泰安","滨州"]},
+ {t:"qǐ fēng（起风）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"fēi fēng（飞风）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"lā fēng（拉风）",c:["德州","聊城","东营"]}
 ]},
-{emoji:"🍇", q:"那一串串大泽山葡萄，你们说？", options:[
-  {text:"葡萄", cities:["青岛"]},
-  {text:"提子", cities:["烟台","威海","潍坊","日照"]},
-  {text:"葡萄", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"紫葡萄", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🐟",q:"那个在水里游的鱼，你们叫？",o:[
+ {t:"yú（鱼）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"yú'er（鱼儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"yú ròu（鱼肉）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xì yú（细鱼）",c:["日照"]}
 ]},
-{emoji:"🍐", q:"那皮薄汁多的莱阳梨，在哪个市？", options:[
-  {text:"莱阳（烟台）", cities:["烟台"]},
-  {text:"梨", cities:["青岛","威海","潍坊","日照"]},
-  {text:"鸭梨", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"雪梨", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🦆",q:"那只嘎嘎叫的鸭子，你们叫？",o:[
+ {t:"yā zi（鸭子）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"xiǎo yā（小鸭）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"yā ròu（鸭肉）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"guā yā（呱鸭）",c:["临沂"]}
 ]},
-{emoji:"🫘", q:"那红红的沾化冬枣，在哪个市？", options:[
-  {text:"沾化（滨州）", cities:["滨州"]},
-  {text:"冬枣", cities:["东营","德州","聊城"]},
-  {text:"红枣", cities:["济南","淄博","泰安"]},
-  {text:"大枣", cities:["青岛","烟台","威海","潍坊","日照","菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🐱",q:"那只猫，你们叫？",o:[
+ {t:"māo（猫）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"māo'er（猫儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"māo māo（猫猫）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo māo（小猫）",c:["日照"]}
 ]},
-{emoji:"🌶️", q:"那个全国出名的蔬菜批发市场，在哪个市？", options:[
-  {text:"寿光（潍坊）", cities:["潍坊"]},
-  {text:"蔬菜市场", cities:["青岛","烟台","威海","日照"]},
-  {text:"菜市场", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"批发市场", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🐶",q:"那只狗，你们叫？",o:[
+ {t:"gǒu（狗）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"gǒu'er（狗儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"gǒu gǒu（狗狗）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo gǒu（小狗）",c:["日照"]}
 ]},
-{emoji:"🛢️", q:"那个因石油而生的城市，你们说？", options:[
-  {text:"东营", cities:["东营"]},
-  {text:"油田", cities:["滨州","德州","聊城"]},
-  {text:"油城", cities:["济南","淄博","泰安"]},
-  {text:"工业城", cities:["青岛","烟台","威海","潍坊","日照","菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🐎",q:"那匹马，你们叫？",o:[
+ {t:"mǎ（马）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"mǎ'er（马儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"dà mǎ（大马）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"chē mǎ（车马）",c:["聊城"]}
 ]},
-{emoji:"🏭", q:"那个因陶瓷而闻名的城市，你们说？", options:[
-  {text:"淄博", cities:["淄博"]},
-  {text:"瓷都", cities:["济南","泰安","滨州","德州","聊城","东营"]},
-  {text:"陶瓷", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"窑", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🐑",q:"那只羊，你们叫？",o:[
+ {t:"yáng（羊）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"shān yáng（山羊）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"yáng ròu（羊肉）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo yáng（小羊）",c:["日照"]}
 ]},
-{emoji:"🚄", q:"那个因火车头而兴起的城市，你们说？", options:[
-  {text:"济南", cities:["济南"]},
-  {text:"火车站", cities:["淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"高铁站", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"铁路", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🐂",q:"那头牛，你们叫？",o:[
+ {t:"niú（牛）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"niú'er（牛儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"lǎo niú（老牛）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"dà niú（大牛）",c:["日照"]}
 ]},
-{emoji:"🌉", q:"那个跨黄河的大桥，在哪个市最有名？", options:[
-  {text:"济南", cities:["济南"]},
-  {text:"黄河大桥", cities:["淄博","泰安","滨州","东营"]},
-  {text:"大桥", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"桥", cities:["菏泽","济宁","枣庄","临沂","德州","聊城"]}
+{l:2,e:"🐰",q:"那只兔子，你们叫？",o:[
+ {t:"tù zi（兔子）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"tù'er（兔儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"tù ròu（兔肉）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo tù（小兔）",c:["日照"]}
 ]},
-{emoji:"🐫", q:"那个出名的骆驼祥子故事发生在哪个城市？", options:[
-  {text:"济南", cities:["济南"]},
-  {text:"青岛", cities:["青岛"]},
-  {text:"北京", cities:["其他城市"]},
-  {text:"济南/青岛", cities:["其他城市"]}
+{l:2,e:"🐦",q:"那只鸟，你们叫？",o:[
+ {t:"niǎo（鸟）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"qiǎo（雀）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"niǎo'r（鸟儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo niǎo（小鸟）",c:["日照"]}
 ]},
-{emoji:"📚", q:"那个写《聊斋》的蒲松龄是哪的？", options:[
-  {text:"淄博", cities:["淄博"]},
-  {text:"济南", cities:["济南"]},
-  {text:"青岛", cities:["青岛"]},
-  {text:"其他", cities:["其他城市"]}
+{l:2,e:"🐛",q:"那个毛毛虫，你们叫？",o:[
+ {t:"máo máo chóng（毛毛虫）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"yáng là zi（洋辣子）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"máo chóng（毛虫）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"huài chóng（坏虫）",c:["日照"]}
 ]},
-{emoji:"🌊", q:"那个因奥帆赛而出名的城市？", options:[
-  {text:"青岛", cities:["青岛"]},
-  {text:"烟台", cities:["烟台","威海","日照"]},
-  {text:"潍坊", cities:["潍坊"]},
-  {text:"大连", cities:["其他城市"]}
+{l:2,e:"🦟",q:"那个蚊子，你们叫？",o:[
+ {t:"wén zi（蚊子）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"wén chóng（蚊虫）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"wén'er（蚊儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo wén（小蚊）",c:["日照"]}
 ]},
-{emoji:"⛷️", q:"那个刚办过全运会雪上项目的城市？", options:[
-  {text:"烟台", cities:["烟台"]},
-  {text:"青岛", cities:["青岛","威海","潍坊","日照"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🕷️",q:"那个蜘蛛，你们叫？",o:[
+ {t:"zhī zhū（蜘蛛）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"lāng zhī（螂蛛）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"zhī zhū'r（蜘蛛儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo zhī（小蜘）",c:["日照"]}
 ]},
-{emoji:"🏖️", q:"那个有金沙滩的城市？", options:[
-  {text:"青岛", cities:["青岛"]},
-  {text:"烟台", cities:["烟台","威海","日照"]},
-  {text:"潍坊", cities:["潍坊"]},
-  {text:"三亚", cities:["其他城市"]}
+{l:2,e:"🐜",q:"那个蚂蚁，你们叫？",o:[
+ {t:"mǎ yǐ（蚂蚁）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"mǎ yǐ'r（蚂蚁儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"mǎ yǐ zi（蚂蚁子）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo yǐ（小蚁）",c:["日照"]}
 ]},
-{emoji:"🐠", q:"那个因海参闻名的沿海城市？", options:[
-  {text:"烟台", cities:["烟台"]},
-  {text:"青岛", cities:["青岛","威海","日照"]},
-  {text:"潍坊", cities:["潍坊"]},
-  {text:"大连", cities:["其他城市"]}
+{l:2,e:"🦗",q:"那个蛐蛐，你们叫？",o:[
+ {t:"qū qū（蛐蛐）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"cì rú（促织）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"qū qū'r（蛐蛐儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo qū（小蛐）",c:["日照"]}
 ]},
-{emoji:"🍶", q:"那个出名的扳倒井酒在哪个市？", options:[
-  {text:"淄博", cities:["淄博"]},
-  {text:"济南", cities:["济南","泰安","滨州"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂","德州","聊城","东营"]}
+{l:2,e:"🐢",q:"那个乌龟，你们叫？",o:[
+ {t:"wū guī（乌龟）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"biē má（鳖马）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"wū guī'r（乌龟儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo wū（小乌）",c:["日照"]}
 ]},
-{emoji:"🍜", q:"那个出名的大津口豆腐在哪个市？", options:[
-  {text:"泰安", cities:["泰安"]},
-  {text:"济南", cities:["济南","淄博","滨州"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂","德州","聊城","东营"]}
+{l:2,e:"🐍",q:"那条蛇，你们叫？",o:[
+ {t:"shé（蛇）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"cháng chóng（长虫）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"shé'r（蛇儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo shé（小蛇）",c:["日照"]}
 ]},
-{emoji:"🥮", q:"那个出名的平阴玫瑰在哪个市？", options:[
-  {text:"济南", cities:["济南"]},
-  {text:"泰安", cities:["泰安","淄博","滨州","德州","聊城","东营"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🦂",q:"那个蝎子，你们叫？",o:[
+ {t:"xiē zi（蝎子）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"xiē hú（蝎虎）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"xiē zi'r（蝎子儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo xiē（小蝎）",c:["日照"]}
 ]},
-{emoji:"🐑", q:"那个出名的单县羊肉汤在哪个市？", options:[
-  {text:"菏泽", cities:["菏泽"]},
-  {text:"济宁", cities:["济宁","枣庄","临沂"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照"]}
+{l:2,e:"🦎",q:"那个壁虎，你们叫？",o:[
+ {t:"bì hǔ（壁虎）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"xiē hǔ zi（蝎虎子）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"bì hǔ'r（壁虎儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo bì（小壁）",c:["日照"]}
 ]},
-{emoji:"🦐", q:"那个出名的盱眙龙虾其实是哪个市的？", options:[
-  {text:"济宁", cities:["济宁"]},
-  {text:"枣庄", cities:["枣庄","临沂"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照","菏泽"]}
+{l:2,e:"🐌",q:"那个蜗牛，你们叫？",o:[
+ {t:"wō niú（蜗牛）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"bā niú（巴牛）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"wō niú'r（蜗牛儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo wō（小蜗）",c:["日照"]}
 ]},
-{emoji:"🍡", q:"那个出名的周村烧饼在哪个市？", options:[
-  {text:"淄博", cities:["淄博"]},
-  {text:"济南", cities:["济南","泰安","滨州","德州","聊城","东营"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🦋",q:"那个蝴蝶，你们叫？",o:[
+ {t:"hú dié（蝴蝶）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"hú tie'r（蝴贴儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"hú dié'r（蝴蝶儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo hú（小蝴）",c:["日照"]}
 ]},
-{emoji:"🥟", q:"那个出名的锅贴在哪个市？", options:[
-  {text:"青岛", cities:["青岛"]},
-  {text:"烟台", cities:["烟台","威海","潍坊","日照"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🐝",q:"那个蜜蜂，你们叫？",o:[
+ {t:"mì fēng（蜜蜂）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"mǎ fēng（马蜂）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"mì fēng'r（蜜蜂儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo mì（小蜜）",c:["日照"]}
 ]},
-{emoji:"🍲", q:"那个出名的单县羊肉汤属于哪个市？", options:[
-  {text:"菏泽", cities:["菏泽"]},
-  {text:"济宁", cities:["济宁","枣庄","临沂"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照"]}
+{l:2,e:"🪰",q:"那个苍蝇，你们叫？",o:[
+ {t:"cāng ying（苍蝇）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"cāng me（苍么）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"cāng ying'r（苍蝇儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo cāng（小苍）",c:["日照"]}
 ]},
-{emoji:"🐟", q:"那个出名的微山湖在哪个市？", options:[
-  {text:"济宁", cities:["济宁"]},
-  {text:"枣庄", cities:["枣庄","临沂"]},
-  {text:"菏泽", cities:["菏泽"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营","青岛","烟台","威海","潍坊","日照"]}
+{l:2,e:"🪳",q:"那个蟑螂，你们叫？",o:[
+ {t:"zhāng láng（蟑螂）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"záo jǔ（灶驹）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"xiāng mā hǔ（香马虎）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo zhāng（小蟑）",c:["日照"]}
 ]},
-{emoji:"🌿", q:"那个出名的日照绿茶在哪个市？", options:[
-  {text:"日照", cities:["日照"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:2,e:"🐀",q:"那个老鼠，你们叫？",o:[
+ {t:"lǎo shǔ（老鼠）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"lǎo chǔ（老杵）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"lǎo shǔ'r（老鼠儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo lǎo（小老）",c:["日照"]}
 ]},
-{emoji:"⛰️", q:"那个出名的沂山在哪个市？", options:[
-  {text:"潍坊", cities:["潍坊"]},
-  {text:"临沂", cities:["临沂","淄博"]},
-  {text:"日照", cities:["日照","青岛","烟台","威海"]},
-  {text:"泰安", cities:["泰安","济南","滨州","德州","聊城","东营","菏泽","济宁","枣庄"]}
+{l:2,e:"🦊",q:"那个狐狸，你们叫？",o:[
+ {t:"hú li（狐狸）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"hú li'r（狐狸儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"hú li zi（狐狸子）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo hú（小狐）",c:["日照"]}
 ]},
-{emoji:"🏛️", q:"那个出名的三孔在哪个市？", options:[
-  {text:"济宁", cities:["济宁"]},
-  {text:"枣庄", cities:["枣庄","临沂"]},
-  {text:"菏泽", cities:["菏泽"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营","青岛","烟台","威海","潍坊","日照"]}
+
+// ===== L3 定市（纯方言标志词）=====
+{l:3,e:"🍺",q:"夏天路边摊，你就蛤蜊喝——",o:[
+ {t:"hē pí jiǔ（哈啤酒）",c:["青岛"]},
+ {t:"hē pí jiǔ",c:["烟台","威海","潍坊","日照"]},
+ {t:"hē bái jiǔ（喝白酒）",c:["济南","淄博","泰安"]},
+ {t:"hē sǎn jiǔ（喝散酒）",c:["菏泽","济宁","枣庄","临沂","德州","聊城","滨州","东营"]}
 ]},
-{emoji:"🎪", q:"那个出名的水泊梁山在哪个市？", options:[
-  {text:"济宁", cities:["济宁"]},
-  {text:"泰安", cities:["泰安","济南","淄博","滨州","德州","聊城","东营"]},
-  {text:"菏泽", cities:["菏泽","枣庄","临沂"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照"]}
+{l:3,e:"🍢",q:"晚上出门撸串，你们叫？",o:[
+ {t:"kǎo chuàn（烤串）",c:["淄博"]},
+ {t:"lū chuàn（撸串）",c:["济南","泰安"]},
+ {t:"kǎo chuàn'r（烤串儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"kǎo chuàn zi（烤串子）",c:["菏泽","济宁","枣庄","临沂","德州","聊城","滨州","东营"]}
 ]},
-{emoji:"🐉", q:"那个出名的董永故里在哪个市？", options:[
-  {text:"滨州", cities:["滨州"]},
-  {text:"东营", cities:["东营","德州","聊城"]},
-  {text:"济南", cities:["济南","淄博","泰安"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照","菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"🍗",q:"那个真空包装的扒鸡，你们叫？",o:[
+ {t:"bá jī（扒鸡）",c:["德州"]},
+ {t:"shāo jī（烧鸡）",c:["济南","淄博","泰安","滨州","菏泽","济宁","枣庄","临沂","聊城","东营"]},
+ {t:"xūn jī（熏鸡）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"hóng shāo jī（红烧鸡）",c:["聊城"]}
 ]},
-{emoji:"🍑", q:"那个出名的肥城桃在哪个市？", options:[
-  {text:"泰安", cities:["泰安"]},
-  {text:"济南", cities:["济南","淄博","滨州","德州","聊城","东营"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"🌶️",q:"那个辣炒的鸡块，你们叫？",o:[
+ {t:"là zi jī（辣子鸡）",c:["枣庄"]},
+ {t:"chǎo jī（炒鸡）",c:["济南","淄博","泰安"]},
+ {t:"dùn jī（炖鸡）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"shāo jī（烧鸡）",c:["菏泽","济宁","临沂","德州","聊城","滨州","东营"]}
 ]},
-{emoji:"🍇", q:"那个出名的大泽山葡萄属于哪个市？", options:[
-  {text:"青岛", cities:["青岛"]},
-  {text:"烟台", cities:["烟台","威海","潍坊","日照"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"🐑",q:"那碗羊肉汤，你老家的叫法是？",o:[
+ {t:"yáng ròu tāng（羊肉汤）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"qīng tāng yáng ròu（清汤羊肉）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"hóng tāng yáng ròu（红汤羊肉）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"guō péi yáng tāng（锅陪羊汤）",c:["日照"]}
 ]},
-{emoji:"🥜", q:"那个出名的大花生在哪个市最出名？", options:[
-  {text:"日照", cities:["日照"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊"]},
-  {text:"临沂", cities:["临沂","济宁","枣庄","菏泽"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]}
+{l:3,e:"👨‍🏫",q:"陌生人问路，你怎么称呼？",o:[
+ {t:"lǎo shī'r（老师儿）",c:["济南"]},
+ {t:"shī fu（师傅）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"lǎo shī（老师）",c:["淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"dà gē（大哥）",c:["菏泽","济宁","枣庄","临沂"]}
 ]},
-{emoji:"🐔", q:"那个出名的琅琊鸡在哪个市？", options:[
-  {text:"青岛", cities:["青岛"]},
-  {text:"日照", cities:["日照","潍坊","烟台","威海"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"👍",q:"吃到好吃的，你脱口而出？",o:[
+ {t:"gāng sài le（刚赛了）",c:["淄博"]},
+ {t:"zhēn bù nāo（真不孬）",c:["济南"]},
+ {t:"gàng sài liě（杠赛咧）",c:["泰安"]},
+ {t:"bù cāo（不糙）",c:["滨州"]}
 ]},
-{emoji:"🍊", q:"那个出名的日照苹果其实是哪里的？", options:[
-  {text:"烟台", cities:["烟台"]},
-  {text:"青岛", cities:["青岛","威海","潍坊","日照"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"🌙",q:"\"昨天晚上\"你怎么说？",o:[
+ {t:"yè lái hǒng shàng（夜来哄上）",c:["德州"]},
+ {t:"wǎn sī（晚司）",c:["聊城"]},
+ {t:"hòu shǎng（后晌）",c:["滨州","东营","淄博"]},
+ {t:"wǎn hang（晚航）",c:["菏泽"]}
 ]},
-{emoji:"🌾", q:"那个出名的黄河大米在哪个市？", options:[
-  {text:"济南", cities:["济南"]},
-  {text:"滨州", cities:["滨州","东营","德州","聊城"]},
-  {text:"淄博", cities:["淄博","泰安"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照","菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"👉",q:"\"那个东西\"你怎么说？",o:[
+ {t:"niè ge（捏个）",c:["临沂","菏泽"]},
+ {t:"nà hù（那户）",c:["济宁"]},
+ {t:"guò'r（过儿）",c:["枣庄"]},
+ {t:"niè guò（捏过）",c:["日照"]}
 ]},
-{emoji:"🐟", q:"那个出名的黄河刀鱼在哪个市最出名？", options:[
-  {text:"东营", cities:["东营"]},
-  {text:"滨州", cities:["滨州","淄博"]},
-  {text:"济南", cities:["济南","泰安","德州","聊城"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照","菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"🥣",q:"早上那碗粥，你叫它？",o:[
+ {t:"mǐ tāng（米汤）",c:["烟台"]},
+ {t:"nián zhǔ（黏煮）",c:["潍坊"]},
+ {t:"xī fàn（稀饭）",c:["威海","日照"]},
+ {t:"zhōu（粥）",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]}
 ]},
-{emoji:"🦆", q:"那个出名的微山湖咸鸭蛋在哪个市？", options:[
-  {text:"济宁", cities:["济宁"]},
-  {text:"枣庄", cities:["枣庄","临沂"]},
-  {text:"菏泽", cities:["菏泽"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营","青岛","烟台","威海","潍坊","日照"]}
+{l:3,e:"🌽",q:"玉米你怎么叫？",o:[
+ {t:"bàng zi（棒子）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"bāo mǐ（苞米）",c:["青岛","烟台","威海","潍坊"]},
+ {t:"yù dòu（玉豆）",c:["日照"]},
+ {t:"yù shǔ shǔ（玉蜀黍）",c:["菏泽","济宁","枣庄","临沂"]}
 ]},
-{emoji:"🍯", q:"那个出名的槐花蜜在哪个市？", options:[
-  {text:"烟台", cities:["烟台"]},
-  {text:"青岛", cities:["青岛","威海","潍坊","日照"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"🍞",q:"馒头你怎么叫？",o:[
+ {t:"juǎn zi（卷子）",c:["淄博"]},
+ {t:"mán tou（馒头）",c:["济南","泰安","滨州","德州","聊城","东营"]},
+ {t:"bō bō（饽饽）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"mó mó（馍馍）",c:["菏泽","济宁","枣庄","临沂"]}
 ]},
-{emoji:"🥮", q:"那个出名的广饶肴驴肉在哪个市？", options:[
-  {text:"东营", cities:["东营"]},
-  {text:"滨州", cities:["滨州","淄博","德州","聊城"]},
-  {text:"济南", cities:["济南","泰安"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照","菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"🥟",q:"饺子你怎么叫？",o:[
+ {t:"biǎn shí（扁食）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"bāo zi（包子）",c:["淄博"]},
+ {t:"hún tun（馄饨）",c:["枣庄"]},
+ {t:"jiǎo zi（饺子）",c:["济南","泰安","德州","聊城","东营","滨州","菏泽","济宁","临沂"]}
 ]},
-{emoji:"🍤", q:"那个出名的潍县萝卜在哪个市？", options:[
-  {text:"潍坊", cities:["潍坊"]},
-  {text:"青岛", cities:["青岛","烟台","威海","日照"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"💧",q:"\"喝水\"你怎么说？",o:[
+ {t:"hē shuǐ（喝水）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"hē fěi（哈水）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"hē fèi",c:["菏泽","临沂"]},
+ {t:"hē tāng（喝汤）",c:["济宁","枣庄"]}
 ]},
-{emoji:"🥬", q:"那个出名的章丘大葱在哪个市？", options:[
-  {text:"济南", cities:["济南"]},
-  {text:"淄博", cities:["淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"🍽️",q:"\"吃饭\"你怎么说？",o:[
+ {t:"chī fàn（吃饭）",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"jí fàn（急饭）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"qiá fàn",c:["菏泽","济宁"]},
+ {t:"qiě fàn",c:["枣庄","临沂"]}
 ]},
-{emoji:"🌶️", q:"那个出名的金乡大蒜在哪个市？", options:[
-  {text:"济宁", cities:["济宁"]},
-  {text:"菏泽", cities:["菏泽","枣庄","临沂"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照"]}
+{l:3,e:"🗣️",q:"\"说话\"你怎么说？",o:[
+ {t:"shuō huà（说话）",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"xué huà（学话）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"shuāi huà（摔话）",c:["济南","淄博","泰安"]},
+ {t:"fó huà（佛话）",c:["菏泽","济宁"]}
 ]},
-{emoji:"🧅", q:"那个出名的莱芜生姜现在属于哪个市？", options:[
-  {text:"济南", cities:["济南"]},
-  {text:"泰安", cities:["泰安","淄博"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊","日照"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂","滨州","德州","聊城","东营"]}
+{l:3,e:"🚪",q:"\"我去\"的\"去\"你怎么说？",o:[
+ {t:"qù",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"kǎi/kè",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"qi",c:["济南","淄博","泰安"]},
+ {t:"qie",c:["菏泽","济宁"]}
 ]},
-{emoji:"🍎", q:"那个出名的烟台苹果在哪个市？", options:[
-  {text:"烟台", cities:["烟台"]},
-  {text:"青岛", cities:["青岛","威海","潍坊","日照"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"🔪",q:"\"割草\"的\"割\"你怎么说？",o:[
+ {t:"gē",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"gá（嘎）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"guá",c:["青岛","日照"]},
+ {t:"gěi",c:["菏泽","济宁"]}
 ]},
-{emoji:"🍐", q:"那个出名的莱阳梨在哪个市？", options:[
-  {text:"烟台", cities:["烟台"]},
-  {text:"青岛", cities:["青岛","威海","潍坊","日照"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"📌",q:"\"知道\"你怎么说？",o:[
+ {t:"zhī dào（知道）",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"dào（道）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"zhidao",c:["济南","淄博"]},
+ {t:"zhedao",c:["菏泽","济宁"]}
 ]},
-{emoji:"🍊", q:"那个出名的日照绿茶在哪个市？", options:[
-  {text:"日照", cities:["日照"]},
-  {text:"青岛", cities:["青岛","烟台","威海","潍坊"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
-  {text:"菏泽", cities:["菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"📅",q:"\"今天\"你怎么说？",o:[
+ {t:"jīn tiān（今天）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"jīn měi（今每）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"jīn mén（今门）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"jīn'r（今儿）",c:["济南","淄博","泰安"]}
 ]},
-{emoji:"🐚", q:"那个出名的青岛蛤蜊在哪个市？", options:[
-  {text:"青岛", cities:["青岛"]},
-  {text:"烟台", cities:["烟台","威海","日照"]},
-  {text:"潍坊", cities:["潍坊"]},
-  {text:"济南", cities:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]}
+{l:3,e:"📆",q:"\"昨天\"你怎么说？",o:[
+ {t:"zuó tiān（昨天）",c:["济南","淄博","泰安","滨州"]},
+ {t:"yè lái（夜来）",c:["德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"yè'r lǐ（夜里）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"zuó yè（昨夜）",c:["济南","淄博"]}
+]},
+{l:3,e:"🤷",q:"\"什么\"你怎么说？",o:[
+ {t:"shén me（什么）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"me（么）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"shá（啥）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"zǎ（咋）",c:["菏泽","临沂"]}
+]},
+{l:3,e:"🚶",q:"\"走路\"你怎么说？",o:[
+ {t:"zǒu dào（走道）",c:["济南","淄博","泰安","滨州"]},
+ {t:"zǒu jiā（走家）",c:["青岛","烟台","威海"]},
+ {t:"zǒu lù（走路）",c:["菏泽","济宁","枣庄","临沂","德州","聊城","东营"]},
+ {t:"nuó（挪）",c:["潍坊","日照"]}
+]},
+{l:3,e:"😴",q:"\"睡觉\"你怎么说？",o:[
+ {t:"kùn jiào（困觉）",c:["济南","淄博","泰安","滨州"]},
+ {t:"shuì jiào（睡觉）",c:["青岛","烟台","威海","潍坊","日照","菏泽","济宁","枣庄","临沂"]},
+ {t:"tǎng tǎng（躺躺）",c:["德州","聊城","东营"]},
+ {t:"mián（眠）",c:["日照"]}
+]},
+{l:3,e:"🤏",q:"\"很小\"你怎么说？",o:[
+ {t:"gāng xiǎo（刚小）",c:["淄博"]},
+ {t:"zhēn xiǎo（真小）",c:["济南","泰安"]},
+ {t:"xiě xiǎo（血小）",c:["青岛","烟台","威海"]},
+ {t:"qí xiǎo（奇小）",c:["青岛","潍坊","日照"]}
+]},
+{l:3,e:"👍",q:"\"很好\"你怎么说？",o:[
+ {t:"gāng sài（刚赛）",c:["淄博"]},
+ {t:"zhēn bù nāo（真不孬）",c:["济南"]},
+ {t:"qí hǎo（奇好）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"gàng hǎo（杠好）",c:["菏泽","济宁","枣庄","临沂"]}
+]},
+{l:3,e:"🥵",q:"\"好看\"你怎么说？",o:[
+ {t:"jùn（俊）",c:["济南","淄博","泰安"]},
+ {t:"liàng（靓）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"pái chǎng（排场）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"dài jìn（带劲）",c:["德州","聊城","滨州","东营"]}
+]},
+{l:3,e:"🤕",q:"\"磕破了\"你怎么说？",o:[
+ {t:"kē pò le（磕破了）",c:["济南","淄博","泰安","滨州"]},
+ {t:"kǎ pò le（卡破了）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"shuāi pò le（摔破了）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"cèng pò le（蹭破了）",c:["德州","聊城","东营"]}
+]},
+{l:3,e:"🧺",q:"竹筐你怎么叫？",o:[
+ {t:"kuāng（筐）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"pǒ luó（笸箩）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"bò ji（簸箕）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"lán zi（篮子）",c:["日照"]}
+]},
+{l:3,e:"🌧️",q:"下小雨你怎么说？",o:[
+ {t:"xià xiǎo yǔ（下小雨）",c:["济南","淄博","泰安","滨州"]},
+ {t:"xià xīng zi（下星子）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"méng méng yǔ（蒙蒙雨）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xī xī yǔ（淅淅雨）",c:["德州","聊城","东营"]}
+]},
+{l:3,e:"🐖",q:"猪你怎么叫？",o:[
+ {t:"zhū（猪）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"tún（豚）",c:["青岛","烟台","威海"]},
+ {t:"zhū ròu（肉猪）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"hái zhū（孩猪）",c:["潍坊","日照"]}
+]},
+{l:3,e:"🌳",q:"树你怎么叫？",o:[
+ {t:"shù（树）",c:["济南","淄博","泰安","滨州","德州","聊城","东营","菏泽","济宁","枣庄","临沂"]},
+ {t:"mù（木）",c:["青岛","烟台","威海"]},
+ {t:"shù kē（树棵）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"dà mù（大木）",c:["潍坊","日照"]}
+]},
+{l:3,e:"💰",q:"花钱大手大脚你怎么说？",o:[
+ {t:"dà kuǎn（大款）",c:["济南","淄博","泰安","滨州"]},
+ {t:"chǎng pài（敞派）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"làng zhāng（浪张）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"dà shǒu（大手）",c:["德州","聊城","东营"]}
+]},
+{l:3,e:"😴",q:"形容人懒你怎么说？",o:[
+ {t:"lǎn hàn（懒汉）",c:["济南","淄博","泰安","滨州"]},
+ {t:"lǎn ròu（懒肉）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"lǎn chóng（懒虫）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"lǎn dàn（懒蛋）",c:["德州","聊城","东营"]}
+]},
+{l:3,e:"🔥",q:"做饭生火你怎么说？",o:[
+ {t:"shēng huǒ（生火）",c:["济南","淄博","泰安","滨州"]},
+ {t:"shāo huǒ（烧火）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"qǐ huǒ（起火）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"diǎn huǒ（点火）",c:["德州","聊城","东营"]}
+]},
+{l:3,e:"🧂",q:"盐你怎么叫？",o:[
+ {t:"yán（盐）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"yán bā（盐巴）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"yán miàn（盐面）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"shí yán（食盐）",c:["德州","聊城"]}
+]},
+{l:3,e:"🌾",q:"玉米粥你怎么叫？",o:[
+ {t:"chá fàn（茶饭）",c:["淄博"]},
+ {t:"xiǎo mǐ zhōu（小米粥）",c:["济南","泰安"]},
+ {t:"chēng fàn（秫饭）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"cháng shēng zhōu（长生粥）",c:["菏泽","济宁","枣庄","临沂"]}
+]},
+{l:3,e:"🐔",q:"母鸡你怎么叫？",o:[
+ {t:"mǔ jī（母鸡）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"chǎn dàn jī（蛋鸡）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"huá jī（花鸡）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"mǔ chǎ（母衩）",c:["日照"]}
+]},
+{l:3,e:"🥩",q:"猪肉你怎么叫？",o:[
+ {t:"ròu（肉）",c:["济南","淄博","泰安","滨州","德州","聊城","东营","潍坊","日照"]},
+ {t:"dà ròu（大肉）",c:["青岛","烟台","威海"]},
+ {t:"zhū ròu（猪肉）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xián ròu（咸肉）",c:["临沂"]}
+]},
+{l:3,e:"🍎",q:"苹果很红你怎么形容？",o:[
+ {t:"hóng（红）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"hóng yān（红嫣）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"hóng tōng tōng（红彤彤）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"hóng bù jīn（红不禁）",c:["日照"]}
+]},
+{l:3,e:"🌬️",q:"刮风了你怎么说？",o:[
+ {t:"guā fēng（刮风）",c:["济南","淄博","泰安","滨州"]},
+ {t:"qǐ fēng（起风）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"fēi fēng（飞风）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"lā fēng（拉风）",c:["德州","聊城","东营"]}
+]},
+{l:3,e:"🐟",q:"鱼你怎么叫？",o:[
+ {t:"yú（鱼）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"yú'er（鱼儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"yú ròu（鱼肉）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xì yú（细鱼）",c:["日照"]}
+]},
+{l:3,e:"🦆",q:"鸭子你怎么叫？",o:[
+ {t:"yā zi（鸭子）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"xiǎo yā（小鸭）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"yā ròu（鸭肉）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"guā yā（呱鸭）",c:["临沂"]}
+]},
+{l:3,e:"🐱",q:"猫你怎么叫？",o:[
+ {t:"māo（猫）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"māo'er（猫儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"māo māo（猫猫）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo māo（小猫）",c:["日照"]}
+]},
+{l:3,e:"🐶",q:"狗你怎么叫？",o:[
+ {t:"gǒu（狗）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"gǒu'er（狗儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"gǒu gǒu（狗狗）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo gǒu（小狗）",c:["日照"]}
+]},
+{l:3,e:"🐎",q:"马你怎么叫？",o:[
+ {t:"mǎ（马）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"mǎ'er（马儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"dà mǎ（大马）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"chē mǎ（车马）",c:["聊城"]}
+]},
+{l:3,e:"🐑",q:"羊你怎么叫？",o:[
+ {t:"yáng（羊）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"shān yáng（山羊）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"yáng ròu（羊肉）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo yáng（小羊）",c:["日照"]}
+]},
+{l:3,e:"🐂",q:"牛你怎么叫？",o:[
+ {t:"niú（牛）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"niú'er（牛儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"lǎo niú（老牛）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"dà niú（大牛）",c:["日照"]}
+]},
+{l:3,e:"🐰",q:"兔子你怎么叫？",o:[
+ {t:"tù zi（兔子）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"tù'er（兔儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"tù ròu（兔肉）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo tù（小兔）",c:["日照"]}
+]},
+{l:3,e:"🐦",q:"鸟你怎么叫？",o:[
+ {t:"niǎo（鸟）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"qiǎo（雀）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"niǎo'r（鸟儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo niǎo（小鸟）",c:["日照"]}
+]},
+{l:3,e:"🐛",q:"毛毛虫你怎么叫？",o:[
+ {t:"máo máo chóng（毛毛虫）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"yáng là zi（洋辣子）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"máo chóng（毛虫）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"huài chóng（坏虫）",c:["日照"]}
+]},
+{l:3,e:"🦟",q:"蚊子你怎么叫？",o:[
+ {t:"wén zi（蚊子）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"wén chóng（蚊虫）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"wén'er（蚊儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo wén（小蚊）",c:["日照"]}
+]},
+{l:3,e:"🕷️",q:"蜘蛛你怎么叫？",o:[
+ {t:"zhī zhū（蜘蛛）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"lāng zhī（螂蛛）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"zhī zhū'r（蜘蛛儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo zhī（小蜘）",c:["日照"]}
+]},
+{l:3,e:"🐜",q:"蚂蚁你怎么叫？",o:[
+ {t:"mǎ yǐ（蚂蚁）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"mǎ yǐ'r（蚂蚁儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"mǎ yǐ zi（蚂蚁子）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo yǐ（小蚁）",c:["日照"]}
+]},
+{l:3,e:"🦗",q:"蛐蛐你怎么叫？",o:[
+ {t:"qū qū（蛐蛐）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"cì rú（促织）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"qū qū'r（蛐蛐儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo qū（小蛐）",c:["日照"]}
+]},
+{l:3,e:"🐢",q:"乌龟你怎么叫？",o:[
+ {t:"wū guī（乌龟）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"biē má（鳖马）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"wū guī'r（乌龟儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo wū（小乌）",c:["日照"]}
+]},
+{l:3,e:"🐍",q:"蛇你怎么叫？",o:[
+ {t:"shé（蛇）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"cháng chóng（长虫）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"shé'r（蛇儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo shé（小蛇）",c:["日照"]}
+]},
+{l:3,e:"🦂",q:"蝎子你怎么叫？",o:[
+ {t:"xiē zi（蝎子）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"xiē hú（蝎虎）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"xiē zi'r（蝎子儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo xiē（小蝎）",c:["日照"]}
+]},
+{l:3,e:"🦎",q:"壁虎你怎么叫？",o:[
+ {t:"bì hǔ（壁虎）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"xiē hǔ zi（蝎虎子）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"bì hǔ'r（壁虎儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo bì（小壁）",c:["日照"]}
+]},
+{l:3,e:"🐌",q:"蜗牛你怎么叫？",o:[
+ {t:"wō niú（蜗牛）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"bā niú（巴牛）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"wō niú'r（蜗牛儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo wō（小蜗）",c:["日照"]}
+]},
+{l:3,e:"🦋",q:"蝴蝶你怎么叫？",o:[
+ {t:"hú dié（蝴蝶）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"hú tie'r（蝴贴儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"hú dié'r（蝴蝶儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo hú（小蝴）",c:["日照"]}
+]},
+{l:3,e:"🐝",q:"蜜蜂你怎么叫？",o:[
+ {t:"mì fēng（蜜蜂）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"mǎ fēng（马蜂）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"mì fēng'r（蜜蜂儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo mì（小蜜）",c:["日照"]}
+]},
+{l:3,e:"🪰",q:"苍蝇你怎么叫？",o:[
+ {t:"cāng ying（苍蝇）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"cāng me（苍么）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"cāng ying'r（苍蝇儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo cāng（小苍）",c:["日照"]}
+]},
+{l:3,e:"🪳",q:"蟑螂你怎么叫？",o:[
+ {t:"zhāng láng（蟑螂）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"záo jǔ（灶驹）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"xiāng mā hǔ（香马虎）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo zhāng（小蟑）",c:["日照"]}
+]},
+{l:3,e:"🐀",q:"老鼠你怎么叫？",o:[
+ {t:"lǎo shǔ（老鼠）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"lǎo chǔ（老杵）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"lǎo shǔ'r（老鼠儿）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo lǎo（小老）",c:["日照"]}
+]},
+{l:3,e:"🦊",q:"狐狸你怎么叫？",o:[
+ {t:"hú li（狐狸）",c:["济南","淄博","泰安","滨州","德州","聊城","东营"]},
+ {t:"hú li'r（狐狸儿）",c:["青岛","烟台","威海","潍坊","日照"]},
+ {t:"hú li zi（狐狸子）",c:["菏泽","济宁","枣庄","临沂"]},
+ {t:"xiǎo hú（小狐）",c:["日照"]}
 ]}
 ];
 
-// ========== 城市结果数据 ==========
-var results = {
-  "济南": {emoji:"🌆", desc:"泉城济南，趵突泉水泡大碗茶，开口就是\"老师儿\"。", fact:"济南话最大特点是儿化音多，称呼陌生人一律叫\"老师儿\"。"},
-  "青岛": {emoji:"🌊", desc:"红瓦绿树碧海蓝天，哈啤酒吃蛤蜊，海蛎子味正到骨子里。", fact:"青岛话是胶辽官话代表，\"哈啤酒\"就是\"喝啤酒\"。"},
-  "淄博": {emoji:"🍢", desc:"烧烤之都，\"刚赛了\"是你的口头禅，琉璃和陶瓷也是名片。", fact:"淄博话的\"刚赛\"就是\"很好、很棒\"。"},
-  "枣庄": {emoji:"🌶️", desc:"辣子鸡配石榴，说话直接不绕弯，\"过儿\"就是\"那个\"。", fact:"枣庄话把\"那个\"叫\"过儿\"，很有辨识度。"},
-  "东营": {emoji:"🛢️", desc:"黄河入海的地方，胜利油田的油城，说话干脆利落。", fact:"东营话把\"晚上\"叫\"后晌\"。"},
-  "烟台": {emoji:"🍎", desc:"苹果和海鲜的故乡，蓬莱仙阁在这，话不多但实在。", fact:"烟台话把粥叫\"米汤\"，和威海话最接近。"},
-  "潍坊": {emoji:"🪁", desc:"风筝都的人，说话敞亮，把粥叫\"黏煮\"。", fact:"潍坊话属胶辽官话青莱片，\"黏煮\"就是粥。"},
-  "济宁": {emoji:"📚", desc:"孔孟之乡，京杭大运河穿城，说话带着文化人的讲究。", fact:"济宁话属中原官话蔡鲁片，最接近河南话。"},
-  "泰安": {emoji:"⛰️", desc:"泰山脚下长大，说话实在又热情，爬泰山都能聊一路。", fact:"泰安话和济南话很像，都属冀鲁官话。"},
-  "威海": {emoji:"🌅", desc:"山东最东头，最早看见太阳，说话带着最浓的海味。", fact:"威海话属胶辽官话登连片，和大连话有点像。"},
-  "日照": {emoji:"🌾", desc:"日出先照的地方，玉米叫\"玉豆\"，说话带着黄海的清爽。", fact:"日照话把玉米叫\"玉豆\"，很有特色。"},
-  "临沂": {emoji:"🏔️", desc:"沂蒙山区的厚道劲儿，\"捏个\"说得最溜，拉呱一下午。", fact:"临沂话\"捏个\"就是\"那个\"，\"拉呱\"就是聊天。"},
-  "德州": {emoji:"🍗", desc:"扒鸡的故乡，鲁西北的豪爽，\"夜来哄上\"就是昨天晚上。", fact:"德州话把\"昨天晚上\"叫\"夜来哄上\"。"},
-  "聊城": {emoji:"🚣", desc:"江北水城，运河古都，说话慢悠悠的，\"晚司\"就是晚上。", fact:"聊城话属冀鲁官话，\"晚司\"就是\"晚上\"。"},
-  "滨州": {emoji:"🌉", desc:"黄河尾闾，孙子故里，说话爽利，\"不糙\"就是不错。", fact:"滨州话\"不糙\"就是\"不错、挺好\"。"},
-  "菏泽": {emoji:"🌸", desc:"牡丹之都，鲁西南豪爽，\"捏个\"\"晚航\"是标志。", fact:"菏泽话\"晚航\"就是\"晚上\"，和河南话很接近。"}
+// 结果数据
+var results={
+"济南":{e:"🌆",q:"冀鲁官话·石济片",d:"泉城济南，开口就是\"老师儿\"，儿化音裹着全城。",f:"济南话最大特点是儿化音多，称呼陌生人一律叫\"老师儿\"。"},
+"青岛":{e:"🌊",q:"胶辽官话·青莱片",d:"红瓦绿树碧海蓝天，哈啤酒吃蛤蜊，海蛎子味正到骨子里。",f:"青岛话\"人\"读yín，\"吃\"读jí（急），是胶辽官话代表。"},
+"淄博":{e:"🍢",q:"冀鲁官话·石济片",d:"烧烤之都，\"刚赛了\"是口头禅，说话直爽。",f:"淄博话\"刚赛\"就是\"很好、很棒\"。"},
+"枣庄":{e:"🌶️",q:"中原官话·蔡鲁片",d:"辣子鸡配石榴，说话直接，\"过儿\"就是\"那个\"。",f:"枣庄话把\"那个\"叫\"过儿\"。"},
+"东营":{e:"🛢️",q:"冀鲁官话·沧惠片",d:"黄河入海的油城，说话干脆利落。",f:"东营话把\"晚上\"叫\"后晌\"。"},
+"烟台":{e:"🍎",q:"胶辽官话·登连片",d:"苹果和海鲜故乡，话不多但实在。",f:"烟台话把粥叫\"米汤\"，\"人\"读yín。"},
+"潍坊":{e:"🪁",q:"胶辽官话·青莱片",d:"风筝都的人，说话敞亮，把粥叫\"黏煮\"。",f:"潍坊话\"黏煮\"就是粥。"},
+"济宁":{e:"📚",q:"中原官话·蔡鲁片",d:"孔孟之乡，京杭大运河穿城，说话有讲究。",f:"济宁话属中原官话蔡鲁片，最接近河南话。"},
+"泰安":{e:"⛰️",q:"冀鲁官话·石济片",d:"泰山脚下长大，说话实在热情。",f:"泰安话和济南话很像，都属冀鲁官话。"},
+"威海":{e:"🌅",q:"胶辽官话·登连片",d:"山东最东头，说话带着最浓海味。",f:"威海话属胶辽官话登连片，和大连话像。"},
+"日照":{e:"🌾",q:"胶辽官话·青莱片",d:"日出先照的地方，玉米叫\"玉豆\"，说话清爽。",f:"日照话把玉米叫\"玉豆\"，很有特色。"},
+"临沂":{e:"🏔️",q:"中原官话·兖菏片",d:"沂蒙山区厚道劲儿，\"捏个\"说得最溜，拉呱一下午。",f:"临沂话\"捏个\"就是\"那个\"，\"拉呱\"就是聊天。"},
+"德州":{e:"🍗",q:"冀鲁官话·沧惠片",d:"扒鸡故乡，鲁西北豪爽，\"夜来哄上\"就是昨天晚上。",f:"德州话\"夜来哄上\"就是昨天晚上。"},
+"聊城":{e:"🚣",q:"冀鲁官话·沧惠片",d:"江北水城，运河古都，\"晚司\"就是晚上。",f:"聊城话\"晚司\"就是\"晚上\"。"},
+"滨州":{e:"🌉",q:"冀鲁官话·沧惠片",d:"黄河尾闾，说话爽利，\"不糙\"就是不错。",f:"滨州话\"不糙\"就是\"不错、挺好\"。"},
+"菏泽":{e:"🌸",q:"中原官话·兖菏片",d:"牡丹之都，鲁西南豪爽，\"晚航\"就是晚上。",f:"菏泽话\"晚航\"就是\"晚上\"，和河南话接近。"}
 };
 
-// ========== 游戏逻辑 ==========
-var candidates = [];
-var usedQuestions = [];
-var currentQIndex = 0;
-var totalQuestions = 7;
-
-function showView(id) {
-  var views = document.querySelectorAll('.view');
-  for (var i = 0; i < views.length; i++) views[i].classList.remove('active');
-  document.getElementById(id).classList.add('active');
-}
-
-function startQuiz() {
-  candidates = ALL_CITIES.slice();
-  usedQuestions = [];
-  currentQIndex = 0;
-  totalQuestions = 6 + Math.floor(Math.random() * 3); // 6-8题随机
-  renderQuestion();
-  showView('view-quiz');
-}
-
-// 从未用题中选一道"区分度最高"的题
-function pickQuestion() {
-  var best = null;
-  var bestScore = -1;
-  var unused = [];
-  for (var i = 0; i < bank.length; i++) {
-    if (usedQuestions.indexOf(i) === -1) unused.push(i);
-  }
-  // 打乱顺序
-  for (var i = unused.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var tmp = unused[i]; unused[i] = unused[j]; unused[j] = tmp;
-  }
-  // 从随机顺序里找最好的（前10个候选里选）
-  var checkCount = Math.min(10, unused.length);
-  for (var k = 0; k < checkCount; k++) {
-    var idx = unused[k];
-    var q = bank[idx];
-    // 计算这道题对当前candidates的区分度
-    var score = 0;
-    for (var o = 0; o < q.options.length; o++) {
-      var overlap = 0;
-      for (var c = 0; c < q.options[o].cities.length; c++) {
-        if (candidates.indexOf(q.options[o].cities[c]) !== -1) overlap++;
+// 游戏逻辑
+var cand=[], used=[], qi=0, total=7;
+function showView(id){var v=document.querySelectorAll('.view');for(var i=0;i<v.length;i++)v[i].classList.remove('active');document.getElementById(id).classList.add('active');}
+function startQuiz(){cand=ALL.slice();used=[];qi=0;total=6+Math.floor(Math.random()*3);renderQ();showView('vq');}
+function pickQ(){
+  var buckets={1:[],2:[],3:[]};
+  for(var i=0;i<bank.length;i++){
+    if(used.indexOf(i)===-1){
+      var q=bank[i],overlap=0;
+      for(var o=0;o<q.o.length;o++){
+        for(var c=0;c<q.o[o].c.length;c++){
+          if(cand.indexOf(q.o[o].c[c])!==-1){overlap++;break;}
+        }
       }
-      // 希望每个选项覆盖的candidates数量适中
-      if (overlap > 0 && overlap < candidates.length) score++;
+      if(overlap>=2)buckets[q.l].push(i);
     }
-    if (score > bestScore) { bestScore = score; best = idx; }
   }
-  if (best === null && unused.length > 0) best = unused[0];
-  return best;
+  var pl;
+  if(cand.length>8)pl=1;else if(cand.length>=4)pl=2;else pl=3;
+  var pool=buckets[pl];
+  if(pool.length===0){pool=buckets[Math.min(pl+1,3)];if(pool.length===0)pool=buckets[1].concat(buckets[2],buckets[3]);}
+  if(pool.length===0)return null;
+  return pool[Math.floor(Math.random()*pool.length)];
 }
-
-function renderQuestion() {
-  if (currentQIndex >= totalQuestions || candidates.length <= 1) {
-    showResult();
-    return;
-  }
-  var qIdx = pickQuestion();
-  if (qIdx === null) { showResult(); return; }
-  usedQuestions.push(qIdx);
-  var q = bank[qIdx];
-
-  document.getElementById('qTag').textContent = "第 " + (currentQIndex + 1) + " 题 / 共 " + totalQuestions + " 题";
-  document.getElementById('qEmoji').textContent = q.emoji;
-  document.getElementById('qText').textContent = q.q;
-
-  var pct = ((currentQIndex + 1) / totalQuestions) * 100;
-  document.getElementById('progressFill').style.width = pct + '%';
-
-  var box = document.getElementById('qOptions');
-  box.innerHTML = '';
-  // 打乱选项顺序
-  var opts = q.options.slice();
-  for (var i = opts.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var tmp = opts[i]; opts[i] = opts[j]; opts[j] = tmp;
-  }
-  for (var i = 0; i < opts.length; i++) {
-    (function(opt, ci) {
-      var card = document.createElement('div');
-      card.className = 'option-card opt-c' + (ci + 1);
-      card.innerHTML = '<div class="opt-text">' + opt.text + '</div>';
-      card.onclick = function() { chooseOption(opt); };
+function renderQ(){
+  if(qi>=total||cand.length<=1){showR();return;}
+  var idx=pickQ();
+  if(idx===null){showR();return;}
+  used.push(idx);
+  var q=bank[idx];
+  document.getElementById('qt').textContent="第 "+(qi+1)+" 题 / 共 "+total+" 题";
+  document.getElementById('qe').textContent=q.e;
+  document.getElementById('q2').textContent=q.q;
+  document.getElementById('pf').style.width=((qi+1)/total*100)+'%';
+  var box=document.getElementById('op');
+  box.innerHTML='';
+  var opts=q.o.slice();
+  for(var i=opts.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=opts[i];opts[i]=opts[j];opts[j]=t;}
+  for(var i=0;i<opts.length;i++){
+    (function(opt,ci){
+      var card=document.createElement('div');
+      card.className='oc c'+(ci+1);
+      card.innerHTML='<div class="ot">'+opt.t+'</div>';
+      card.onclick=function(){choose(opt);};
       box.appendChild(card);
-    })(opts[i], i);
+    })(opts[i],i);
   }
 }
-
-function chooseOption(opt) {
-  // 缩小候选集：取交集
-  var newCandidates = [];
-  for (var i = 0; i < candidates.length; i++) {
-    if (opt.cities.indexOf(candidates[i]) !== -1) {
-      newCandidates.push(candidates[i]);
-    }
-  }
-  // 如果交集为空（选项里的城市都不在候选集里），保持候选集不变
-  if (newCandidates.length > 0) candidates = newCandidates;
-  currentQIndex++;
-  renderQuestion();
+function choose(opt){
+  var nc=[];
+  for(var i=0;i<cand.length;i++){if(opt.c.indexOf(cand[i])!==-1)nc.push(cand[i]);}
+  if(nc.length>0)cand=nc;
+  qi++;
+  renderQ();
 }
-
-function showResult() {
+function showR(){
   var city;
-  if (candidates.length === 1) {
-    city = candidates[0];
-  } else {
-    // 多个候选，随机选一个
-    city = candidates[Math.floor(Math.random() * candidates.length)];
-  }
-  var r = results[city];
-  document.getElementById('rEmoji').textContent = r.emoji;
-  document.getElementById('rCity').textContent = city;
-  document.getElementById('rDesc').textContent = r.desc;
-  document.getElementById('rFact').textContent = "方言小知识：" + r.fact;
-  document.getElementById('progressFill').style.width = '100%';
-  showView('view-result');
+  if(cand.length===1)city=cand[0];
+  else city=cand[Math.floor(Math.random()*cand.length)];
+  var r=results[city];
+  document.getElementById('re').textContent=r.e;
+  document.getElementById('rc').textContent=city;
+  document.getElementById('rq').textContent=r.q;
+  document.getElementById('rd').textContent=r.d;
+  document.getElementById('rf').textContent="方言小知识："+r.f;
+  document.getElementById('pf').style.width='100%';
+  showView('vr');
 }
-
-function restart() {
-  showView('view-start');
-}
+function restart(){showView('vs');}
 </script>
 </body>
 </html>
