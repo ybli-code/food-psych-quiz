@@ -225,7 +225,7 @@ function renderQ() {
   document.getElementById('qText').textContent = q.text;
   document.getElementById('optAText').textContent = q.a;
   document.getElementById('optBText').textContent = q.b;
-  const pct = Math.round((current / questions.length) * 100);
+  const pct = Math.round(((current + 1) / questions.length) * 100);
   document.getElementById('prog').style.width = pct + '%';
   document.getElementById('pctText').textContent = pct + '%';
   document.getElementById('ring').textContent = pct + '%';
@@ -238,6 +238,9 @@ function choose(v) {
   answers[current] = v;
   document.getElementById('optA').classList.toggle('selected', v === 0);
   document.getElementById('optB').classList.toggle('selected', v === 1);
+  setTimeout(function() {
+    next();
+  }, 400);
 }
 function prev() { if (current > 0) { current--; renderQ(); } }
 function next() {
