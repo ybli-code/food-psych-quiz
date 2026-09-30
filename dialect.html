@@ -59,14 +59,14 @@
   .start-card {
     background: var(--card);
     border-radius: var(--radius);
-    padding: 32px 28px;
+    padding: 28px 24px;
     text-align: center;
     box-shadow: 0 8px 32px rgba(255, 107, 53, 0.12);
   }
   .start-img {
     width: 100%;
     border-radius: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
   .start-title {
     font-size: 26px;
@@ -78,7 +78,7 @@
     font-size: 14px;
     color: var(--ink-soft);
     line-height: 1.7;
-    margin-bottom: 28px;
+    margin-bottom: 26px;
   }
   .btn-primary {
     display: inline-block;
@@ -87,7 +87,7 @@
     border: none;
     font-size: 17px;
     font-weight: 700;
-    padding: 15px 44px;
+    padding: 14px 42px;
     border-radius: 50px;
     cursor: pointer;
     font-family: inherit;
@@ -104,7 +104,7 @@
     height: 6px;
     background: var(--accent-soft);
     border-radius: 3px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     overflow: hidden;
   }
   .progress-fill {
@@ -114,17 +114,24 @@
     transition: width 0.4s ease;
   }
 
+  .q-num {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
   .q-img {
     width: 100%;
     border-radius: 16px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     background: #fff;
   }
   .question-text {
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 900;
     line-height: 1.4;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 
   .options {
@@ -158,7 +165,7 @@
   .result-card {
     background: var(--card);
     border-radius: var(--radius);
-    padding: 36px 28px;
+    padding: 32px 26px;
     text-align: center;
     box-shadow: 0 8px 32px rgba(45, 27, 20, 0.1);
   }
@@ -168,21 +175,31 @@
     border-radius: 50px;
     font-size: 13px;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     background: var(--accent-soft);
     color: var(--accent);
   }
   .result-city {
-    font-size: 36px;
+    font-size: 34px;
     font-weight: 900;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     color: var(--accent);
   }
   .result-desc {
     font-size: 15px;
     color: var(--ink-soft);
     line-height: 1.8;
-    margin-bottom: 32px;
+    margin-bottom: 14px;
+  }
+  .result-fact {
+    background: var(--accent-soft);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.7;
+    margin-bottom: 26px;
+    text-align: left;
   }
   .btn-restart {
     display: inline-block;
@@ -210,7 +227,7 @@
       <img class="start-img" src="images/cover.png" alt="山东方言测评">
       <div class="start-title">山东方言大测评</div>
       <div class="start-sub">
-        两个问题，测出你是山东哪市人。<br>
+        三关闯完，测出你是山东哪市人。<br>
         从玉米叫法到傍晚的说法，<br>
         看看你的方言基因对不对。
       </div>
@@ -221,6 +238,7 @@
   <!-- 题目页 -->
   <div class="view" id="view-quiz">
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="q-num" id="qNum"></div>
     <img class="q-img" id="qImg" src="" alt="">
     <div class="question-text" id="qText"></div>
     <div class="options" id="qOptions"></div>
@@ -232,6 +250,7 @@
       <div class="result-badge">测试结果</div>
       <div class="result-city" id="rCity"></div>
       <div class="result-desc" id="rDesc"></div>
+      <div class="result-fact" id="rFact"></div>
       <button class="btn-restart" onclick="restart()">再测一次</button>
     </div>
   </div>
@@ -239,21 +258,35 @@
 </div>
 
 <script>
-// ===== 题库：分支跳转 =====
+// ===== 题库：3关，分支跳转 =====
 var questions = {
-  // Q1：分4片区
+  // Q1：热身题，所有选项进Q2
   1: {
+    num: "第一关",
+    img: "images/cover.png",
+    text: "你和山东是什么缘分？",
+    options: [
+      { label: "土生土长山东人", next: 2, cls: "c1" },
+      { label: "在山东上学/工作", next: 2, cls: "c2" },
+      { label: "山东女婿/媳妇", next: 2, cls: "c3" },
+      { label: "外地但对山东很好奇", next: 2, cls: "c4" }
+    ]
+  },
+  // Q2：玉米叫什么？分4大区
+  2: {
+    num: "第二关",
     img: "images/corn.png",
     text: "玉米在你老家话里叫什么？",
     options: [
       { label: "棒子", next: 21, cls: "c1" },
       { label: "苞米", next: 22, cls: "c2" },
-      { label: "玉蜀黍", next: 23, cls: "c3" },
+      { label: "玉豆", next: 23, cls: "c3" },
       { label: "棒槌", next: 24, cls: "c4" }
     ]
   },
   // Q21：鲁中片（济南、淄博、泰安、滨州）
   21: {
+    num: "第三关",
     img: "images/food.png",
     text: "吃到好吃的，你会说？",
     options: [
@@ -265,6 +298,7 @@ var questions = {
   },
   // Q22：胶东片（青岛、烟台、威海、潍坊）
   22: {
+    num: "第三关",
     img: "images/porridge.png",
     text: "早上喝的那碗粥，你叫它？",
     options: [
@@ -276,6 +310,7 @@ var questions = {
   },
   // Q23：鲁南片（临沂、济宁、枣庄、日照）
   23: {
+    num: "第三关",
     img: "images/thing.png",
     text: "指着不远处那个东西，你说？",
     options: [
@@ -287,6 +322,7 @@ var questions = {
   },
   // Q24：鲁西片（菏泽、德州、聊城、东营）
   24: {
+    num: "第三关",
     img: "images/evening.png",
     text: "太阳落山了，你说的是？",
     options: [
@@ -299,22 +335,70 @@ var questions = {
 };
 
 var results = {
-  "济南": "你是济南人——开口就是\"老师儿\"，儿化音裹着全城，泉城广场的风都是亲切的。",
-  "淄博": "你是淄博人——\"刚赛了\"是你的口头禅，烧烤炉一冒烟，全城都是朋友。",
-  "泰安": "你是泰安人——泰山脚下长大，说话实在又热情，爬个泰山都能聊一路。",
-  "滨州": "你是滨州人——黄河尾闾的爽利劲儿，说话干脆，做事利落。",
-  "青岛": "你是青岛人——海蛎子味纯正，喝啤酒就蛤蜊，说话带着海风的咸鲜。",
-  "烟台": "你是烟台人——苹果和海鲜的故乡，话不多但实在，靠海吃海长大。",
-  "威海": "你是威海人——山东最东头的城市，说话带着最浓的胶东海味，干净透亮。",
-  "潍坊": "你是潍坊人——风筝都的人，说话敞亮，和你们放的风筝一样飞得高。",
-  "临沂": "你是临沂人——沂蒙山区的厚道劲儿，\"捏个\"说得最溜，拉呱能拉一下午。",
-  "济宁": "你是济宁人——孔孟之乡的底蕴，说话带着文化人的讲究，不紧不慢。",
-  "枣庄": "你是枣庄人——辣子鸡和石榴的家乡，说话直接，不绕弯子。",
-  "日照": "你是日照人——日出先照的地方，说话带着黄海的清爽，敞亮。",
-  "菏泽": "你是菏泽人——牡丹之都的人，说话带着鲁西南的豪爽，\"捏个\"是标志。",
-  "德州": "你是德州人——扒鸡的故乡，鲁西北的豪爽劲儿，\"夜来哄上\"是你的时间词。",
-  "聊城": "你是聊城人——江北水城的秀气，说话带着运河的慢节奏。",
-  "东营": "你是东营人——黄河入海的地方，说话干脆利落，油城人的豪爽。"
+  "济南": {
+    desc: "你是济南人——开口就是\"老师儿\"，儿化音裹着全城，泉城广场的风都是亲切的。",
+    fact: "济南话属于冀鲁官话，最大特点就是儿化音多，称呼陌生人一律叫\"老师儿\"。"
+  },
+  "淄博": {
+    desc: "你是淄博人——\"刚赛了\"是你的口头禅，烧烤炉一冒烟，全城都是朋友。",
+    fact: "淄博话的\"刚赛\"就是\"很好、很棒\"的意思，全国人民因为烧烤认识了淄博。"
+  },
+  "泰安": {
+    desc: "你是泰安人——泰山脚下长大，说话实在又热情，爬个泰山都能聊一路。",
+    fact: "泰安话和济南话很像，都属冀鲁官话，但泰安话的声调更平一些。"
+  },
+  "滨州": {
+    desc: "你是滨州人——黄河尾闾的爽利劲儿，说话干脆，做事利落。",
+    fact: "滨州话属于冀鲁官话，靠近河北，\"不糙\"就是\"不错、挺好\"的意思。"
+  },
+  "青岛": {
+    desc: "你是青岛人——海蛎子味纯正，喝啤酒就蛤蜊，说话带着海风的咸鲜。",
+    fact: "青岛话是胶辽官话的代表，\"哈啤酒\"（喝啤酒）是最经典的青岛话。"
+  },
+  "烟台": {
+    desc: "你是烟台人——苹果和海鲜的故乡，话不多但实在，靠海吃海长大。",
+    fact: "烟台话和威海话最接近，都属胶辽官话登连片，\"喝粥\"叫\"喝米汤\"。"
+  },
+  "威海": {
+    desc: "你是威海人——山东最东头的城市，说话带着最浓的胶东海味，干净透亮。",
+    fact: "威海话是胶辽官话里最\"海\"的，和大连话有点像，都属于登连片。"
+  },
+  "潍坊": {
+    desc: "你是潍坊人——风筝都的人，说话敞亮，和你们放的风筝一样飞得高。",
+    fact: "潍坊话属于胶辽官话青莱片，当地把粥叫\"黏煮\"，很有地方特色。"
+  },
+  "临沂": {
+    desc: "你是临沂人——沂蒙山区的厚道劲儿，\"捏个\"说得最溜，拉呱能拉一下午。",
+    fact: "临沂话属中原官话，\"捏个\"就是\"那个\"，\"拉呱\"就是聊天。"
+  },
+  "济宁": {
+    desc: "你是济宁人——孔孟之乡的底蕴，说话带着文化人的讲究，不紧不慢。",
+    fact: "济宁话属中原官话蔡鲁片，是山东境内最接近河南话的一片。"
+  },
+  "枣庄": {
+    desc: "你是枣庄人——辣子鸡和石榴的家乡，说话直接，不绕弯子。",
+    fact: "枣庄话把\"那个\"叫\"过儿\"，很有辨识度。"
+  },
+  "日照": {
+    desc: "你是日照人——日出先照的地方，说话带着黄海的清爽，敞亮。",
+    fact: "日照话把玉米叫\"玉豆\"，是胶辽官话里很有特色的叫法。"
+  },
+  "菏泽": {
+    desc: "你是菏泽人——牡丹之都的人，说话带着鲁西南的豪爽，\"捏个\"是标志。",
+    fact: "菏泽话属中原官话，\"晚航\"就是\"晚上\"，和河南话很接近。"
+  },
+  "德州": {
+    desc: "你是德州人——扒鸡的故乡，鲁西北的豪爽劲儿，\"夜来哄上\"是你的时间词。",
+    fact: "德州话把\"昨天晚上\"叫\"夜来哄上\"，很有画面感。"
+  },
+  "聊城": {
+    desc: "你是聊城人——江北水城的秀气，说话带着运河的慢节奏。",
+    fact: "聊城话属冀鲁官话，\"晚司\"就是\"晚上\"，运河边上的城市说话慢悠悠的。"
+  },
+  "东营": {
+    desc: "你是东营人——黄河入海的地方，说话干脆利落，油城人的豪爽。",
+    fact: "东营话属冀鲁官话，\"后晌\"就是\"晚上\"，和滨州话很接近。"
+  }
 };
 
 var currentQ = 1;
@@ -333,11 +417,12 @@ function startQuiz() {
 
 function renderQuestion() {
   var q = questions[currentQ];
+  document.getElementById('qNum').textContent = q.num;
   document.getElementById('qImg').src = q.img;
   document.getElementById('qText').textContent = q.text;
 
-  // 进度：Q1=50%，Q2=100%
-  var pct = currentQ === 1 ? 50 : 100;
+  // 进度：3关
+  var pct = (currentQ / 3) * 100;
   document.getElementById('progressFill').style.width = pct + '%';
 
   var box = document.getElementById('qOptions');
@@ -363,8 +448,10 @@ function chooseOption(opt) {
 }
 
 function showResult(city) {
+  var r = results[city];
   document.getElementById('rCity').textContent = city;
-  document.getElementById('rDesc').textContent = results[city];
+  document.getElementById('rDesc').textContent = r.desc;
+  document.getElementById('rFact').textContent = "方言小知识：" + r.fact;
   document.getElementById('progressFill').style.width = '100%';
   showView('view-result');
 }
