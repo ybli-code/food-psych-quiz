@@ -15,7 +15,7 @@
   }
   .navbar {
     background: linear-gradient(180deg, #9DB8D4 0%, #B8CCE0 100%);
-    padding: 20px 20px;
+    padding: 20px;
     text-align: center;
     position: sticky;
     top: 0;
@@ -25,142 +25,52 @@
   .container { max-width: 480px; margin: 0 auto; padding: 20px; }
 
   /* 首页 */
-  .page-title {
-    text-align: center;
-    font-size: 32px;
-    font-weight: 700;
-    color: #5A7A9A;
-    margin: 30px 0;
-  }
-  .intro-card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 24px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  }
-  .intro-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #7A9CBF;
-    margin-bottom: 12px;
-  }
-  .intro-text {
-    font-size: 15px;
-    line-height: 1.7;
-    color: #555;
-    margin-bottom: 16px;
-  }
+  .page-title { text-align: center; font-size: 32px; font-weight: 700; color: #5A7A9A; margin: 30px 0; }
+  .intro-card { background: #fff; border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+  .intro-title { font-size: 20px; font-weight: 600; color: #7A9CBF; margin-bottom: 12px; }
+  .intro-text { font-size: 15px; line-height: 1.7; color: #555; margin-bottom: 16px; }
   .dim-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .dim-tag {
-    background: #EDF2F7;
-    color: #7A9CBF;
-    font-size: 13px;
-    padding: 6px 14px;
-    border-radius: 999px;
-  }
-  .test-card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    position: relative;
-  }
-  .test-icon {
-    width: 48px; height: 48px;
-    border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
-    margin-right: 16px;
-    flex-shrink: 0;
-  }
+  .dim-tag { background: #EDF2F7; color: #7A9CBF; font-size: 13px; padding: 6px 14px; border-radius: 999px; }
+  .test-card { background: #fff; border-radius: 16px; padding: 20px; margin-bottom: 16px; display: flex; align-items: center; box-shadow: 0 2px 12px rgba(0,0,0,0.04); position: relative; }
+  .test-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 16px; flex-shrink: 0; }
   .test-card:nth-child(1) .test-icon { background: #E8F0FE; }
   .test-card:nth-child(2) .test-icon { background: #FFF3E0; }
   .test-card:nth-child(3) .test-icon { background: #FFE8EC; }
   .test-info { flex: 1; }
   .test-name { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
   .test-desc { font-size: 13px; color: #999; }
-  .start-btn {
-    background: #7A9CBF;
-    color: #fff;
-    border: none;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 999px;
-    cursor: pointer;
-  }
+  .start-btn { background: #7A9CBF; color: #fff; border: none; font-size: 14px; font-weight: 600; padding: 10px 20px; border-radius: 999px; cursor: pointer; }
   .start-btn.orange { background: #FF8A65; }
-  .badge {
-    position: absolute;
-    top: 12px;
-    right: 80px;
-    background: #FF8A65;
-    color: #fff;
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 999px;
-  }
-  .footer-note {
-    text-align: center;
-    font-size: 13px;
-    color: #999;
-    margin-top: 20px;
-  }
+  .badge { position: absolute; top: 12px; right: 80px; background: #FF8A65; color: #fff; font-size: 11px; padding: 2px 8px; border-radius: 999px; }
+  .footer-note { text-align: center; font-size: 13px; color: #999; margin-top: 20px; }
   .footer-note strong { color: #FF8A65; }
 
-  /* 底部导航 */
-  .tabbar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #fff;
-    display: flex;
-    padding: 10px 0;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-  }
-  .tab-item {
-    flex: 1;
-    text-align: center;
-    cursor: pointer;
-    color: #999;
-  }
-  .tab-item.active { color: #7A9CBF; }
-  .tab-icon { font-size: 22px; margin-bottom: 4px; }
-  .tab-label { font-size: 12px; }
-
   /* 答题页 */
-  .quiz-page { display: none; }
-  .quiz-page.active { display: block; }
-  .quiz-header {
-    text-align: center;
+  .quiz-top { display: flex; justify-content: space-between; font-size: 14px; color: #999; margin-bottom: 10px; }
+  .progress-bar { height: 4px; background: #E0E8F0; border-radius: 2px; margin-bottom: 30px; }
+  .progress-fill { height: 100%; background: #7A9CBF; border-radius: 2px; transition: width .3s; }
+  .ring-progress { text-align: center; margin-bottom: 20px; }
+  .ring {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    border: 4px solid #E0E8F0;
+    border-top-color: #7A9CBF;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 18px;
-    color: #5A7A9A;
-    margin: 20px 0;
+    font-weight: 600;
+    color: #7A9CBF;
   }
-  .progress-bar {
-    height: 4px;
-    background: #E0E8F0;
-    border-radius: 2px;
-    margin-bottom: 30px;
-  }
-  .progress-fill {
-    height: 100%;
-    background: #7A9CBF;
-    border-radius: 2px;
-    transition: width .3s;
-  }
-  .question-num { font-size: 14px; color: #999; margin-bottom: 12px; }
+  .dim-label { display: flex; justify-content: space-between; margin-bottom: 10px; }
+  .dim-badge { background: #EDF2F7; color: #7A9CBF; font-size: 13px; padding: 4px 12px; border-radius: 999px; }
+  .q-num { font-size: 13px; color: #999; }
   .question-text { font-size: 22px; font-weight: 600; line-height: 1.5; margin-bottom: 30px; }
   .option-btn {
     background: #fff;
-    border: none;
+    border: 2px solid transparent;
     border-radius: 14px;
-    padding: 20px;
+    padding: 18px 20px;
     width: 100%;
     text-align: left;
     font-size: 16px;
@@ -169,145 +79,81 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     display: flex;
     align-items: center;
+    gap: 14px;
+    transition: all .2s;
   }
-  .option-letter {
-    width: 32px; height: 32px;
+  .option-btn.selected { border-color: #7A9CBF; background: #F0F6FC; }
+  .radio {
+    width: 20px; height: 20px;
     border-radius: 50%;
-    background: #EDF2F7;
-    color: #7A9CBF;
-    font-size: 14px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 14px;
+    border: 2px solid #ccc;
     flex-shrink: 0;
   }
+  .option-btn.selected .radio { border-color: #7A9CBF; background: #7A9CBF; box-shadow: inset 0 0 0 4px #fff; }
+  .nav-btns { display: flex; gap: 12px; margin-top: 20px; }
+  .nav-btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .nav-btn.prev { background: #fff; color: #7A9CBF; }
+  .nav-btn.next { background: #7A9CBF; color: #fff; }
+  .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .quiz-tip { text-align: center; font-size: 12px; color: #bbb; margin-top: 10px; }
 
   /* 结果页 */
-  .result-page { display: none; text-align: center; }
-  .result-page.active { display: block; }
-  .couple-avatars {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 30px 0 10px;
-  }
-  .avatar-label { font-size: 16px; color: #999; }
-  .heart-icon { font-size: 28px; }
-  .score-circle {
-    width: 140px; height: 140px;
-    border-radius: 50%;
-    border: 8px solid #7A9CBF;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 20px auto;
-  }
-  .score-num { font-size: 40px; font-weight: 700; color: #7A9CBF; }
-  .score-label { font-size: 14px; color: #999; }
-  .stars { font-size: 24px; margin-bottom: 10px; }
-  .result-title { font-size: 20px; font-weight: 600; margin-bottom: 30px; }
-  .analysis-card {
-    background: #fff;
-    border-radius: 14px;
-    padding: 18px;
-    margin-bottom: 12px;
-    text-align: left;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  }
-  .analysis-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .analysis-text { font-size: 14px; line-height: 1.7; color: #555; }
-  .action-btns {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .action-btn {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 999px;
-    font-size: 14px;
-    font-weight: 600;
+  .result-type-title { text-align: center; margin: 20px 0; }
+  .result-code { font-size: 36px; font-weight: 900; color: #5A7A9A; }
+  .result-name { font-size: 18px; color: #999; }
+  .tags-section { background: #fff; border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .tags-section-title { font-size: 16px; font-weight: 600; color: #7A9CBF; margin-bottom: 4px; }
+  .tags-section-sub { font-size: 12px; color: #bbb; margin-bottom: 16px; }
+  .tag-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .tag-item {
+    background: #F8FAFC;
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+    font-size: 13px;
+    color: #555;
     cursor: pointer;
   }
-  .action-btn.primary { background: #7A9CBF; color: #fff; }
-  .action-btn.orange { background: #FF8A65; color: #fff; }
-  .action-btn.outline { background: #fff; color: #7A9CBF; border: 1px solid #7A9CBF; }
-
-  /* 配对页 */
-  .match-page { display: none; }
-  .match-page.active { display: block; }
-  .match-header {
-    text-align: center;
-    margin: 30px 0;
-  }
-  .match-icon { font-size: 48px; margin-bottom: 10px; }
-  .match-title { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
-  .match-sub { font-size: 14px; color: #999; }
-  .match-options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  .match-option {
-    background: #fff;
-    border-radius: 14px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  }
-  .match-option-icon { font-size: 28px; margin-bottom: 8px; }
-  .match-option-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-  .match-option-desc { font-size: 12px; color: #999; }
-  .scene-card {
-    background: #fff;
-    border-radius: 14px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  }
-  .scene-title { font-size: 16px; font-weight: 600; margin-bottom: 14px; }
-  .scene-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-  .scene-tag {
-    background: #F5F7FA;
-    border: none;
-    font-size: 14px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    cursor: pointer;
-  }
-  .scene-tag.active { background: #7A9CBF; color: #fff; }
-  .big-btn {
+  .tag-item:hover { background: #EDF2F7; }
+  .locked-card { background: #fff; border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+  .locked-title { font-size: 16px; font-weight: 600; color: #7A9CBF; margin-bottom: 10px; }
+  .locked-text { font-size: 14px; line-height: 1.7; color: #666; margin-bottom: 14px; }
+  .unlock-btn {
     width: 100%;
-    background: #7A9CBF;
+    background: linear-gradient(135deg, #FF8A65, #FF7043);
     color: #fff;
     border: none;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
-    padding: 16px;
+    padding: 14px;
     border-radius: 999px;
     cursor: pointer;
   }
+  .action-btns { display: flex; gap: 12px; margin-top: 20px; }
+  .action-btn { flex: 1; padding: 14px; border: none; border-radius: 999px; font-size: 15px; font-weight: 600; cursor: pointer; }
+  .action-btn.primary { background: #7A9CBF; color: #fff; }
+  .action-btn.outline { background: #fff; color: #7A9CBF; }
+
+  /* 底部导航 */
+  .tabbar { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; display: flex; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+  .tab-item { flex: 1; text-align: center; cursor: pointer; color: #999; }
+  .tab-item.active { color: #7A9CBF; }
+  .tab-icon { font-size: 22px; margin-bottom: 4px; }
+  .tab-label { font-size: 12px; }
 
   .hidden { display: none !important; }
 </style>
 </head>
 <body>
 
-<!-- 导航栏 -->
 <div class="navbar">
   <div class="navbar-title" id="navTitle">MBTI性格测试</div>
 </div>
@@ -333,25 +179,7 @@
         <div class="test-name">快速版 · 28题</div>
         <div class="test-desc">约6分钟完成，快速了解你的性格类型</div>
       </div>
-      <button class="start-btn" onclick="startQuiz('quick')">开始</button>
-    </div>
-    <div class="test-card">
-      <div class="test-icon">◎</div>
-      <div class="test-info">
-        <div class="test-name">完整版 · 48题</div>
-        <div class="test-desc">约10分钟完成，更精准的性格分析</div>
-      </div>
-      <span class="badge">推荐</span>
-      <button class="start-btn" onclick="startQuiz('full')">开始</button>
-    </div>
-    <div class="test-card">
-      <div class="test-icon">🤍</div>
-      <div class="test-info">
-        <div class="test-name">双人配对测试</div>
-        <div class="test-desc">测测你们的契合指数</div>
-      </div>
-      <span class="badge">HOT</span>
-      <button class="start-btn orange" onclick="showMatch()">开始</button>
+      <button class="start-btn" onclick="startQuiz()">开始</button>
     </div>
     <div class="footer-note">
       <strong>完全免费</strong> | 广告中收费服务与本小程序无关
@@ -360,92 +188,67 @@
 
   <!-- 答题页 -->
   <div id="page-quiz" class="hidden">
-    <div class="quiz-header">MBTI性格测试</div>
-    <div class="progress-bar"><div class="progress-fill" id="prog"></div></div>
-    <div class="question-num" id="qnum"></div>
-    <div class="question-text" id="qtext"></div>
-    <button class="option-btn" onclick="choose(0)">
-      <div class="option-letter">A</div>
-      <div id="qa"></div>
+    <div class="quiz-top">
+      <span>第 <span id="curQ">1</span>/<span id="totalQ">28</span> 题</span>
+      <span id="pctText">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+    <div class="ring-progress">
+      <div class="ring" id="ring">0%</div>
+    </div>
+    <div class="dim-label">
+      <span class="dim-badge" id="dimBadge">EI</span>
+      <span class="q-num" id="qNum">Q1</span>
+    </div>
+    <div class="question-text" id="qText"></div>
+    <button class="option-btn" id="optA" onclick="choose(0)">
+      <div class="radio"></div>
+      <span id="optAText"></span>
     </button>
-    <button class="option-btn" onclick="choose(1)">
-      <div class="option-letter">B</div>
-      <div id="qb"></div>
+    <button class="option-btn" id="optB" onclick="choose(1)">
+      <div class="radio"></div>
+      <span id="optBText"></span>
     </button>
-  </div>
-
-  <!-- 配对页 -->
-  <div id="page-match" class="hidden">
-    <div class="match-header">
-      <div class="match-icon">💑</div>
-      <div class="match-title">双人配对测试</div>
-      <div class="match-sub">发现你们的关系密码</div>
+    <div class="nav-btns">
+      <button class="nav-btn prev" id="prevBtn" onclick="prev()" disabled>← 上一题</button>
+      <button class="nav-btn next" id="nextBtn" onclick="next()">下一题 →</button>
     </div>
-    <div class="match-options">
-      <div class="match-option">
-        <div class="match-option-icon">⚡</div>
-        <div class="match-option-name">快速配对</div>
-        <div class="match-option-desc">已知双方MBTI<br>一键生成报告</div>
-      </div>
-      <div class="match-option">
-        <div class="match-option-icon">🤝</div>
-        <div class="match-option-name">协同测试</div>
-        <div class="match-option-desc">未知双方MBTI<br>转发解锁报告</div>
-      </div>
-    </div>
-    <div class="scene-card">
-      <div class="scene-title">选择关系场景</div>
-      <div class="scene-tags">
-        <button class="scene-tag active">❤️ 情侣恋爱</button>
-        <button class="scene-tag">💖 暧昧关系</button>
-        <button class="scene-tag">👯 闺蜜朋友</button>
-        <button class="scene-tag">💼 职场合作</button>
-        <button class="scene-tag">🏠 家人相处</button>
-      </div>
-    </div>
-    <button class="big-btn" onclick="showResult()">开始配对</button>
+    <div class="quiz-tip">点击选项即可选择，再次点击可取消</div>
   </div>
 
   <!-- 结果页 -->
   <div id="page-result" class="hidden">
-    <div class="couple-avatars">
-      <span class="avatar-label">我</span>
-      <span class="heart-icon">❤️</span>
-      <span class="avatar-label">TA</span>
+    <div class="result-type-title">
+      <div class="result-code" id="rCode">ESFP</div>
+      <div class="result-name" id="rName">— 表演者型人格</div>
     </div>
-    <div class="score-circle">
-      <div class="score-num">81</div>
-      <div class="score-label">分</div>
+
+    <div class="tags-section">
+      <div class="tags-section-title" id="rType">ESFP类型详解</div>
+      <div class="tags-section-sub">（点击下面选项可免费查看）</div>
+      <div class="tag-grid" id="tagGrid"></div>
     </div>
-    <div class="stars">⭐⭐⭐⭐✨</div>
-    <div class="result-title">稳重踏实×鲜活自由的反差CP</div>
-    <div class="analysis-card">
-      <div class="analysis-title">✅ 核心契合亮点</div>
-      <div class="analysis-text">稳重与自由的反差互补，SJ的踏实稳重遇上SP的肆意鲜活。一个负责安稳兜底，一个负责点亮生活，反差互补让日子有烟火气又有新鲜感。</div>
+
+    <div class="locked-card">
+      <div class="locked-title">🔮 凯尔西气质类型</div>
+      <div class="locked-text">本报告基于你的测试结果生成，核心参考大卫·凯尔西（David Keirsey）研发的《凯尔西气质类型调查表》，并结合本土实际情况进行适配优化。本报告在经典理论框架与本土适配的双重支撑下，内容全面且分析细致，力求为你提供贴合实际的气质解读。</div>
+      <button class="unlock-btn">📺 观看广告解锁</button>
     </div>
-    <div class="analysis-card">
-      <div class="analysis-title">⚡ 核心矛盾痛点</div>
-      <div class="analysis-text">性格差异带来的摩擦需要互相磨合与包容</div>
+
+    <div class="locked-card">
+      <div class="locked-title">💗 天生情人</div>
+      <div class="locked-text">揭秘你的专属恋爱密码！想知道谁是你命中注定的灵魂伴侣？想了解自己在爱情中的独特魅力？</div>
+      <button class="unlock-btn">📺 观看广告解锁</button>
     </div>
-    <div class="analysis-card">
-      <div class="analysis-title">💡 相处最优建议</div>
-      <div class="analysis-text">互相理解、互相包容，差异即是互补</div>
-    </div>
-    <div class="analysis-card">
-      <div class="analysis-title">💗 情侣专属分析</div>
-      <div class="analysis-text" style="color:#999;">（后续填充）</div>
-    </div>
+
     <div class="action-btns">
-      <button class="action-btn primary">分享给TA</button>
-      <button class="action-btn orange">生成海报</button>
-      <button class="action-btn outline">复制文案</button>
-      <button class="action-btn outline">再测一对</button>
+      <button class="action-btn outline" onclick="restart()">重新测试</button>
+      <button class="action-btn primary" onclick="share()">分享</button>
     </div>
   </div>
 
 </div>
 
-<!-- 底部导航 -->
 <div class="tabbar">
   <div class="tab-item active" onclick="goHome()">
     <div class="tab-icon">🏠</div>
@@ -463,43 +266,58 @@
 
 <script>
 const questions = [
-  {dim:'EI',text:'周末朋友突然约你聚会，你通常？',a:'立刻答应，去了再说',b:'先想想累不累，可能更想在家待着'},
-  {dim:'EI',text:'在聚会中你更倾向于？',a:'主动和不同的人聊天',b:'和熟悉的几个人待在一起'},
-  {dim:'EI',text:'工作一整天很累，你更喜欢怎么放松？',a:'出门找朋友吃饭聊天',b:'一个人宅家看剧打游戏'},
-  {dim:'EI',text:'认识新朋友时，你通常？',a:'主动开口，很快熟络',b:'等对方先开口，慢慢了解'},
-  {dim:'EI',text:'在团队讨论中，你更倾向于？',a:'边说边想，说出来才清楚',b:'先想清楚再发言'},
-  {dim:'EI',text:'你的社交电量通常？',a:'越玩越嗨，人越多越精神',b:'热闹完需要独处回血'},
-  {dim:'EI',text:'别人形容你更可能是？',a:'外向开朗、话多',b:'安静内敛、话少'},
-  {dim:'SN',text:'你更相信？',a:'亲身经历和事实',b:'直觉和灵感'},
-  {dim:'SN',text:'学习新东西时，你更喜欢？',a:'具体的步骤和实操',b:'理论框架和概念'},
-  {dim:'SN',text:'看一本书，你更关注？',a:'具体的情节和细节',b:'背后的寓意和联想'},
-  {dim:'SN',text:'你更佩服什么样的人？',a:'脚踏实地、务实的人',b:'天马行空、有创意的人'},
-  {dim:'SN',text:'做决定时，你更依赖？',a:'现实情况和已有经验',b:'第六感和可能性'},
-  {dim:'SN',text:'你更喜欢聊？',a:'实际发生的事',b:'未来的设想和脑洞'},
-  {dim:'SN',text:'别人说你更像？',a:'现实主义者',b:'理想主义者'},
-  {dim:'TF',text:'朋友找你诉苦，你更倾向于？',a:'帮他分析问题出在哪',b:'先共情，安慰情绪'},
-  {dim:'TF',text:'做决定时你更看重？',a:'逻辑和公平',b:'人情和感受'},
-  {dim:'TF',text:'被批评时，你第一反应是？',a:'他说的有没有道理',b:'他为什么这么说我'},
-  {dim:'TF',text:'你更看重团队里的？',a:'效率和结果',b:'和谐和氛围'},
-  {dim:'TF',text:'别人惹你生气，你通常？',a:'对事不对人，讲道理',b:'情绪上头，很难冷静'},
-  {dim:'TF',text:'你更讨厌？',a:'不讲逻辑的人',b:'不讲情面的人'},
-  {dim:'TF',text:'帮朋友出主意，你更可能？',a:'直接指出问题',b:'委婉照顾他的感受'},
-  {dim:'JP',text:'出去旅行，你更喜欢？',a:'提前做好详细攻略',b:'走到哪算哪，随缘'},
-  {dim:'JP',text:'你的房间通常？',a:'整整齐齐，东西有固定位置',b:'有点乱，但我知道东西在哪'},
-  {dim:'JP',text:'deadline前你通常？',a:'提前完成，不喜欢赶',b:'最后冲刺，deadline是第一生产力'},
-  {dim:'JP',text:'计划被打乱，你会？',a:'有点烦躁，赶紧调整',b:'无所谓，随机应变'},
-  {dim:'JP',text:'你更喜欢？',a:'有明确的计划和安排',b:'保持灵活，留有余地'},
-  {dim:'JP',text:'做事你更倾向于？',a:'定好目标，按部就班',b:'走一步看一步，边做边调'},
-  {dim:'JP',text:'周末你通常？',a:'提前想好要做什么',b:'到时候再说'},
+  // E/I (7题)
+  {dim:'EI', text:'周末朋友突然约你聚会，你通常？', a:'立刻答应，去了再说', b:'先想想累不累，可能更想在家待着'},
+  {dim:'EI', text:'发朋友圈后，你会？', a:'时不时看看有没有人点赞评论', b:'发完就忘，想起来才看一眼'},
+  {dim:'EI', text:'在聚会上，你更倾向于？', a:'主动和不同的人聊天', b:'和熟悉的几个人待在一起'},
+  {dim:'EI', text:'认识新朋友时，你通常？', a:'主动开口，很快熟络', b:'等对方先开口，慢慢了解'},
+  {dim:'EI', text:'工作一整天很累，你更喜欢怎么放松？', a:'出门找朋友吃饭聊天', b:'一个人宅家看剧打游戏'},
+  {dim:'EI', text:'在团队讨论中，你更倾向于？', a:'边说边想，说出来才清楚', b:'先想清楚再发言'},
+  {dim:'EI', text:'你的社交电量通常？', a:'越玩越嗨，人越多越精神', b:'热闹完需要独处回血'},
+
+  // S/N (7题)
+  {dim:'SN', text:'看一部悬疑剧，你更关注？', a:'剧情走向、人物命运、隐藏彩蛋', b:'演员演技、服化道、拍摄手法'},
+  {dim:'SN', text:'你更相信？', a:'亲身经历和事实', b:'直觉和灵感'},
+  {dim:'SN', text:'学习新东西时，你更喜欢？', a:'具体的步骤和实操', b:'理论框架和概念'},
+  {dim:'SN', text:'听别人讲故事，你更在意？', a:'故事的细节和真实性', b:'故事的寓意和启发'},
+  {dim:'SN', text:'做决定时，你更依赖？', a:'现实情况和已有经验', b:'第六感和可能性'},
+  {dim:'SN', text:'你更喜欢聊？', a:'实际发生的事', b:'未来的设想和脑洞'},
+  {dim:'SN', text:'你更佩服什么样的人？', a:'脚踏实地、务实的人', b:'天马行空、有创意的人'},
+
+  // T/F (7题)
+  {dim:'TF', text:'朋友找你诉苦，你更倾向于？', a:'帮他分析问题出在哪', b:'先共情，安慰情绪'},
+  {dim:'TF', text:'做决定时你更看重？', a:'逻辑和公平', b:'人情和感受'},
+  {dim:'TF', text:'被批评时，你第一反应是？', a:'他说的有没有道理', b:'他为什么这么说我'},
+  {dim:'TF', text:'你更看重团队里的？', a:'效率和结果', b:'和谐和氛围'},
+  {dim:'TF', text:'别人惹你生气，你通常？', a:'对事不对人，讲道理', b:'情绪上头，很难冷静'},
+  {dim:'TF', text:'帮朋友出主意，你更可能？', a:'直接指出问题', b:'委婉照顾他的感受'},
+  {dim:'TF', text:'你更讨厌？', a:'不讲逻辑的人', b:'不讲情面的人'},
+
+  // J/P (7题)
+  {dim:'JP', text:'旅行计划，你的风格是？', a:'精确到分钟，Excel表格安排得明明白白', b:'走哪算哪，主打一个随缘'},
+  {dim:'JP', text:'你的房间通常？', a:'整整齐齐，东西有固定位置', b:'有点乱，但我知道东西在哪'},
+  {dim:'JP', text:'deadline前你通常？', a:'提前完成，不喜欢赶', b:'最后冲刺，deadline是第一生产力'},
+  {dim:'JP', text:'计划被打乱，你会？', a:'有点烦躁，赶紧调整', b:'无所谓，随机应变'},
+  {dim:'JP', text:'你更喜欢？', a:'有明确的计划和安排', b:'保持灵活，留有余地'},
+  {dim:'JP', text:'做事你更倾向于？', a:'定好目标，按部就班', b:'走一步看一步，边做边调'},
+  {dim:'JP', text:'周末你通常？', a:'提前想好要做什么', b:'到时候再说'},
 ];
 
+const typeNames = {
+  INTJ:'建筑师型人格', INTP:'逻辑学家型人格', ENTJ:'指挥官型人格', ENTP:'辩论家型人格',
+  INFJ:'提倡者型人格', INFP:'调停者型人格', ENFJ:'主人公型人格', ENFP:'竞选者型人格',
+  ISTJ:'物流师型人格', ISFJ:'守卫者型人格', ESTJ:'总经理型人格', ESFJ:'执政官型人格',
+  ISTP:'鉴赏家型人格', ISFP:'探险家型人格', ESTP:'企业家型人格', ESFP:'表演者型人格'
+};
+
+const tags = ['人格特征概述','潜在的隐患','人格功能特点','如何发挥优势','问题解决路径','职场优势','职场短板','适合的岗位特质','适合的职业','对公司的贡献','领导风格','潜在短板','适配职场环境','个人发展建议','性格优点','性格缺点','职业偏好','就业指导'];
+
 let current = 0;
+let answers = new Array(questions.length).fill(null);
 let scores = {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
 
 function showPage(id) {
-  ['page-home','page-quiz','page-match','page-result'].forEach(p => {
-    document.getElementById(p).classList.add('hidden');
-  });
+  ['page-home','page-quiz','page-result'].forEach(p => document.getElementById(p).classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
   window.scrollTo(0,0);
 }
@@ -508,47 +326,80 @@ function goHome() { showPage('page-home'); }
 function goShare() { alert('点击右上角分享给朋友'); }
 function goHistory() { alert('暂无测试记录'); }
 
-function startQuiz(type) {
+function startQuiz() {
   current = 0;
+  answers = new Array(questions.length).fill(null);
   scores = {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
+  document.getElementById('totalQ').textContent = questions.length;
   showPage('page-quiz');
   renderQ();
 }
 
 function renderQ() {
   const q = questions[current];
-  document.getElementById('qnum').textContent = '第 ' + (current+1) + ' 题 / 共 ' + questions.length + ' 题';
-  document.getElementById('qtext').textContent = q.text;
-  document.getElementById('qa').textContent = q.a;
-  document.getElementById('qb').textContent = q.b;
-  document.getElementById('prog').style.width = ((current/questions.length)*100) + '%';
+  document.getElementById('curQ').textContent = current + 1;
+  document.getElementById('qNum').textContent = 'Q' + (current + 1);
+  document.getElementById('dimBadge').textContent = q.dim;
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('optAText').textContent = q.a;
+  document.getElementById('optBText').textContent = q.b;
+
+  const pct = Math.round(((current) / questions.length) * 100);
+  document.getElementById('prog').style.width = pct + '%';
+  document.getElementById('pctText').textContent = pct + '%';
+  document.getElementById('ring').textContent = pct + '%';
+
+  // 选中状态
+  document.getElementById('optA').classList.toggle('selected', answers[current] === 0);
+  document.getElementById('optB').classList.toggle('selected', answers[current] === 1);
+
+  // 按钮状态
+  document.getElementById('prevBtn').disabled = current === 0;
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.textContent = current === questions.length - 1 ? '查看结果 →' : '下一题 →';
 }
 
 function choose(v) {
+  answers[current] = v;
+  document.getElementById('optA').classList.toggle('selected', v === 0);
+  document.getElementById('optB').classList.toggle('selected', v === 1);
+}
+
+function prev() {
+  if (current > 0) { current--; renderQ(); }
+}
+
+function next() {
+  if (answers[current] === null) {
+    alert('请先选择一个选项');
+    return;
+  }
+  // 计分
   const q = questions[current];
-  if(q.dim==='EI'){ v===0?scores.E++:scores.I++; }
-  if(q.dim==='SN'){ v===0?scores.S++:scores.N++; }
-  if(q.dim==='TF'){ v===0?scores.T++:scores.F++; }
-  if(q.dim==='JP'){ v===0?scores.J++:scores.P++; }
-  current++;
-  if(current >= questions.length) {
-    alert('测试完成！结果页后续填充');
-    showPage('page-home');
+  if(q.dim==='EI'){ answers[current]===0?scores.E++:scores.I++; }
+  if(q.dim==='SN'){ answers[current]===0?scores.S++:scores.N++; }
+  if(q.dim==='TF'){ answers[current]===0?scores.T++:scores.F++; }
+  if(q.dim==='JP'){ answers[current]===0?scores.J++:scores.P++; }
+
+  if (current >= questions.length - 1) {
+    finish();
   } else {
+    current++;
     renderQ();
   }
 }
 
-function showMatch() { showPage('page-match'); }
-function showResult() { showPage('page-result'); }
+function finish() {
+  const code = (scores.E>=scores.I?'E':'I') + (scores.S>=scores.N?'S':'N') + (scores.T>=scores.F?'T':'F') + (scores.J>=scores.P?'J':'P');
+  document.getElementById('rCode').textContent = code;
+  document.getElementById('rName').textContent = '— ' + typeNames[code];
+  document.getElementById('rType').textContent = code + '类型详解';
+  document.getElementById('tagGrid').innerHTML = tags.map(t => '<div class="tag-item">' + t + '</div>').join('');
+  showPage('page-result');
+}
 
-// 场景标签切换
-document.querySelectorAll('.scene-tag').forEach(tag => {
-  tag.onclick = function() {
-    document.querySelectorAll('.scene-tag').forEach(t => t.classList.remove('active'));
-    this.classList.add('active');
-  };
-});
+function restart() { showPage('page-home'); }
+function share() { alert('点击右上角分享给朋友'); }
 </script>
 
 </body>
