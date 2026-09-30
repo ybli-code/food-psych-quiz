@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>趣味美食心理测试</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #FFF5EB;
+    --card: #FFFFFF;
+    --ink: #2D1B14;
+    --ink-soft: #7A6558;
+    --accent: #FF6B35;
+    --accent-soft: #FFE8D6;
+    --yellow: #F7B801;
+    --yellow-soft: #FFF3D0;
+    --green: #6BBF59;
+    --green-soft: #E2F4DC;
+    --pink: #E85D75;
+    --pink-soft: #FBE0E6;
+    --blue: #4A90D9;
+    --blue-soft: #DCEAFB;
+    --radius: 20px;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 16px;
+  }
+
+  #app {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  /* ===== 视图切换 ===== */
+  .view {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+  .view.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== 开始页 ===== */
+  .start-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 48px 32px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(255, 107, 53, 0.12);
+  }
+  .start-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+    line-height: 1;
+  }
+  .start-title {
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .start-sub {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 16px 48px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 16px rgba(255, 107, 53, 0.35);
+  }
+  .btn-primary:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+  }
+
+  /* ===== 题目页 ===== */
+  .progress-bar {
+    height: 6px;
+    background: var(--accent-soft);
+    border-radius: 3px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .question-num {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .question-text {
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1.4;
+    margin-bottom: 32px;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .option-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    text-align: center;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: transform 0.15s, border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(45, 27, 20, 0.06);
+  }
+  .option-card:active {
+    transform: scale(0.97);
+  }
+  .option-card .opt-emoji {
+    font-size: 44px;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .option-card .opt-label {
+    font-size: 17px;
+    font-weight: 700;
+  }
+  .option-card .opt-hint {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  .option-card.c1 { border-bottom: 4px solid var(--accent); }
+  .option-card.c2 { border-bottom: 4px solid var(--blue); }
+
+  /* ===== 结果页 ===== */
+  .result-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 40px 28px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(45, 27, 20, 0.1);
+  }
+  .result-badge {
+    display: inline-block;
+    padding: 6px 20px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .result-emoji {
+    font-size: 72px;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .result-type {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 16px;
+  }
+  .result-desc {
+    font-size: 16px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+  .btn-restart {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px 36px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.15s;
+  }
+  .btn-restart:active { transform: scale(0.96); }
+
+  /* 结果配色 */
+  .type-A .result-badge { background: var(--accent-soft); color: var(--accent); }
+  .type-B .result-badge { background: var(--yellow-soft); color: #B8860B; }
+  .type-C .result-badge { background: var(--green-soft); color: var(--green); }
+  .type-D .result-badge { background: var(--pink-soft); color: var(--pink); }
+
+  .type-A .result-type { color: var(--accent); }
+  .type-B .result-type { color: #B8860B; }
+  .type-C .result-type { color: var(--green); }
+  .type-D .result-type { color: var(--pink); }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- 开始页 -->
+  <div class="view active" id="view-start">
+    <div class="start-card">
+      <div class="start-icon">&#127869;</div>
+      <div class="start-title">趣味美食<br>心理测试</div>
+      <div class="start-sub">
+        跟着你的味蕾走，<br>
+        看看你最爱的是哪一款拌饭。<br>
+        共 8 道题，轻松又好玩。
+      </div>
+      <button class="btn-primary" onclick="startQuiz()">开始测试</button>
+    </div>
+  </div>
+
+  <!-- 题目页（动态填充） -->
+  <div class="view" id="view-quiz">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="question-num" id="qNum">第 1 题</div>
+    <div class="question-text" id="qText"></div>
+    <div class="options" id="qOptions"></div>
+  </div>
+
+  <!-- 结果页 -->
+  <div class="view" id="view-result">
+    <div class="result-card" id="resultCard">
+      <div class="result-badge" id="rBadge">测试答案</div>
+      <div class="result-emoji" id="rEmoji">&#127837;</div>
+      <div class="result-type" id="rType">A型</div>
+      <div class="result-desc" id="rDesc"></div>
+      <button class="btn-restart" onclick="restart()">再测一次</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ===== 题库：分支跳转 =====
+var questions = {
+  1: {
+    num: 1,
+    text: "你的性别是？",
+    options: [
+      { label: "女孩", emoji: "👧", next: 2 },
+      { label: "男孩", emoji: "👦", next: 3 }
+    ]
+  },
+  2: {
+    num: 2,
+    text: "你很饿的时候会选择？",
+    options: [
+      { label: "米饭", emoji: "🍚", next: 3 },
+      { label: "意大利面", emoji: "🍝", next: 4 }
+    ]
+  },
+  3: {
+    num: 3,
+    text: "你更喜欢吃？",
+    options: [
+      { label: "中餐", emoji: "🍱", next: 4 },
+      { label: "西餐", emoji: "🍽️", next: 4 }
+    ]
+  },
+  4: {
+    num: 4,
+    text: "你更喜欢吃？",
+    options: [
+      { label: "鸡蛋羹", emoji: "🍮", next: 5 },
+      { label: "鸡腿", emoji: "🍗", next: 6 }
+    ]
+  },
+  5: {
+    num: 5,
+    text: "下午茶你爱喝？",
+    options: [
+      { label: "咖啡", emoji: "☕", next: 6 },
+      { label: "茶叶", emoji: "🍵", next: 7 }
+    ]
+  },
+  6: {
+    num: 6,
+    text: "佐餐更喜欢吃？",
+    options: [
+      { label: "沙拉", emoji: "🥗", next: 7 },
+      { label: "蛋糕", emoji: "🍰", next: 8 }
+    ]
+  },
+  7: {
+    num: 7,
+    text: "巴沙鱼和照烧鸡腿，你会选择什么口味？",
+    options: [
+      { label: "巴沙鱼土豆泥拌饭", sub: "选项 A", result: "A" },
+      { label: "蛋羹照烧鸡腿拌饭", sub: "选项 B", result: "B" }
+    ]
+  },
+  8: {
+    num: 8,
+    text: "荞麦面 / 意面，你会选择什么面？",
+    options: [
+      { label: "蛋羹鸡胸低脂意面", sub: "选项 C", result: "C" },
+      { label: "秘制鸡胸低脂荞麦面", sub: "选项 D", result: "D" }
+    ]
+  }
+};
+
+var results = {
+  A: { type: "A型", emoji: "🐟", desc: "说明你是喜欢巴沙鱼土豆泥拌饭的人。", cls: "type-A" },
+  B: { type: "B型", emoji: "🍗", desc: "说明你是喜欢蛋羹照烧鸡腿拌饭的人。", cls: "type-B" },
+  C: { type: "C型", emoji: "🍝", desc: "说明你是喜欢蛋羹鸡胸低脂意面的人。", cls: "type-C" },
+  D: { type: "D型", emoji: "🍜", desc: "说明你是喜欢秘制鸡胸低脂荞麦面的人。", cls: "type-D" }
+};
+
+var currentQ = 1;
+var answered = 0;
+
+function showView(id) {
+  var views = document.querySelectorAll('.view');
+  for (var i = 0; i < views.length; i++) views[i].classList.remove('active');
+  document.getElementById(id).classList.add('active');
+}
+
+function startQuiz() {
+  currentQ = 1;
+  answered = 0;
+  renderQuestion();
+  showView('view-quiz');
+}
+
+function renderQuestion() {
+  var q = questions[currentQ];
+  document.getElementById('qNum').textContent = "第 " + q.num + " 题";
+  document.getElementById('qText').textContent = q.text;
+
+  // 进度：根据实际答题进度估算
+  var pct = Math.min(100, Math.round((answered / 8) * 100));
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  var box = document.getElementById('qOptions');
+  box.innerHTML = '';
+  for (var i = 0; i < q.options.length; i++) {
+    (function(opt) {
+      var card = document.createElement('div');
+      card.className = 'option-card ' + (i === 0 ? 'c1' : 'c2');
+      var emojiHtml = opt.emoji ? '<div class="opt-emoji">' + opt.emoji + '</div>' : '';
+      var subHtml = opt.sub ? '<div class="opt-hint">' + opt.sub + '</div>' : '';
+      card.innerHTML = emojiHtml + '<div class="opt-label">' + opt.label + '</div>' + subHtml;
+      card.onclick = function() { chooseOption(opt); };
+      box.appendChild(card);
+    })(q.options[i]);
+  }
+}
+
+function chooseOption(opt) {
+  answered++;
+  if (opt.result) {
+    showResult(opt.result);
+  } else {
+    currentQ = opt.next;
+    renderQuestion();
+  }
+}
+
+function showResult(type) {
+  var r = results[type];
+  document.getElementById('rBadge').textContent = "测试答案";
+  document.getElementById('rEmoji').textContent = r.emoji;
+  document.getElementById('rType').textContent = r.type;
+  document.getElementById('rDesc').textContent = r.desc;
+
+  var card = document.getElementById('resultCard');
+  card.className = 'result-card ' + r.cls;
+
+  document.getElementById('progressFill').style.width = '100%';
+  showView('view-result');
+}
+
+function restart() {
+  showView('view-start');
+}
+</script>
+
+</body>
+</html>
