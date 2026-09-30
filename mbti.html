@@ -3,197 +3,521 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MBTI人格测试 - 心晴心理测评</title>
+<title>MBTI性格测试</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
     font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: linear-gradient(160deg, #FFF5EB 0%, #FFE8D6 100%);
+    background: linear-gradient(180deg, #B8CCE0 0%, #D6E2EE 30%, #F5F7FA 100%);
     min-height: 100vh;
-    color: #2D1B14;
+    color: #333;
+    padding-bottom: 80px;
   }
-  .container { max-width: 480px; margin: 0 auto; padding: 40px 20px; }
+  .navbar {
+    background: linear-gradient(180deg, #9DB8D4 0%, #B8CCE0 100%);
+    padding: 20px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .navbar-title { font-size: 18px; font-weight: 600; color: #fff; }
+  .container { max-width: 480px; margin: 0 auto; padding: 20px; }
+
+  /* 首页 */
+  .page-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #5A7A9A;
+    margin: 30px 0;
+  }
   .intro-card {
-    background: #fff; border-radius: 20px; padding: 50px 30px;
-    text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-    margin-top: 60px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
   }
-  .intro-title { font-size: 36px; font-weight: 900; margin-bottom: 10px; }
-  .intro-sub { font-size: 15px; color: #999; margin-bottom: 30px; }
-  .dims { display: flex; justify-content: space-around; margin-bottom: 35px; }
-  .dim { text-align: center; }
-  .dim b { display: block; font-size: 22px; color: #FF6B35; }
-  .dim span { font-size: 12px; color: #999; }
+  .intro-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #7A9CBF;
+    margin-bottom: 12px;
+  }
+  .intro-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 16px;
+  }
+  .dim-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .dim-tag {
+    background: #EDF2F7;
+    color: #7A9CBF;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 999px;
+  }
+  .test-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    position: relative;
+  }
+  .test-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin-right: 16px;
+    flex-shrink: 0;
+  }
+  .test-card:nth-child(1) .test-icon { background: #E8F0FE; }
+  .test-card:nth-child(2) .test-icon { background: #FFF3E0; }
+  .test-card:nth-child(3) .test-icon { background: #FFE8EC; }
+  .test-info { flex: 1; }
+  .test-name { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .test-desc { font-size: 13px; color: #999; }
   .start-btn {
-    background: #FF6B35; color: #fff; border: none;
-    font-size: 18px; font-weight: 700; padding: 14px 50px;
-    border-radius: 999px; cursor: pointer;
+    background: #7A9CBF;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 999px;
+    cursor: pointer;
   }
-  .progress-bar { height: 8px; background: #FFE0CC; border-radius: 999px; margin-bottom: 15px; overflow: hidden; }
-  .progress-inner { height: 100%; background: #FF6B35; border-radius: 999px; transition: width .3s; }
-  .quiz-num { font-size: 14px; color: #999; margin-bottom: 20px; }
-  .question { font-size: 22px; font-weight: 700; line-height: 1.5; margin-bottom: 30px; }
-  .options { display: flex; flex-direction: column; gap: 15px; }
-  .option {
-    background: #fff; border-radius: 14px; padding: 20px;
-    display: flex; align-items: flex-start; gap: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer;
-    transition: transform .15s;
+  .start-btn.orange { background: #FF8A65; }
+  .badge {
+    position: absolute;
+    top: 12px;
+    right: 80px;
+    background: #FF8A65;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
   }
-  .option:active { transform: scale(0.98); }
+  .footer-note {
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+    margin-top: 20px;
+  }
+  .footer-note strong { color: #FF8A65; }
+
+  /* 底部导航 */
+  .tabbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    display: flex;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+  }
+  .tab-item {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    color: #999;
+  }
+  .tab-item.active { color: #7A9CBF; }
+  .tab-icon { font-size: 22px; margin-bottom: 4px; }
+  .tab-label { font-size: 12px; }
+
+  /* 答题页 */
+  .quiz-page { display: none; }
+  .quiz-page.active { display: block; }
+  .quiz-header {
+    text-align: center;
+    font-size: 18px;
+    color: #5A7A9A;
+    margin: 20px 0;
+  }
+  .progress-bar {
+    height: 4px;
+    background: #E0E8F0;
+    border-radius: 2px;
+    margin-bottom: 30px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #7A9CBF;
+    border-radius: 2px;
+    transition: width .3s;
+  }
+  .question-num { font-size: 14px; color: #999; margin-bottom: 12px; }
+  .question-text { font-size: 22px; font-weight: 600; line-height: 1.5; margin-bottom: 30px; }
+  .option-btn {
+    background: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 20px;
+    width: 100%;
+    text-align: left;
+    font-size: 16px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    display: flex;
+    align-items: center;
+  }
   .option-letter {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: #FF6B35; color: #fff; font-size: 16px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: #EDF2F7;
+    color: #7A9CBF;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    flex-shrink: 0;
   }
-  .option-text { font-size: 16px; line-height: 1.5; }
-  .result-card {
-    background: #fff; border-radius: 20px; padding: 40px 30px;
-    text-align: center; margin-top: 30px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+
+  /* 结果页 */
+  .result-page { display: none; text-align: center; }
+  .result-page.active { display: block; }
+  .couple-avatars {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 30px 0 10px;
   }
-  .result-badge {
-    display: inline-block; background: linear-gradient(135deg, #FF6B35, #FF8F5E);
-    color: #fff; font-size: 36px; font-weight: 900;
-    padding: 10px 40px; border-radius: 14px; letter-spacing: 6px; margin-bottom: 15px;
+  .avatar-label { font-size: 16px; color: #999; }
+  .heart-icon { font-size: 28px; }
+  .score-circle {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    border: 8px solid #7A9CBF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
   }
-  .result-name { font-size: 22px; font-weight: 700; margin-bottom: 15px; }
-  .result-desc { font-size: 15px; color: #666; line-height: 1.6; text-align: left; margin-bottom: 20px; }
-  .traits { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px; }
-  .trait { background: #FFF0E5; color: #FF6B35; font-size: 13px; padding: 6px 16px; border-radius: 999px; }
-  .jobs-box { background: #FAFAFA; border-radius: 12px; padding: 15px; margin-bottom: 20px; text-align: left; }
-  .jobs-title { font-size: 13px; color: #999; margin-bottom: 5px; }
-  .jobs { font-size: 15px; }
-  .bars { text-align: left; margin-bottom: 25px; }
-  .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  .bar-label { font-size: 13px; color: #666; width: 60px; }
-  .bar-track { flex: 1; height: 10px; background: #F0F0F0; border-radius: 999px; overflow: hidden; }
-  .bar-fill { height: 100%; background: #FF6B35; border-radius: 999px; }
-  .bar-pct { font-size: 13px; color: #999; width: 50px; text-align: right; }
-  .restart-btn {
-    background: #FF6B35; color: #fff; border: none;
-    font-size: 16px; font-weight: 700; padding: 12px 40px;
-    border-radius: 999px; cursor: pointer;
+  .score-num { font-size: 40px; font-weight: 700; color: #7A9CBF; }
+  .score-label { font-size: 14px; color: #999; }
+  .stars { font-size: 24px; margin-bottom: 10px; }
+  .result-title { font-size: 20px; font-weight: 600; margin-bottom: 30px; }
+  .analysis-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 12px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
-  .hidden { display: none; }
-  .back-home { text-align: center; margin-top: 20px; }
-  .back-home a { color: #FF6B35; text-decoration: none; font-size: 14px; }
+  .analysis-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .analysis-text { font-size: 14px; line-height: 1.7; color: #555; }
+  .action-btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .action-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .action-btn.primary { background: #7A9CBF; color: #fff; }
+  .action-btn.orange { background: #FF8A65; color: #fff; }
+  .action-btn.outline { background: #fff; color: #7A9CBF; border: 1px solid #7A9CBF; }
+
+  /* 配对页 */
+  .match-page { display: none; }
+  .match-page.active { display: block; }
+  .match-header {
+    text-align: center;
+    margin: 30px 0;
+  }
+  .match-icon { font-size: 48px; margin-bottom: 10px; }
+  .match-title { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+  .match-sub { font-size: 14px; color: #999; }
+  .match-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .match-option {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .match-option-icon { font-size: 28px; margin-bottom: 8px; }
+  .match-option-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .match-option-desc { font-size: 12px; color: #999; }
+  .scene-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .scene-title { font-size: 16px; font-weight: 600; margin-bottom: 14px; }
+  .scene-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+  .scene-tag {
+    background: #F5F7FA;
+    border: none;
+    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .scene-tag.active { background: #7A9CBF; color: #fff; }
+  .big-btn {
+    width: 100%;
+    background: #7A9CBF;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 16px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .hidden { display: none !important; }
 </style>
 </head>
 <body>
+
+<!-- 导航栏 -->
+<div class="navbar">
+  <div class="navbar-title" id="navTitle">MBTI性格测试</div>
+</div>
+
 <div class="container">
 
-  <div id="intro" class="intro-card">
-    <div class="intro-title">MBTI 人格测试</div>
-    <div class="intro-sub">28道题 · 约3分钟 · 测出你的人格类型</div>
-    <div class="dims">
-      <div class="dim"><b>E/I</b><span>外向/内向</span></div>
-      <div class="dim"><b>S/N</b><span>感觉/直觉</span></div>
-      <div class="dim"><b>T/F</b><span>思考/情感</span></div>
-      <div class="dim"><b>J/P</b><span>判断/知觉</span></div>
-    </div>
-    <button class="start-btn" onclick="start()">开始测试</button>
-  </div>
-
-  <div id="quiz" class="hidden">
-    <div class="progress-bar"><div class="progress-inner" id="prog"></div></div>
-    <div class="quiz-num" id="qnum"></div>
-    <div class="question" id="qtext"></div>
-    <div class="options">
-      <div class="option" onclick="choose(0)">
-        <div class="option-letter">A</div>
-        <div class="option-text" id="qa"></div>
-      </div>
-      <div class="option" onclick="choose(1)">
-        <div class="option-letter">B</div>
-        <div class="option-text" id="qb"></div>
+  <!-- 首页 -->
+  <div id="page-home">
+    <div class="page-title">MBTI性格测试</div>
+    <div class="intro-card">
+      <div class="intro-title">什么是MBTI？</div>
+      <div class="intro-text">MBTI（Myers-Briggs Type Indicator）是一种性格测试工具，通过四个维度分析你的性格类型，帮助你更好地了解自己。</div>
+      <div class="dim-tags">
+        <span class="dim-tag">E/I 外向/内向</span>
+        <span class="dim-tag">S/N 感觉/直觉</span>
+        <span class="dim-tag">T/F 思考/情感</span>
+        <span class="dim-tag">J/P 判断/知觉</span>
       </div>
     </div>
-  </div>
-
-  <div id="result" class="hidden">
-    <div class="result-card">
-      <div class="result-badge" id="rcode"></div>
-      <div class="result-name" id="rname"></div>
-      <div class="result-desc" id="rdesc"></div>
-      <div class="traits" id="rtraits"></div>
-      <div class="jobs-box">
-        <div class="jobs-title">适合职业</div>
-        <div class="jobs" id="rjobs"></div>
+    <div class="test-card">
+      <div class="test-icon">⚡</div>
+      <div class="test-info">
+        <div class="test-name">快速版 · 28题</div>
+        <div class="test-desc">约6分钟完成，快速了解你的性格类型</div>
       </div>
-      <div class="bars" id="rbars"></div>
-      <button class="restart-btn" onclick="restart()">再测一次</button>
+      <button class="start-btn" onclick="startQuiz('quick')">开始</button>
+    </div>
+    <div class="test-card">
+      <div class="test-icon">◎</div>
+      <div class="test-info">
+        <div class="test-name">完整版 · 48题</div>
+        <div class="test-desc">约10分钟完成，更精准的性格分析</div>
+      </div>
+      <span class="badge">推荐</span>
+      <button class="start-btn" onclick="startQuiz('full')">开始</button>
+    </div>
+    <div class="test-card">
+      <div class="test-icon">🤍</div>
+      <div class="test-info">
+        <div class="test-name">双人配对测试</div>
+        <div class="test-desc">测测你们的契合指数</div>
+      </div>
+      <span class="badge">HOT</span>
+      <button class="start-btn orange" onclick="showMatch()">开始</button>
+    </div>
+    <div class="footer-note">
+      <strong>完全免费</strong> | 广告中收费服务与本小程序无关
     </div>
   </div>
 
-  <div class="back-home"><a href="index.html">← 返回首页</a></div>
+  <!-- 答题页 -->
+  <div id="page-quiz" class="hidden">
+    <div class="quiz-header">MBTI性格测试</div>
+    <div class="progress-bar"><div class="progress-fill" id="prog"></div></div>
+    <div class="question-num" id="qnum"></div>
+    <div class="question-text" id="qtext"></div>
+    <button class="option-btn" onclick="choose(0)">
+      <div class="option-letter">A</div>
+      <div id="qa"></div>
+    </button>
+    <button class="option-btn" onclick="choose(1)">
+      <div class="option-letter">B</div>
+      <div id="qb"></div>
+    </button>
+  </div>
+
+  <!-- 配对页 -->
+  <div id="page-match" class="hidden">
+    <div class="match-header">
+      <div class="match-icon">💑</div>
+      <div class="match-title">双人配对测试</div>
+      <div class="match-sub">发现你们的关系密码</div>
+    </div>
+    <div class="match-options">
+      <div class="match-option">
+        <div class="match-option-icon">⚡</div>
+        <div class="match-option-name">快速配对</div>
+        <div class="match-option-desc">已知双方MBTI<br>一键生成报告</div>
+      </div>
+      <div class="match-option">
+        <div class="match-option-icon">🤝</div>
+        <div class="match-option-name">协同测试</div>
+        <div class="match-option-desc">未知双方MBTI<br>转发解锁报告</div>
+      </div>
+    </div>
+    <div class="scene-card">
+      <div class="scene-title">选择关系场景</div>
+      <div class="scene-tags">
+        <button class="scene-tag active">❤️ 情侣恋爱</button>
+        <button class="scene-tag">💖 暧昧关系</button>
+        <button class="scene-tag">👯 闺蜜朋友</button>
+        <button class="scene-tag">💼 职场合作</button>
+        <button class="scene-tag">🏠 家人相处</button>
+      </div>
+    </div>
+    <button class="big-btn" onclick="showResult()">开始配对</button>
+  </div>
+
+  <!-- 结果页 -->
+  <div id="page-result" class="hidden">
+    <div class="couple-avatars">
+      <span class="avatar-label">我</span>
+      <span class="heart-icon">❤️</span>
+      <span class="avatar-label">TA</span>
+    </div>
+    <div class="score-circle">
+      <div class="score-num">81</div>
+      <div class="score-label">分</div>
+    </div>
+    <div class="stars">⭐⭐⭐⭐✨</div>
+    <div class="result-title">稳重踏实×鲜活自由的反差CP</div>
+    <div class="analysis-card">
+      <div class="analysis-title">✅ 核心契合亮点</div>
+      <div class="analysis-text">稳重与自由的反差互补，SJ的踏实稳重遇上SP的肆意鲜活。一个负责安稳兜底，一个负责点亮生活，反差互补让日子有烟火气又有新鲜感。</div>
+    </div>
+    <div class="analysis-card">
+      <div class="analysis-title">⚡ 核心矛盾痛点</div>
+      <div class="analysis-text">性格差异带来的摩擦需要互相磨合与包容</div>
+    </div>
+    <div class="analysis-card">
+      <div class="analysis-title">💡 相处最优建议</div>
+      <div class="analysis-text">互相理解、互相包容，差异即是互补</div>
+    </div>
+    <div class="analysis-card">
+      <div class="analysis-title">💗 情侣专属分析</div>
+      <div class="analysis-text" style="color:#999;">（后续填充）</div>
+    </div>
+    <div class="action-btns">
+      <button class="action-btn primary">分享给TA</button>
+      <button class="action-btn orange">生成海报</button>
+      <button class="action-btn outline">复制文案</button>
+      <button class="action-btn outline">再测一对</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- 底部导航 -->
+<div class="tabbar">
+  <div class="tab-item active" onclick="goHome()">
+    <div class="tab-icon">🏠</div>
+    <div class="tab-label">首页</div>
+  </div>
+  <div class="tab-item" onclick="goShare()">
+    <div class="tab-icon">🔗</div>
+    <div class="tab-label">分享</div>
+  </div>
+  <div class="tab-item" onclick="goHistory()">
+    <div class="tab-icon">🕐</div>
+    <div class="tab-label">历史</div>
+  </div>
 </div>
 
 <script>
 const questions = [
-  { dim:'EI', text:'周末朋友突然约你聚会，你通常？', a:'立刻答应，去了再说', b:'先想想累不累，可能更想在家待着' },
-  { dim:'EI', text:'在聚会中你更倾向于？', a:'主动和不同的人聊天', b:'和熟悉的几个人待在一起' },
-  { dim:'EI', text:'工作了一整天很累，你更喜欢怎么放松？', a:'出门找朋友吃饭聊天', b:'一个人宅家看剧打游戏' },
-  { dim:'EI', text:'认识新朋友时，你通常？', a:'主动开口，很快熟络', b:'等对方先开口，慢慢了解' },
-  { dim:'EI', text:'在团队讨论中，你更倾向于？', a:'边说边想，说出来才清楚', b:'先想清楚再发言' },
-  { dim:'EI', text:'你的社交电量通常？', a:'越玩越嗨，人越多越精神', b:'热闹完需要独处回血' },
-  { dim:'EI', text:'别人形容你更可能是？', a:'外向开朗、话多', b:'安静内敛、话少' },
-  { dim:'SN', text:'你更相信？', a:'亲身经历和事实', b:'直觉和灵感' },
-  { dim:'SN', text:'学习新东西时，你更喜欢？', a:'具体的步骤和实操', b:'理论框架和概念' },
-  { dim:'SN', text:'看一本书，你更关注？', a:'具体的情节和细节', b:'背后的寓意和联想' },
-  { dim:'SN', text:'你更佩服什么样的人？', a:'脚踏实地、务实的人', b:'天马行空、有创意的人' },
-  { dim:'SN', text:'做决定时，你更依赖？', a:'现实情况和已有经验', b:'第六感和可能性' },
-  { dim:'SN', text:'你更喜欢聊？', a:'实际发生的事', b:'未来的设想和脑洞' },
-  { dim:'SN', text:'别人说你更像？', a:'现实主义者', b:'理想主义者' },
-  { dim:'TF', text:'朋友找你诉苦，你更倾向于？', a:'帮他分析问题出在哪', b:'先共情，安慰情绪' },
-  { dim:'TF', text:'做决定时你更看重？', a:'逻辑和公平', b:'人情和感受' },
-  { dim:'TF', text:'被批评时，你第一反应是？', a:'他说的有没有道理', b:'他为什么这么说我' },
-  { dim:'TF', text:'你更看重团队里的？', a:'效率和结果', b:'和谐和氛围' },
-  { dim:'TF', text:'别人惹你生气，你通常？', a:'对事不对人，讲道理', b:'情绪上头，很难冷静' },
-  { dim:'TF', text:'你更讨厌？', a:'不讲逻辑的人', b:'不讲情面的人' },
-  { dim:'TF', text:'帮朋友出主意，你更可能？', a:'直接指出问题', b:'委婉照顾他的感受' },
-  { dim:'JP', text:'出去旅行，你更喜欢？', a:'提前做好详细攻略', b:'走到哪算哪，随缘' },
-  { dim:'JP', text:'你的房间通常？', a:'整整齐齐，东西有固定位置', b:'有点乱，但我知道东西在哪' },
-  { dim:'JP', text:'deadline前你通常？', a:'提前完成，不喜欢赶', b:'最后冲刺，deadline是第一生产力' },
-  { dim:'JP', text:'计划被打乱，你会？', a:'有点烦躁，赶紧调整', b:'无所谓，随机应变' },
-  { dim:'JP', text:'你更喜欢？', a:'有明确的计划和安排', b:'保持灵活，留有余地' },
-  { dim:'JP', text:'做事你更倾向于？', a:'定好目标，按部就班', b:'走一步看一步，边做边调' },
-  { dim:'JP', text:'周末你通常？', a:'提前想好要做什么', b:'到时候再说' },
+  {dim:'EI',text:'周末朋友突然约你聚会，你通常？',a:'立刻答应，去了再说',b:'先想想累不累，可能更想在家待着'},
+  {dim:'EI',text:'在聚会中你更倾向于？',a:'主动和不同的人聊天',b:'和熟悉的几个人待在一起'},
+  {dim:'EI',text:'工作一整天很累，你更喜欢怎么放松？',a:'出门找朋友吃饭聊天',b:'一个人宅家看剧打游戏'},
+  {dim:'EI',text:'认识新朋友时，你通常？',a:'主动开口，很快熟络',b:'等对方先开口，慢慢了解'},
+  {dim:'EI',text:'在团队讨论中，你更倾向于？',a:'边说边想，说出来才清楚',b:'先想清楚再发言'},
+  {dim:'EI',text:'你的社交电量通常？',a:'越玩越嗨，人越多越精神',b:'热闹完需要独处回血'},
+  {dim:'EI',text:'别人形容你更可能是？',a:'外向开朗、话多',b:'安静内敛、话少'},
+  {dim:'SN',text:'你更相信？',a:'亲身经历和事实',b:'直觉和灵感'},
+  {dim:'SN',text:'学习新东西时，你更喜欢？',a:'具体的步骤和实操',b:'理论框架和概念'},
+  {dim:'SN',text:'看一本书，你更关注？',a:'具体的情节和细节',b:'背后的寓意和联想'},
+  {dim:'SN',text:'你更佩服什么样的人？',a:'脚踏实地、务实的人',b:'天马行空、有创意的人'},
+  {dim:'SN',text:'做决定时，你更依赖？',a:'现实情况和已有经验',b:'第六感和可能性'},
+  {dim:'SN',text:'你更喜欢聊？',a:'实际发生的事',b:'未来的设想和脑洞'},
+  {dim:'SN',text:'别人说你更像？',a:'现实主义者',b:'理想主义者'},
+  {dim:'TF',text:'朋友找你诉苦，你更倾向于？',a:'帮他分析问题出在哪',b:'先共情，安慰情绪'},
+  {dim:'TF',text:'做决定时你更看重？',a:'逻辑和公平',b:'人情和感受'},
+  {dim:'TF',text:'被批评时，你第一反应是？',a:'他说的有没有道理',b:'他为什么这么说我'},
+  {dim:'TF',text:'你更看重团队里的？',a:'效率和结果',b:'和谐和氛围'},
+  {dim:'TF',text:'别人惹你生气，你通常？',a:'对事不对人，讲道理',b:'情绪上头，很难冷静'},
+  {dim:'TF',text:'你更讨厌？',a:'不讲逻辑的人',b:'不讲情面的人'},
+  {dim:'TF',text:'帮朋友出主意，你更可能？',a:'直接指出问题',b:'委婉照顾他的感受'},
+  {dim:'JP',text:'出去旅行，你更喜欢？',a:'提前做好详细攻略',b:'走到哪算哪，随缘'},
+  {dim:'JP',text:'你的房间通常？',a:'整整齐齐，东西有固定位置',b:'有点乱，但我知道东西在哪'},
+  {dim:'JP',text:'deadline前你通常？',a:'提前完成，不喜欢赶',b:'最后冲刺，deadline是第一生产力'},
+  {dim:'JP',text:'计划被打乱，你会？',a:'有点烦躁，赶紧调整',b:'无所谓，随机应变'},
+  {dim:'JP',text:'你更喜欢？',a:'有明确的计划和安排',b:'保持灵活，留有余地'},
+  {dim:'JP',text:'做事你更倾向于？',a:'定好目标，按部就班',b:'走一步看一步，边做边调'},
+  {dim:'JP',text:'周末你通常？',a:'提前想好要做什么',b:'到时候再说'},
 ];
-
-const results = {
-  INTJ:{name:'建筑师',desc:'你是独立理性的战略家，凡事都有自己的规划和判断。不爱废话，行动力强，认准目标就默默推进。表面冷静，内心其实有很远大的蓝图。',traits:['独立','理性','有远见','完美主义'],jobs:'科研人员、策略分析师、架构师、设计师、投资人'},
-  INTP:{name:'逻辑学家',desc:'你是好奇心旺盛的思考者，喜欢琢磨各种原理和逻辑。对感兴趣的事钻得很深，对不感兴趣的事提不起劲。朋友眼里你是个行走的十万个为什么。',traits:['理性','好奇','独立','爱钻研'],jobs:'程序员、数学家、研究员、哲学家、数据分析师'},
-  ENTJ:{name:'指挥官',desc:'你是天生的领导者，果断、高效、目标感强。不喜欢拖泥带水，擅长组织和推进事情。在人群中很容易成为拿主意的那个人。',traits:['果断','高效','领导力','目标感'],jobs:'CEO、项目经理、律师、创业、管理者'},
-  ENTP:{name:'辩论家',desc:'你是脑洞大、反应快的点子王，喜欢挑战和思辨。对新鲜事物充满好奇，聊起天来天马行空。讨厌一成不变的生活。',traits:['聪明','反应快','爱挑战','创意多'],jobs:'创业、营销、策划、律师、媒体人'},
-  INFJ:{name:'提倡者',desc:'你是温柔而坚定的理想主义者，有很强的直觉和共情力。看似安静，内心对世界有自己的坚持和热爱。是那种温柔但有力量的人。',traits:['温柔','有理想','共情力强','神秘'],jobs:'心理咨询、作家、教育、公益、艺术'},
-  INFP:{name:'调停者',desc:'你是内心柔软的诗人，丰富的想象力和细腻的情感是你的天赋。重视价值观，不喜欢虚伪和功利。活在自己的小世界里也能自得其乐。',traits:['浪漫','细腻','善良','理想主义'],jobs:'作家、设计师、心理咨询、艺术、文案'},
-  ENFJ:{name:'主人公',desc:'你是天生的感染力者，善于倾听和引导别人。重视团队和谐，愿意为他人付出。朋友遇到问题第一个想到找你聊。',traits:['有感染力','温暖','善解人意','有担当'],jobs:'教育、HR、公关、销售、培训师'},
-  ENFP:{name:'竞选者',desc:'你是热情洋溢的快乐小狗，对世界充满好奇和热爱。点子多、社交广、感染力强。讨厌无聊和束缚，生活总是充满新鲜感。',traits:['热情','创意','爱社交','乐观'],jobs:'营销、媒体、策划、演员、自由职业'},
-  ISTJ:{name:'物流师',desc:'你是靠谱的实干家，守规矩、重承诺、做事踏实。交给你的事一定能办好，是团队里最让人放心的那个人。',traits:['靠谱','踏实','守规则','责任感强'],jobs:'会计、公务员、法务、审计、项目管理'},
-  ISFJ:{name:'守卫者',desc:'你是温暖的守护者，默默照顾身边的人，细心又体贴。不喜欢出风头，但身边人都离不开你。是那种朋友有你真好的存在。',traits:['细心','温暖','顾家','可靠'],jobs:'护士、教师、行政、社工、客服'},
-  ESTJ:{name:'总经理',desc:'你是务实的管理者，重视秩序和效率，说一不二。擅长把事情落地执行，不喜欢拖泥带水。是天生的组织者。',traits:['务实','果断','有条理','执行力强'],jobs:'管理者、公务员、法官、项目经理、军官'},
-  ESFJ:{name:'执政官',desc:'你是热心肠的社交达人，重视和谐，喜欢照顾别人。聚会的组织者、朋友的粘合剂。大家都喜欢你。',traits:['热心','社交','体贴','重视和谐'],jobs:'HR、教师、护理、公关、社区工作'},
-  ISTP:{name:'鉴赏家',desc:'你是冷静的手艺人，喜欢动手解决问题，擅长拆解和修复。话不多但一出手就知道是行家。喜欢自由，不喜欢被管。',traits:['冷静','动手能力强','灵活','独立'],jobs:'工程师、程序员、技师、飞行员、运动员'},
-  ISFP:{name:'探险家',desc:'你是安静的艺术家，用感官感受世界，审美在线。不喜欢冲突，活在当下。看似佛系，其实内心有自己的小宇宙。',traits:['艺术感','温柔','随性','敏感'],jobs:'设计师、摄影师、厨师、手工艺、音乐'},
-  ESTP:{name:'企业家',desc:'你是胆大心细的行动派，反应快、敢冒险、擅长临场发挥。讨厌纸上谈兵，喜欢在实战中找机会。是人群里最会来事的那个。',traits:['大胆','灵活','行动力强','爱冒险'],jobs:'销售、创业、投资、公关、运动员'},
-  ESFP:{name:'表演者',desc:'你是天生的开心果，热爱生活、享受当下、感染力强。走到哪都能带来欢乐。讨厌无聊，喜欢热闹和新鲜感。',traits:['热情','乐观','爱表现','享受生活'],jobs:'演员、主持、销售、活动策划、导游'},
-};
 
 let current = 0;
 let scores = {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
 
-function start() {
+function showPage(id) {
+  ['page-home','page-quiz','page-match','page-result'].forEach(p => {
+    document.getElementById(p).classList.add('hidden');
+  });
+  document.getElementById(id).classList.remove('hidden');
+  window.scrollTo(0,0);
+}
+
+function goHome() { showPage('page-home'); }
+function goShare() { alert('点击右上角分享给朋友'); }
+function goHistory() { alert('暂无测试记录'); }
+
+function startQuiz(type) {
   current = 0;
   scores = {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
-  document.getElementById('intro').classList.add('hidden');
-  document.getElementById('quiz').classList.remove('hidden');
+  showPage('page-quiz');
   renderQ();
 }
 
 function renderQ() {
   const q = questions[current];
-  document.getElementById('qnum').textContent = (current+1) + ' / ' + questions.length;
+  document.getElementById('qnum').textContent = '第 ' + (current+1) + ' 题 / 共 ' + questions.length + ' 题';
   document.getElementById('qtext').textContent = q.text;
   document.getElementById('qa').textContent = q.a;
   document.getElementById('qb').textContent = q.b;
@@ -207,36 +531,25 @@ function choose(v) {
   if(q.dim==='TF'){ v===0?scores.T++:scores.F++; }
   if(q.dim==='JP'){ v===0?scores.J++:scores.P++; }
   current++;
-  if(current >= questions.length) finish();
-  else renderQ();
+  if(current >= questions.length) {
+    alert('测试完成！结果页后续填充');
+    showPage('page-home');
+  } else {
+    renderQ();
+  }
 }
 
-function finish() {
-  const code = (scores.E>=scores.I?'E':'I') + (scores.S>=scores.N?'S':'N') + (scores.T>=scores.F?'T':'F') + (scores.J>=scores.P?'J':'P');
-  const r = results[code];
-  document.getElementById('quiz').classList.add('hidden');
-  document.getElementById('result').classList.remove('hidden');
-  document.getElementById('rcode').textContent = code;
-  document.getElementById('rname').textContent = r.name;
-  document.getElementById('rdesc').textContent = r.desc;
-  document.getElementById('rtraits').innerHTML = r.traits.map(t=>'<span class="trait">'+t+'</span>').join('');
-  document.getElementById('rjobs').textContent = r.jobs;
-  const dims = [
-    {label:'E/I',a:scores.E,b:scores.I,letter:scores.E>=scores.I?'E':'I'},
-    {label:'S/N',a:scores.S,b:scores.N,letter:scores.S>=scores.N?'S':'N'},
-    {label:'T/F',a:scores.T,b:scores.F,letter:scores.T>=scores.F?'T':'F'},
-    {label:'J/P',a:scores.J,b:scores.P,letter:scores.J>=scores.P?'J':'P'},
-  ];
-  document.getElementById('rbars').innerHTML = dims.map(d=>{
-    const pct = Math.round((Math.max(d.a,d.b)/7)*100);
-    return '<div class="bar-row"><div class="bar-label">'+d.label+' '+d.letter+'</div><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%"></div></div><div class="bar-pct">'+pct+'%</div></div>';
-  }).join('');
-}
+function showMatch() { showPage('page-match'); }
+function showResult() { showPage('page-result'); }
 
-function restart() {
-  document.getElementById('result').classList.add('hidden');
-  document.getElementById('intro').classList.remove('hidden');
-}
+// 场景标签切换
+document.querySelectorAll('.scene-tag').forEach(tag => {
+  tag.onclick = function() {
+    document.querySelectorAll('.scene-tag').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+  };
+});
 </script>
+
 </body>
 </html>
