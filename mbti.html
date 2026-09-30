@@ -6,66 +6,77 @@
 <title>MBTI性格测试</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: linear-gradient(180deg, #B8CCE0 0%, #D6E2EE 30%, #F5F7FA 100%); min-height: 100vh; color: #333; padding-bottom: 80px; }
-  .navbar { background: linear-gradient(180deg, #9DB8D4 0%, #B8CCE0 100%); padding: 20px; text-align: center; position: sticky; top: 0; z-index: 100; }
+  :root {
+    --primary: #7A9CBF;
+    --primary-dark: #9DB8D4;
+    --primary-light: #B8CCE0;
+    --primary-lighter: #D6E2EE;
+    --primary-bg: #EDF2F7;
+    --primary-icon: #E8F0FE;
+    --gradient-top: #B8CCE0;
+    --gradient-mid: #D6E2EE;
+    --accent: #FF8A65;
+  }
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: linear-gradient(180deg, var(--gradient-top) 0%, var(--gradient-mid) 30%, #F5F7FA 100%); min-height: 100vh; color: #333; padding-bottom: 80px; }
+  .navbar { background: linear-gradient(180deg, var(--primary-dark) 0%, var(--gradient-top) 100%); padding: 20px; text-align: center; position: sticky; top: 0; z-index: 100; }
   .navbar-title { font-size: 18px; font-weight: 600; color: #fff; }
   .container { max-width: 480px; margin: 0 auto; padding: 20px; }
-  .page-title { text-align: center; font-size: 32px; font-weight: 700; color: #5A7A9A; margin: 30px 0; }
+  .page-title { text-align: center; font-size: 32px; font-weight: 700; color: var(--primary); margin: 30px 0; }
   .intro-card { background: #fff; border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
-  .intro-title { font-size: 20px; font-weight: 600; color: #7A9CBF; margin-bottom: 12px; }
+  .intro-title { font-size: 20px; font-weight: 600; color: var(--primary); margin-bottom: 12px; }
   .intro-text { font-size: 15px; line-height: 1.7; color: #555; margin-bottom: 16px; }
   .dim-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-  .dim-tag { background: #EDF2F7; color: #7A9CBF; font-size: 13px; padding: 6px 14px; border-radius: 999px; }
+  .dim-tag { background: var(--primary-bg); color: var(--primary); font-size: 13px; padding: 6px 14px; border-radius: 999px; }
   .test-card { background: #fff; border-radius: 16px; padding: 20px; margin-bottom: 16px; display: flex; align-items: center; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
-  .test-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 16px; flex-shrink: 0; background: #E8F0FE; }
+  .test-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 16px; flex-shrink: 0; background: var(--primary-icon); }
   .test-info { flex: 1; }
   .test-name { font-size: 17px; font-weight: 600; margin-bottom: 4px; }
   .test-desc { font-size: 13px; color: #999; }
-  .start-btn { background: #7A9CBF; color: #fff; border: none; font-size: 14px; font-weight: 600; padding: 10px 20px; border-radius: 999px; cursor: pointer; }
+  .start-btn { background: var(--primary); color: #fff; border: none; font-size: 14px; font-weight: 600; padding: 10px 20px; border-radius: 999px; cursor: pointer; }
   .footer-note { text-align: center; font-size: 13px; color: #999; margin-top: 20px; }
-  .footer-note strong { color: #FF8A65; }
+  .footer-note strong { color: var(--accent); }
   .quiz-top { display: flex; justify-content: space-between; font-size: 14px; color: #999; margin-bottom: 10px; }
   .progress-bar { height: 4px; background: #E0E8F0; border-radius: 2px; margin-bottom: 30px; }
-  .progress-fill { height: 100%; background: #7A9CBF; border-radius: 2px; transition: width .3s; }
+  .progress-fill { height: 100%; background: var(--primary); border-radius: 2px; transition: width .3s; }
   .ring-progress { text-align: center; margin-bottom: 20px; position: relative; width: 100px; height: 100px; margin-left: auto; margin-right: auto; }
   .ring-svg { width: 100px; height: 100px; transform: rotate(-90deg); }
   .ring-bg { fill: none; stroke: #E0E8F0; stroke-width: 6; }
-  .ring-fg { fill: none; stroke: #7A9CBF; stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 0.3s; }
-  .ring-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 18px; font-weight: 600; color: #7A9CBF; }
+  .ring-fg { fill: none; stroke: var(--primary); stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 0.3s; }
+  .ring-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 18px; font-weight: 600; color: var(--primary); }
   .dim-label { display: flex; justify-content: space-between; margin-bottom: 10px; }
-  .dim-badge { background: #EDF2F7; color: #7A9CBF; font-size: 13px; padding: 4px 12px; border-radius: 999px; }
+  .dim-badge { background: var(--primary-bg); color: var(--primary); font-size: 13px; padding: 4px 12px; border-radius: 999px; }
   .q-num { font-size: 13px; color: #999; }
   .question-text { font-size: 22px; font-weight: 600; line-height: 1.5; margin-bottom: 30px; }
   .option-btn { background: #fff; border: 2px solid transparent; border-radius: 14px; padding: 18px 20px; width: 100%; text-align: left; font-size: 16px; margin-bottom: 12px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; align-items: center; gap: 14px; transition: all .2s; }
-  .option-btn.selected { border-color: #7A9CBF; background: #F0F6FC; }
+  .option-btn.selected { border-color: var(--primary); background: var(--primary-bg); }
   .radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #ccc; flex-shrink: 0; }
-  .option-btn.selected .radio { border-color: #7A9CBF; background: #7A9CBF; box-shadow: inset 0 0 0 4px #fff; }
+  .option-btn.selected .radio { border-color: var(--primary); background: var(--primary); box-shadow: inset 0 0 0 4px #fff; }
   .nav-btns { display: flex; gap: 12px; margin-top: 20px; }
   .nav-btn { flex: 1; padding: 14px; border: none; border-radius: 999px; font-size: 15px; font-weight: 600; cursor: pointer; }
-  .nav-btn.prev { background: #fff; color: #7A9CBF; }
-  .nav-btn.next { background: #7A9CBF; color: #fff; }
+  .nav-btn.prev { background: #fff; color: var(--primary); }
+  .nav-btn.next { background: var(--primary); color: #fff; }
   .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
   .quiz-tip { text-align: center; font-size: 12px; color: #bbb; margin-top: 10px; }
   .result-type-title { text-align: center; margin: 20px 0; }
-  .result-code { font-size: 36px; font-weight: 900; color: #5A7A9A; }
+  .result-code { font-size: 36px; font-weight: 900; color: var(--primary); }
   .result-name { font-size: 18px; color: #999; }
   .tags-section { background: #fff; border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-  .tags-section-title { font-size: 16px; font-weight: 600; color: #7A9CBF; margin-bottom: 4px; }
+  .tags-section-title { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
   .tags-section-sub { font-size: 12px; color: #bbb; margin-bottom: 16px; }
   .tag-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .tag-item { background: #F8FAFC; border-radius: 10px; padding: 12px 8px; text-align: center; font-size: 13px; color: #555; cursor: pointer; }
-  .tag-item:hover { background: #EDF2F7; }
+  .tag-item:hover { background: var(--primary-bg); }
   .locked-card { background: #fff; border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-  .locked-title { font-size: 16px; font-weight: 600; color: #7A9CBF; margin-bottom: 10px; }
+  .locked-title { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 10px; }
   .locked-text { font-size: 14px; line-height: 1.7; color: #666; margin-bottom: 14px; }
-  .view-btn { width: 100%; background: #7A9CBF; color: #fff; border: none; font-size: 15px; font-weight: 600; padding: 14px; border-radius: 999px; cursor: pointer; }
+  .view-btn { width: 100%; background: var(--primary); color: #fff; border: none; font-size: 15px; font-weight: 600; padding: 14px; border-radius: 999px; cursor: pointer; }
   .action-btns { display: flex; gap: 12px; margin-top: 20px; }
   .action-btn { flex: 1; padding: 14px; border: none; border-radius: 999px; font-size: 15px; font-weight: 600; cursor: pointer; }
-  .action-btn.primary { background: #7A9CBF; color: #fff; }
-  .action-btn.outline { background: #fff; color: #7A9CBF; }
+  .action-btn.primary { background: var(--primary); color: #fff; }
+  .action-btn.outline { background: #fff; color: var(--primary); }
   .history-list { margin-top: 20px; }
   .history-item { background: #fff; border-radius: 14px; padding: 16px; margin-bottom: 12px; display: flex; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04); cursor: pointer; }
-  .history-code { width: 60px; height: 60px; border-radius: 12px; background: #EDF2F7; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; color: #7A9CBF; margin-right: 14px; flex-shrink: 0; }
+  .history-code { width: 60px; height: 60px; border-radius: 12px; background: var(--primary-bg); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900; color: var(--primary); margin-right: 14px; flex-shrink: 0; }
   .history-info { flex: 1; }
   .history-type { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
   .history-time { font-size: 12px; color: #999; }
@@ -74,14 +85,23 @@
   .clear-btn { display: block; margin: 20px auto; background: #fff; color: #999; border: 1px solid #ddd; font-size: 14px; padding: 10px 30px; border-radius: 999px; cursor: pointer; }
   .tabbar { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; display: flex; padding: 10px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
   .tab-item { flex: 1; text-align: center; cursor: pointer; color: #999; }
-  .tab-item.active { color: #7A9CBF; }
+  .tab-item.active { color: var(--primary); }
   .tab-icon { font-size: 22px; margin-bottom: 4px; }
   .tab-label { font-size: 12px; }
   .hidden { display: none !important; }
 </style>
 </head>
 <body>
-<div class="navbar"><div class="navbar-title">MBTI性格测试</div></div>
+<div class="navbar">
+  <div class="navbar-title">MBTI性格测试</div>
+  <div style="position:absolute;right:16px;top:50%;transform:translateY(-50%);display:flex;gap:6px;">
+    <span onclick="changeTheme('blue')" style="width:20px;height:20px;border-radius:50%;background:#7A9CBF;display:inline-block;cursor:pointer;"></span>
+    <span onclick="changeTheme('yellow')" style="width:20px;height:20px;border-radius:50%;background:#E8B84A;display:inline-block;cursor:pointer;"></span>
+    <span onclick="changeTheme('pink')" style="width:20px;height:20px;border-radius:50%;background:#E88AA5;display:inline-block;cursor:pointer;"></span>
+    <span onclick="changeTheme('green')" style="width:20px;height:20px;border-radius:50%;background:#6BAF8A;display:inline-block;cursor:pointer;"></span>
+    <span onclick="changeTheme('purple')" style="width:20px;height:20px;border-radius:50%;background:#9B7EC4;display:inline-block;cursor:pointer;"></span>
+  </div>
+</div>
 <div class="container">
   <div id="page-home">
     <div class="page-title">MBTI性格测试</div>
@@ -673,6 +693,27 @@ function clearHistory() {
     renderHistory();
   }
 }
+const themes = {
+  blue: { primary:'#7A9CBF', 'primary-dark':'#9DB8D4', 'primary-light':'#B8CCE0', 'primary-lighter':'#D6E2EE', 'primary-bg':'#EDF2F7', 'primary-icon':'#E8F0FE', 'gradient-top':'#B8CCE0', 'gradient-mid':'#D6E2EE', accent:'#FF8A65' },
+  yellow: { primary:'#C99A2E', 'primary-dark':'#D4B86A', 'primary-light':'#E8D49A', 'primary-lighter':'#F0E4C0', 'primary-bg':'#FDF6E3', 'primary-icon':'#FAF0D0', 'gradient-top':'#E8D49A', 'gradient-mid':'#F0E4C0', accent:'#E86A4A' },
+  pink: { primary:'#D47A9A', 'primary-dark':'#E8A0B8', 'primary-light':'#F0C0D0', 'primary-lighter':'#F8D8E0', 'primary-bg':'#FDEEF2', 'primary-icon':'#FCE4EC', 'gradient-top':'#F0C0D0', 'gradient-mid':'#F8D8E0', accent:'#E85A8A' },
+  green: { primary:'#5A9A7A', 'primary-dark':'#7AB89A', 'primary-light':'#A0D0B8', 'primary-lighter':'#C0E0D0', 'primary-bg':'#E8F5EE', 'primary-icon':'#E0F0E8', 'gradient-top':'#A0D0B8', 'gradient-mid':'#C0E0D0', accent:'#E88A5A' },
+  purple: { primary:'#8A6AB8', 'primary-dark':'#A88AC8', 'primary-light':'#C0A8E0', 'primary-lighter':'#D4C4EE', 'primary-bg':'#F0EAF8', 'primary-icon':'#EAE0F5', 'gradient-top':'#C0A8E0', 'gradient-mid':'#D4C4EE', accent:'#E87A9A' }
+};
+
+function changeTheme(name) {
+  const t = themes[name];
+  const root = document.documentElement;
+  for (const key in t) {
+    root.style.setProperty('--' + key, t[key]);
+  }
+  localStorage.setItem('mbti_theme', name);
+}
+
+// 加载保存的主题
+const savedTheme = localStorage.getItem('mbti_theme') || 'blue';
+changeTheme(savedTheme);
+
 function restart() { showPage('page-home'); }
 function share() { alert('点击右上角分享给朋友'); }
 </script>
