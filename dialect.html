@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>山东方言测评 | 测测你是哪市人</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #FFF5EB;
+    --card: #FFFFFF;
+    --ink: #2D1B14;
+    --ink-soft: #7A6558;
+    --accent: #FF6B35;
+    --accent-soft: #FFE8D6;
+    --yellow: #F7B801;
+    --yellow-soft: #FFF3D0;
+    --green: #6BBF59;
+    --green-soft: #E2F4DC;
+    --pink: #E85D75;
+    --pink-soft: #FBE0E6;
+    --blue: #4A90D9;
+    --blue-soft: #DCEAFB;
+    --radius: 20px;
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 16px;
+  }
+
+  #app {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .view { display: none; animation: fadeIn 0.4s ease; }
+  .view.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== 开始页 ===== */
+  .start-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(255, 107, 53, 0.12);
+  }
+  .start-img {
+    width: 100%;
+    border-radius: 16px;
+    margin-bottom: 20px;
+  }
+  .start-title {
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .start-sub {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 15px 44px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 16px rgba(255, 107, 53, 0.35);
+  }
+  .btn-primary:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+  }
+
+  /* ===== 题目页 ===== */
+  .progress-bar {
+    height: 6px;
+    background: var(--accent-soft);
+    border-radius: 3px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .q-img {
+    width: 100%;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    background: #fff;
+  }
+  .question-text {
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1.4;
+    margin-bottom: 24px;
+  }
+
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .option-card {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 20px 14px;
+    text-align: center;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: transform 0.15s, border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 12px rgba(45, 27, 20, 0.06);
+  }
+  .option-card:active { transform: scale(0.96); }
+  .option-card .opt-label {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .c1 { border-bottom: 4px solid var(--accent); }
+  .c2 { border-bottom: 4px solid var(--blue); }
+  .c3 { border-bottom: 4px solid var(--green); }
+  .c4 { border-bottom: 4px solid var(--pink); }
+
+  /* ===== 结果页 ===== */
+  .result-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(45, 27, 20, 0.1);
+  }
+  .result-badge {
+    display: inline-block;
+    padding: 6px 20px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .result-city {
+    font-size: 36px;
+    font-weight: 900;
+    margin-bottom: 16px;
+    color: var(--accent);
+  }
+  .result-desc {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .btn-restart {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 13px 32px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.15s;
+  }
+  .btn-restart:active { transform: scale(0.96); }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- 开始页 -->
+  <div class="view active" id="view-start">
+    <div class="start-card">
+      <img class="start-img" src="images/cover.png" alt="山东方言测评">
+      <div class="start-title">山东方言大测评</div>
+      <div class="start-sub">
+        两个问题，测出你是山东哪市人。<br>
+        从玉米叫法到傍晚的说法，<br>
+        看看你的方言基因对不对。
+      </div>
+      <button class="btn-primary" onclick="startQuiz()">开始测试</button>
+    </div>
+  </div>
+
+  <!-- 题目页 -->
+  <div class="view" id="view-quiz">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <img class="q-img" id="qImg" src="" alt="">
+    <div class="question-text" id="qText"></div>
+    <div class="options" id="qOptions"></div>
+  </div>
+
+  <!-- 结果页 -->
+  <div class="view" id="view-result">
+    <div class="result-card">
+      <div class="result-badge">测试结果</div>
+      <div class="result-city" id="rCity"></div>
+      <div class="result-desc" id="rDesc"></div>
+      <button class="btn-restart" onclick="restart()">再测一次</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ===== 题库：分支跳转 =====
+var questions = {
+  // Q1：分4片区
+  1: {
+    img: "images/corn.png",
+    text: "玉米在你老家话里叫什么？",
+    options: [
+      { label: "棒子", next: 21, cls: "c1" },
+      { label: "苞米", next: 22, cls: "c2" },
+      { label: "玉蜀黍", next: 23, cls: "c3" },
+      { label: "棒槌", next: 24, cls: "c4" }
+    ]
+  },
+  // Q21：鲁中片（济南、淄博、泰安、滨州）
+  21: {
+    img: "images/food.png",
+    text: "吃到好吃的，你会说？",
+    options: [
+      { label: "刚赛了", result: "淄博", cls: "c1" },
+      { label: "真不孬", result: "济南", cls: "c2" },
+      { label: "杠赛咧", result: "泰安", cls: "c3" },
+      { label: "不糙", result: "滨州", cls: "c4" }
+    ]
+  },
+  // Q22：胶东片（青岛、烟台、威海、潍坊）
+  22: {
+    img: "images/porridge.png",
+    text: "早上喝的那碗粥，你叫它？",
+    options: [
+      { label: "喝粥", result: "青岛", cls: "c1" },
+      { label: "喝米汤", result: "烟台", cls: "c2" },
+      { label: "喝黏煮", result: "潍坊", cls: "c3" },
+      { label: "喝稀饭", result: "威海", cls: "c4" }
+    ]
+  },
+  // Q23：鲁南片（临沂、济宁、枣庄、日照）
+  23: {
+    img: "images/thing.png",
+    text: "指着不远处那个东西，你说？",
+    options: [
+      { label: "捏个", result: "临沂", cls: "c1" },
+      { label: "那户", result: "济宁", cls: "c2" },
+      { label: "过儿", result: "枣庄", cls: "c3" },
+      { label: "捏过", result: "日照", cls: "c4" }
+    ]
+  },
+  // Q24：鲁西片（菏泽、德州、聊城、东营）
+  24: {
+    img: "images/evening.png",
+    text: "太阳落山了，你说的是？",
+    options: [
+      { label: "晚航", result: "菏泽", cls: "c1" },
+      { label: "夜来哄上", result: "德州", cls: "c2" },
+      { label: "晚司", result: "聊城", cls: "c3" },
+      { label: "后晌", result: "东营", cls: "c4" }
+    ]
+  }
+};
+
+var results = {
+  "济南": "你是济南人——开口就是\"老师儿\"，儿化音裹着全城，泉城广场的风都是亲切的。",
+  "淄博": "你是淄博人——\"刚赛了\"是你的口头禅，烧烤炉一冒烟，全城都是朋友。",
+  "泰安": "你是泰安人——泰山脚下长大，说话实在又热情，爬个泰山都能聊一路。",
+  "滨州": "你是滨州人——黄河尾闾的爽利劲儿，说话干脆，做事利落。",
+  "青岛": "你是青岛人——海蛎子味纯正，喝啤酒就蛤蜊，说话带着海风的咸鲜。",
+  "烟台": "你是烟台人——苹果和海鲜的故乡，话不多但实在，靠海吃海长大。",
+  "威海": "你是威海人——山东最东头的城市，说话带着最浓的胶东海味，干净透亮。",
+  "潍坊": "你是潍坊人——风筝都的人，说话敞亮，和你们放的风筝一样飞得高。",
+  "临沂": "你是临沂人——沂蒙山区的厚道劲儿，\"捏个\"说得最溜，拉呱能拉一下午。",
+  "济宁": "你是济宁人——孔孟之乡的底蕴，说话带着文化人的讲究，不紧不慢。",
+  "枣庄": "你是枣庄人——辣子鸡和石榴的家乡，说话直接，不绕弯子。",
+  "日照": "你是日照人——日出先照的地方，说话带着黄海的清爽，敞亮。",
+  "菏泽": "你是菏泽人——牡丹之都的人，说话带着鲁西南的豪爽，\"捏个\"是标志。",
+  "德州": "你是德州人——扒鸡的故乡，鲁西北的豪爽劲儿，\"夜来哄上\"是你的时间词。",
+  "聊城": "你是聊城人——江北水城的秀气，说话带着运河的慢节奏。",
+  "东营": "你是东营人——黄河入海的地方，说话干脆利落，油城人的豪爽。"
+};
+
+var currentQ = 1;
+
+function showView(id) {
+  var views = document.querySelectorAll('.view');
+  for (var i = 0; i < views.length; i++) views[i].classList.remove('active');
+  document.getElementById(id).classList.add('active');
+}
+
+function startQuiz() {
+  currentQ = 1;
+  renderQuestion();
+  showView('view-quiz');
+}
+
+function renderQuestion() {
+  var q = questions[currentQ];
+  document.getElementById('qImg').src = q.img;
+  document.getElementById('qText').textContent = q.text;
+
+  // 进度：Q1=50%，Q2=100%
+  var pct = currentQ === 1 ? 50 : 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  var box = document.getElementById('qOptions');
+  box.innerHTML = '';
+  for (var i = 0; i < q.options.length; i++) {
+    (function(opt) {
+      var card = document.createElement('div');
+      card.className = 'option-card ' + opt.cls;
+      card.innerHTML = '<div class="opt-label">' + opt.label + '</div>';
+      card.onclick = function() { chooseOption(opt); };
+      box.appendChild(card);
+    })(q.options[i]);
+  }
+}
+
+function chooseOption(opt) {
+  if (opt.result) {
+    showResult(opt.result);
+  } else {
+    currentQ = opt.next;
+    renderQuestion();
+  }
+}
+
+function showResult(city) {
+  document.getElementById('rCity').textContent = city;
+  document.getElementById('rDesc').textContent = results[city];
+  document.getElementById('progressFill').style.width = '100%';
+  showView('view-result');
+}
+
+function restart() {
+  showView('view-start');
+}
+</script>
+
+</body>
+</html>
