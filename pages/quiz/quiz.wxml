@@ -1,0 +1,38 @@
+<view class="page-wrap" wx:if="{{scale}}">
+  <!-- 顶部进度 -->
+  <view class="quiz-top">
+    <view class="quiz-count">
+      <text class="quiz-current">{{idx + 1}}</text>
+      <text class="quiz-total"> / {{count}}</text>
+    </view>
+    <view class="quiz-bar-bg">
+      <view class="quiz-bar" style="width: {{percent}}%;"></view>
+    </view>
+  </view>
+
+  <!-- 题目卡片 -->
+  <view class="card question-card">
+    <view class="question-no">Q{{idx + 1}}</view>
+    <view class="question-text">{{current}}</view>
+  </view>
+
+  <!-- 选项 -->
+  <view class="option-list">
+    <view
+      wx:for="{{options}}"
+      wx:key="score"
+      class="card option-item {{answers[idx] === item.score ? 'option-active' : ''}}"
+      bindtap="onSelect"
+      data-score="{{item.score}}"
+    >
+      <view class="option-dot {{answers[idx] === item.score ? 'dot-active' : ''}}"></view>
+      <text class="option-label">{{item.label}}</text>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="quiz-actions">
+    <view class="action-btn {{idx === 0 ? 'action-disabled' : ''}}" bindtap="onPrev">上一题</view>
+    <view class="action-quit" bindtap="onQuit">退出测评</view>
+  </view>
+</view>

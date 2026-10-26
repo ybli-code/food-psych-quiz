@@ -1,0 +1,10 @@
+{
+  "desc": "心晴测·微信搜一搜收录配置：仅收录有独立内容的页面，动态参数页不参与收录",
+  "rules": [
+    { "action": "allow", "page": "pages/index/index" },
+    { "action": "allow", "page": "pages/library/library" },
+    { "action": "disallow", "page": "pages/quiz/quiz" },
+    { "action": "disallow", "page": "pages/result/result" },
+    { "action": "disallow", "page": "pages/history/history" }
+  ]
+}

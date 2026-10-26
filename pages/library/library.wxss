@@ -1,0 +1,40 @@
+.page-wrap { padding: 32rpx 32rpx 60rpx; }
+
+.lib-hero { padding: 16rpx 8rpx 28rpx; }
+
+.cat-scroll { white-space: nowrap; margin-bottom: 28rpx; }
+.cat-scroll .chip { margin-bottom: 8rpx; }
+
+.scale-item { display: flex; align-items: flex-start; margin-bottom: 24rpx; }
+.scale-emoji {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 24rpx;
+  background: #FFF3EA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+.scale-info { flex: 1; min-width: 0; }
+.scale-name { font-size: 30rpx; font-weight: 600; color: #4A3B33; }
+.scale-desc { font-size: 24rpx; color: #A8968C; margin-top: 8rpx; }
+.scale-meta { font-size: 22rpx; color: #B9A79C; margin-top: 14rpx; display: flex; align-items: center; }
+.cat-badge {
+  background: #FFE8DC;
+  color: #E8845C;
+  border-radius: 16rpx;
+  padding: 2rpx 16rpx;
+  margin-right: 16rpx;
+}
+.empty-tip { text-align: center; color: #C4B3A8; padding: 60rpx 0; }
+
+.seo-line {
+  text-align: center;
+  font-size: 22rpx;
+  color: #C4B3A8;
+  margin-top: 24rpx;
+  line-height: 1.8;
+}

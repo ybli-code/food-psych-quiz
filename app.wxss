@@ -1,0 +1,71 @@
+/**
+ * 心晴测 · 全局样式（温馨暖色系）
+ */
+page {
+  background: #FDF6EF;
+  color: #5B4A43;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+/* 卡片 */
+.card {
+  background: #FFFFFF;
+  border-radius: 28rpx;
+  padding: 32rpx;
+  box-shadow: 0 6rpx 24rpx rgba(240, 142, 110, 0.10);
+}
+
+/* 主按钮 */
+.btn-primary {
+  background: linear-gradient(135deg, #FF9A76 0%, #F08E6E 100%);
+  color: #FFFFFF;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  padding: 24rpx 0;
+  text-align: center;
+  border: none;
+  box-shadow: 0 8rpx 20rpx rgba(240, 142, 110, 0.30);
+}
+.btn-primary::after { border: none; }
+
+/* 次按钮 */
+.btn-ghost {
+  background: #FFFFFF;
+  color: #F08E6E;
+  border-radius: 48rpx;
+  font-size: 32rpx;
+  padding: 24rpx 0;
+  text-align: center;
+  border: 2rpx solid #F5C6AF;
+  box-sizing: border-box;
+}
+.btn-ghost::after { border: none; }
+
+/* 分类标签 */
+.chip {
+  display: inline-block;
+  padding: 10rpx 28rpx;
+  border-radius: 32rpx;
+  background: #FFFFFF;
+  color: #8C7A70;
+  font-size: 26rpx;
+  margin-right: 16rpx;
+  border: 2rpx solid #F3E5DA;
+}
+.chip-active {
+  background: linear-gradient(135deg, #FF9A76 0%, #F08E6E 100%);
+  color: #FFFFFF;
+  border-color: transparent;
+}
+
+/* 温和分割线 */
+.divider {
+  height: 2rpx;
+  background: #F7EDE3;
+  margin: 24rpx 0;
+}
+
+/* 标题字体 */
+.title { font-size: 36rpx; font-weight: 600; color: #4A3B33; }
+.subtitle { font-size: 26rpx; color: #A8968C; }

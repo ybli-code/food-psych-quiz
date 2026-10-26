@@ -1,0 +1,43 @@
+.page-wrap { padding: 32rpx 32rpx 60rpx; }
+
+.lib-hero { padding: 16rpx 8rpx 28rpx; }
+
+.record-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 22rpx;
+}
+.record-emoji {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 22rpx;
+  background: #FFF3EA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  margin-right: 22rpx;
+  flex-shrink: 0;
+}
+.record-info { flex: 1; min-width: 0; }
+.record-name { font-size: 28rpx; font-weight: 600; color: #4A3B33; }
+.record-date { font-size: 22rpx; color: #A8968C; margin-top: 6rpx; }
+.record-level {
+  font-size: 24rpx;
+  font-weight: 600;
+  text-align: right;
+  flex-shrink: 0;
+  margin-left: 12rpx;
+}
+.record-tip {
+  text-align: center;
+  font-size: 22rpx;
+  color: #C4B3A8;
+  margin-top: 20rpx;
+}
+
+.empty { text-align: center; padding-top: 120rpx; }
+.empty-emoji { font-size: 88rpx; }
+.empty-title { font-size: 32rpx; font-weight: 600; color: #4A3B33; margin-top: 20rpx; }
+.empty-sub { font-size: 26rpx; color: #A8968C; margin-top: 10rpx; }
+.empty-btn { margin: 48rpx 120rpx 0; }

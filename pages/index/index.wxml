@@ -1,0 +1,56 @@
+<view class="page-wrap">
+  <!-- 头部问候 -->
+  <view class="hero">
+    <view class="hero-emoji">🌤️</view>
+    <view class="hero-title">心晴测</view>
+    <view class="hero-sub">关注此刻的心情，是一场温柔的练习</view>
+  </view>
+
+  <!-- 今日推荐 -->
+  <view class="card recommend" bindtap="goQuiz" data-id="{{recommend.id}}">
+    <view class="recommend-tag">今日推荐</view>
+    <view class="recommend-row">
+      <text class="recommend-emoji">{{recommend.emoji}}</text>
+      <view class="recommend-info">
+        <view class="recommend-name">{{recommend.name}}</view>
+        <view class="recommend-desc">{{recommend.desc}}</view>
+        <view class="recommend-meta">{{recommend.questions}} 题 · {{recommend.time}}</view>
+      </view>
+    </view>
+    <view class="btn-primary recommend-btn">开始测评</view>
+  </view>
+
+  <!-- 分类 -->
+  <scroll-view scroll-x class="cat-scroll" enable-flex>
+    <view
+      wx:for="{{categories}}"
+      wx:key="*this"
+      class="chip {{catIndex === index ? 'chip-active' : ''}}"
+      bindtap="onCatTap"
+      data-index="{{index}}"
+    >{{item}}</view>
+  </scroll-view>
+
+  <!-- 量表列表 -->
+  <view class="scale-list">
+    <view
+      wx:for="{{filtered}}"
+      wx:key="id"
+      class="card scale-item"
+      bindtap="goQuiz"
+      data-id="{{item.id}}"
+    >
+      <view class="scale-emoji">{{item.emoji}}</view>
+      <view class="scale-info">
+        <view class="scale-name">{{item.name}}</view>
+        <view class="scale-meta">{{item.category}} · {{item.questions}} 题 · {{item.time}}</view>
+      </view>
+      <view class="scale-arrow">›</view>
+    </view>
+    <view wx:if="{{filtered.length === 0}}" class="empty-tip">该分类暂无量表 🌱</view>
+  </view>
+
+  <view class="seo-line">热门测评：抑郁自评 PHQ-9 · 焦虑测试 GAD-7 · 压力知觉 PSS-10 · 睡眠质量 ISI · 自尊 SES · 大五人格 · SCL-90 综合心理健康</view>
+
+  <view class="footer-tip">测评结果仅供参考，不能替代专业诊断</view>
+</view>

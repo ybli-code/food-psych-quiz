@@ -1,0 +1,39 @@
+<view class="page-wrap">
+  <view class="lib-hero">
+    <view class="title">量表库</view>
+    <view class="subtitle">收录 {{total}} 份国际通行的专业心理量表</view>
+  </view>
+
+  <scroll-view scroll-x class="cat-scroll" enable-flex>
+    <view
+      wx:for="{{categories}}"
+      wx:key="*this"
+      class="chip {{catIndex === index ? 'chip-active' : ''}}"
+      bindtap="onCatTap"
+      data-index="{{index}}"
+    >{{item}}</view>
+  </scroll-view>
+
+  <view class="scale-list">
+    <view
+      wx:for="{{filtered}}"
+      wx:key="id"
+      class="card scale-item"
+      bindtap="goQuiz"
+      data-id="{{item.id}}"
+    >
+      <view class="scale-emoji">{{item.emoji}}</view>
+      <view class="scale-info">
+        <view class="scale-name">{{item.name}}</view>
+        <view class="scale-desc">{{item.desc}}</view>
+        <view class="scale-meta">
+          <text class="cat-badge">{{item.category}}</text>
+          <text>{{item.questions}} 题 · {{item.time}}</text>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{filtered.length === 0}}" class="empty-tip">该分类暂无量表 🌱</view>
+  </view>
+
+  <view class="seo-line">全部量表均可免费在线测评：症状自评 SCL-90、抑郁自评 SDS/PHQ-9、焦虑自评 SAS/GAD-7、压力知觉 PSS-10、自尊量表 SES、失眠指数 ISI、大五人格 BFI-10</view>
+</view>

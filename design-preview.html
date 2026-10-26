@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>心晴测 · 页面设计预览</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: linear-gradient(160deg, #FDF6EF 0%, #FBEDE0 100%);
+    min-height: 100vh;
+    padding: 40px 24px 80px;
+    color: #5B4A43;
+  }
+  .page-title { text-align: center; margin-bottom: 8px; }
+  .page-title h1 { font-size: 26px; color: #4A3B33; letter-spacing: 2px; }
+  .page-title p { font-size: 14px; color: #A8968C; margin-top: 6px; }
+  .stage { display: flex; gap: 36px; justify-content: center; flex-wrap: wrap; margin-top: 36px; }
+  .phone {
+    width: 320px; height: 640px;
+    background: #FDF6EF;
+    border-radius: 36px;
+    box-shadow: 0 20px 50px rgba(240, 142, 110, .25), 0 0 0 8px #fff inset;
+    border: 8px solid #fff;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    flex-shrink: 0;
+  }
+  .statusbar { height: 28px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #B9A79C; background: #FDF6EF; flex-shrink: 0;}
+  .navbar { height: 40px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: #4A3B33; background: #FDF6EF; flex-shrink: 0;}
+  .screen { flex: 1; overflow-y: auto; padding: 16px 16px 70px; }
+  .screen::-webkit-scrollbar { display: none; }
+
+  .card {
+    background: #fff; border-radius: 16px; padding: 16px;
+    box-shadow: 0 4px 14px rgba(240,142,110,.10);
+    margin-bottom: 12px;
+  }
+  .chip-row { display: flex; gap: 8px; margin: 4px 0 14px; overflow: hidden; }
+  .chip { padding: 5px 14px; border-radius: 999px; background: #fff; font-size: 12px; color: #8C7A70; border: 1px solid #F3E5DA; white-space: nowrap;}
+  .chip.active { background: linear-gradient(135deg,#FF9A76,#F08E6E); color: #fff; border-color: transparent;}
+
+  .hero { text-align: center; padding: 14px 0 18px; }
+  .hero .em { font-size: 40px; }
+  .hero h2 { font-size: 24px; color: #4A3B33; letter-spacing: 3px; margin-top: 6px; }
+  .hero p { font-size: 12px; color: #A8968C; margin-top: 4px; }
+
+  .recommend { background: linear-gradient(140deg,#FFE8DC,#FFCBB8); position: relative; }
+  .recommend .tag { position: absolute; top: 0; right: 16px; background: linear-gradient(135deg,#FF9A76,#F08E6E); color:#fff; font-size: 10px; padding: 4px 10px; border-radius: 0 0 8px 8px;}
+  .rec-row { display: flex; gap: 12px; align-items: flex-start;}
+  .rec-row .em { font-size: 32px; }
+  .rec-name { font-size: 15px; font-weight: 600; color: #4A3B33;}
+  .rec-desc { font-size: 11px; color: #8C7466; margin-top: 4px; line-height: 1.5;}
+  .rec-meta { font-size: 10px; color: #A8968C; margin-top: 6px;}
+  .btn {
+    margin-top: 12px; text-align: center; padding: 10px 0; border-radius: 999px;
+    background: linear-gradient(135deg,#FF9A76,#F08E6E); color: #fff; font-size: 14px;
+    box-shadow: 0 6px 14px rgba(240,142,110,.3);
+  }
+  .btn.ghost { background: #fff; color: #F08E6E; border: 1px solid #F5C6AF; box-shadow: none;}
+
+  .item { display: flex; align-items: center; gap: 12px; }
+  .item .ic {
+    width: 44px; height: 44px; border-radius: 12px; background: #FFF3EA;
+    display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;
+  }
+  .item .name { font-size: 14px; font-weight: 600; color: #4A3B33;}
+  .item .meta { font-size: 10px; color: #A8968C; margin-top: 3px;}
+  .arrow { color: #D9C8BC; font-size: 20px; margin-left: auto;}
+
+  .qcard { margin-top: 6px; }
+  .qno { display: inline-block; background: #FFE8DC; color: #E8845C; font-size: 10px; padding: 2px 9px; border-radius: 8px; margin-bottom: 8px;}
+  .qtext { font-size: 16px; font-weight: 600; color: #4A3B33; line-height: 1.6;}
+  .count { font-size: 12px; color: #A8968C; margin-bottom: 6px;}
+  .count b { font-size: 18px; color: #F08E6E; }
+  .bar { height: 6px; background: #F7EDE3; border-radius: 5px; overflow: hidden; margin-bottom: 14px;}
+  .bar > div { height: 100%; width: 45%; background: linear-gradient(90deg,#FFB88C,#F08E6E); border-radius: 5px;}
+  .opt { display: flex; align-items: center; gap: 12px; padding: 13px 14px; margin-bottom: 10px;}
+  .dot { width: 14px; height: 14px; border-radius: 50%; border: 3px solid #E8D9CD; flex-shrink: 0;}
+  .opt.active { border: 1px solid #F08E6E; background: #FFF6F0;}
+  .opt.active .dot { border: 5px solid #F08E6E; }
+  .opt span { font-size: 13px; }
+  .qactions { display: flex; justify-content: space-between; align-items: center; margin-top: 10px;}
+  .qactions .back { background: #FFE8DC; color: #E8845C; padding: 8px 22px; border-radius: 999px; font-size: 12px;}
+  .qactions .quit { font-size: 12px; color: #C4B3A8;}
+
+  .rhero { border-radius: 18px; background: linear-gradient(140deg,#FFE8DC,#FFD9C8); text-align: center; padding: 26px 16px 20px; margin-bottom: 12px;}
+  .rhero .em { font-size: 44px; }
+  .rhero h3 { font-size: 19px; color: #4A3B33; margin-top: 8px;}
+  .rhero .score { font-size: 14px; color: #7A6558; margin-top: 4px;}
+  .rhero .date { font-size: 10px; color: #A8968C; margin-top: 6px;}
+  .sec-title { font-size: 14px; font-weight: 600; color: #4A3B33; margin-bottom: 8px;}
+  .sec-body { font-size: 12px; color: #7A6558; line-height: 1.7;}
+  .factor { margin-bottom: 12px;}
+  .f-head { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;}
+  .f-head b { color: #F08E6E; }
+  .f-bar { height: 6px; background: #F7EDE3; border-radius: 5px; overflow: hidden;}
+  .f-bar > div { height: 100%; background: linear-gradient(90deg,#FFB88C,#F08E6E); border-radius: 5px;}
+  .disclaimer { font-size: 10px; color: #C4B3A8; text-align: center; margin: 10px 0 14px; line-height: 1.6;}
+  .two { display: flex; gap: 10px; }
+  .two > div { flex: 1; font-size: 13px;}
+
+  .tabbar {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 56px;
+    background: #fff; display: flex; border-top: 1px solid #F7EDE3;
+  }
+  .phone { position: relative; }
+  .tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; color: #B9A79C; gap: 2px;}
+  .tab.active { color: #F08E6E; font-weight: 600;}
+  .tab .ic2 { font-size: 18px; }
+  .cap { text-align: center; margin-top: 14px; font-size: 13px; color: #8C7A70;}
+  .cap b { color: #4A3B33; }
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  <h1>心晴测 · 页面设计预览</h1>
+  <p>温馨暖色系 · 三大核心页面 · 实际效果以微信开发者工具中的小程序为准</p>
+</div>
+
+<div class="stage">
+  <!-- 首页 -->
+  <div>
+    <div class="phone">
+      <div class="statusbar">9:41</div>
+      <div class="navbar">心晴测</div>
+      <div class="screen">
+        <div class="hero">
+          <div class="em">🌤️</div>
+          <h2>心晴测</h2>
+          <p>关注此刻的心情，是一场温柔的练习</p>
+        </div>
+        <div class="card recommend">
+          <div class="tag">今日推荐</div>
+          <div class="rec-row">
+            <div class="em">🧭</div>
+            <div>
+              <div class="rec-name">症状自评量表（SCL-90）</div>
+              <div class="rec-desc">世界上最著名的心理健康测评量表之一，从 10 个维度全面评估近期心理状态。</div>
+              <div class="rec-meta">90 题 · 约 15 分钟</div>
+            </div>
+          </div>
+          <div class="btn">开始测评</div>
+        </div>
+        <div class="chip-row">
+          <div class="chip active">全部</div><div class="chip">抑郁</div><div class="chip">焦虑</div><div class="chip">压力</div><div class="chip">睡眠</div>
+        </div>
+        <div class="card item">
+          <div class="ic">🌧️</div>
+          <div><div class="name">抑郁自评量表（PHQ-9）</div><div class="meta">抑郁 · 9 题 · 约 3 分钟</div></div>
+          <div class="arrow">›</div>
+        </div>
+        <div class="card item">
+          <div class="ic">🌊</div>
+          <div><div class="name">焦虑自评量表（GAD-7）</div><div class="meta">焦虑 · 7 题 · 约 2 分钟</div></div>
+          <div class="arrow">›</div>
+        </div>
+        <div class="card item">
+          <div class="ic">🌙</div>
+          <div><div class="name">失眠严重程度指数（ISI）</div><div class="meta">睡眠 · 7 题 · 约 2 分钟</div></div>
+          <div class="arrow">›</div>
+        </div>
+      </div>
+      <div class="tabbar">
+        <div class="tab active"><span class="ic2">🏠</span>首页</div>
+        <div class="tab"><span class="ic2">📚</span>量表库</div>
+        <div class="tab"><span class="ic2">📖</span>记录</div>
+      </div>
+    </div>
+    <div class="cap"><b>首页</b> · 今日推荐 + 分类筛选</div>
+  </div>
+
+  <!-- 答题页 -->
+  <div>
+    <div class="phone">
+      <div class="statusbar">9:41</div>
+      <div class="navbar">测评进行中</div>
+      <div class="screen">
+        <div class="count"><b>2</b> / 9</div>
+        <div class="bar"><div></div></div>
+        <div class="card qcard">
+          <div class="qno">Q2</div>
+          <div class="qtext">感到心情低落、沮丧或绝望</div>
+        </div>
+        <div class="card opt"><div class="dot"></div><span>完全没有</span></div>
+        <div class="card opt active"><div class="dot"></div><span>有几天</span></div>
+        <div class="card opt"><div class="dot"></div><span>一半以上时间</span></div>
+        <div class="card opt"><div class="dot"></div><span>几乎每天</span></div>
+        <div class="qactions">
+          <div class="back">上一题</div>
+          <div class="quit">退出测评</div>
+        </div>
+      </div>
+    </div>
+    <div class="cap"><b>答题页</b> · 进度条 + 选项自动跳题</div>
+  </div>
+
+  <!-- 结果页 -->
+  <div>
+    <div class="phone">
+      <div class="statusbar">9:41</div>
+      <div class="navbar">测评报告</div>
+      <div class="screen">
+        <div class="rhero">
+          <div class="em">🌧️</div>
+          <h3>中度抑郁倾向</h3>
+          <div class="score">总分 12 / 27</div>
+          <div class="date">2026-10-15 10:30 · PHQ-9</div>
+        </div>
+        <div class="card">
+          <div class="sec-title">📖 结果解读</div>
+          <div class="sec-body">你的抑郁症状已达到中度水平，正在影响日常生活。建议前往精神科或心理科就诊评估，专业帮助能显著改善状态。</div>
+        </div>
+        <div class="card">
+          <div class="sec-title">📊 维度得分（示例：SCL-90）</div>
+          <div class="factor"><div class="f-head"><span>焦虑</span><b>2.31</b></div><div class="f-bar"><div style="width:58%"></div></div></div>
+          <div class="factor"><div class="f-head"><span>抑郁</span><b>1.92</b></div><div class="f-bar"><div style="width:48%"></div></div></div>
+          <div class="factor"><div class="f-head"><span>强迫症状</span><b>1.50</b></div><div class="f-bar"><div style="width:38%"></div></div></div>
+        </div>
+        <div class="card">
+          <div class="sec-title">💡 温暖建议</div>
+          <div class="sec-body">增加社交与户外活动，记录情绪变化；若持续两周以上，可考虑寻求心理咨询。</div>
+        </div>
+        <div class="disclaimer">本结果基于自评量表生成，仅供参考与自我了解，不构成医学诊断 ❤️</div>
+        <div class="two">
+          <div class="btn ghost">查看记录</div>
+          <div class="btn">再测一次</div>
+        </div>
+      </div>
+    </div>
+    <div class="cap"><b>报告页</b> · 等级 + 维度图 + 建议</div>
+  </div>
+</div>
+
+</body>
+</html>

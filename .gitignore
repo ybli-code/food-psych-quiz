@@ -1,0 +1,16 @@
+# WeChat Developer Tools per-user settings
+project.private.config.json
+**/project.private.config.json
+# Local credentials and generated files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+secrets*.json
+*.log
+node_modules/
+__pycache__/
+.DS_Store
+Thumbs.db

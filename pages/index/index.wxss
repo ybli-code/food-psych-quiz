@@ -1,0 +1,97 @@
+.page-wrap {
+  padding: 32rpx 32rpx 60rpx;
+}
+
+/* 头部 */
+.hero {
+  text-align: center;
+  padding: 40rpx 0 48rpx;
+}
+.hero-emoji { font-size: 72rpx; }
+.hero-title {
+  font-size: 52rpx;
+  font-weight: 700;
+  color: #4A3B33;
+  letter-spacing: 4rpx;
+  margin-top: 12rpx;
+}
+.hero-sub { font-size: 26rpx; color: #A8968C; margin-top: 8rpx; }
+
+/* 今日推荐 */
+.recommend {
+  background: linear-gradient(140deg, #FFE8DC 0%, #FFD9C8 55%, #FFCBB8 100%);
+  position: relative;
+  margin-bottom: 32rpx;
+}
+.recommend-tag {
+  position: absolute;
+  top: 0;
+  right: 32rpx;
+  background: linear-gradient(135deg, #FF9A76 0%, #F08E6E 100%);
+  color: #FFFFFF;
+  font-size: 22rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 0 0 16rpx 16rpx;
+}
+.recommend-row { display: flex; align-items: flex-start; }
+.recommend-emoji { font-size: 64rpx; margin-right: 24rpx; }
+.recommend-info { flex: 1; }
+.recommend-name { font-size: 32rpx; font-weight: 600; color: #4A3B33; }
+.recommend-desc {
+  font-size: 24rpx;
+  color: #8C7466;
+  margin-top: 8rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.recommend-meta { font-size: 22rpx; color: #A8968C; margin-top: 10rpx; }
+.recommend-btn { margin-top: 24rpx; }
+
+/* 分类滚动条 */
+.cat-scroll {
+  white-space: nowrap;
+  margin: 8rpx 0 24rpx;
+}
+.cat-scroll .chip { margin-bottom: 8rpx; }
+
+/* 列表 */
+.scale-item { display: flex; align-items: center; margin-bottom: 24rpx; }
+.scale-emoji {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 24rpx;
+  background: #FFF3EA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+.scale-info { flex: 1; min-width: 0; }
+.scale-name { font-size: 30rpx; font-weight: 600; color: #4A3B33; }
+.scale-meta { font-size: 22rpx; color: #A8968C; margin-top: 6rpx; }
+.scale-arrow { font-size: 40rpx; color: #D9C8BC; margin-left: 12rpx; }
+
+.empty-tip {
+  text-align: center;
+  color: #C4B3A8;
+  padding: 60rpx 0;
+}
+
+.seo-line {
+  text-align: center;
+  font-size: 22rpx;
+  color: #C4B3A8;
+  margin-top: 24rpx;
+  line-height: 1.8;
+}
+
+.footer-tip {
+  text-align: center;
+  font-size: 22rpx;
+  color: #C4B3A8;
+  margin-top: 8rpx;
+}

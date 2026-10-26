@@ -1,0 +1,58 @@
+<view class="page-wrap" wx:if="{{record}}">
+  <!-- 等级卡片 -->
+  <view class="result-hero" style="background: linear-gradient(140deg, {{heroBg1}} 0%, {{heroBg2}} 100%);">
+    <view class="result-emoji">{{record.levelEmoji}}</view>
+    <view class="result-level">{{record.levelLabel}}</view>
+    <view class="result-total" wx:if="{{record.total !== null}}">总分 {{record.total}} <text class="result-range">/ {{maxTotal}}</text></view>
+    <view class="result-date">{{record.date}}</view>
+  </view>
+
+  <!-- 量表信息 -->
+  <view class="card result-scale" bindtap="goScale">
+    <text class="result-scale-emoji">{{record.scaleEmoji}}</text>
+    <text class="result-scale-name">{{record.scaleName}}</text>
+    <text class="scale-arrow">›</text>
+  </view>
+
+  <!-- 解读 -->
+  <view class="card section">
+    <view class="section-title">📖 结果解读</view>
+    <view class="section-body">{{record.desc}}</view>
+  </view>
+
+  <!-- 维度分布 -->
+  <view class="card section" wx:if="{{record.factors && record.factors.length > 0}}">
+    <view class="section-title">📊 {{isTrait ? '人格维度' : '维度得分'}}</view>
+    <view class="factor" wx:for="{{record.factors}}" wx:key="name">
+      <view class="factor-head">
+        <text class="factor-name">{{item.emoji}}{{item.name}}</text>
+        <text class="factor-score">{{isTrait ? item.mean : item.mean}}</text>
+      </view>
+      <view class="factor-bar-bg">
+        <view class="factor-bar" style="width: {{item.percent}}%;"></view>
+      </view>
+      <view class="factor-text" wx:if="{{item.text}}">{{item.text}}</view>
+    </view>
+  </view>
+
+  <!-- 建议 -->
+  <view class="card section" wx:if="{{record.advice}}">
+    <view class="section-title">💡 温暖建议</view>
+    <view class="section-body">{{record.advice}}</view>
+  </view>
+
+  <!-- 说明 -->
+  <view class="card section" wx:if="{{note}}">
+    <view class="section-title">ℹ️ 计分说明</view>
+    <view class="section-body note-body">{{note}}</view>
+  </view>
+
+  <!-- 免责声明 -->
+  <view class="disclaimer">本结果基于自评量表生成，仅供参考与自我了解，不构成医学诊断。如持续感到困扰，请寻求专业人士的帮助。❤️</view>
+
+  <!-- 操作按钮 -->
+  <view class="result-actions">
+    <view class="btn-ghost action-half" bindtap="goHistory">查看记录</view>
+    <view class="btn-primary action-half" bindtap="retest">再测一次</view>
+  </view>
+</view>

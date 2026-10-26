@@ -1,0 +1,29 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/library/library",
+    "pages/history/history",
+    "pages/quiz/quiz",
+    "pages/result/result"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FDF6EF",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "心晴测",
+    "backgroundColor": "#FDF6EF",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#B9A79C",
+    "selectedColor": "#F08E6E",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "首页" },
+      { "pagePath": "pages/library/library", "text": "量表库" },
+      { "pagePath": "pages/history/history", "text": "记录" }
+    ]
+  },
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}
