@@ -13,7 +13,7 @@ function check(cond, msg) {
 scalesData.scales.forEach(function (s) {
   // 每个量表：题目非空、选项非空、levels 覆盖
   check(s.items.length > 0, s.id + ' 无题目')
-  check(s.options.length >= 4, s.id + ' 选项不足')
+  check(s.options.length >= 3, s.id + ' 选项不足')
   s.items.forEach(function (it, i) {
     check(typeof it.t === 'string' && it.t.length > 0, s.id + ' 第 ' + (i + 1) + ' 题文本为空')
   })
@@ -127,10 +127,38 @@ r.factors.forEach(function (f) {
   check(f.mean === bfiExpect[f.name], 'BFI-10 维度 ' + f.name + ' 计分错误: ' + f.mean)
 })
 
+// WHO-5：全 5 为最高幸福感，总分 25；全 0 为提示进一步评估的区间。
+var who5 = scalesData.getScaleById('who5')
+r = scalesData.computeResult(who5, allAnswers(who5, 5))
+check(r.total === 25 && r.levelLabel === '完成幸福感自评', 'WHO-5 高分计分错误: ' + r.total + '/' + r.levelLabel)
+r = scalesData.computeResult(who5, allAnswers(who5, 0))
+check(r.total === 0 && r.levelLabel === '幸福感值得关注', 'WHO-5 低分计分错误: ' + r.total + '/' + r.levelLabel)
+
+// UCLA-3：响应 1~3 分，总分 3~9，不对个人分数设诊断分界值。
+var ucla3 = scalesData.getScaleById('ucla3')
+r = scalesData.computeResult(ucla3, allAnswers(ucla3, 1))
+check(r.total === 3 && r.levelLabel === '完成自我了解', 'UCLA-3 最低分计分错误: ' + r.total)
+r = scalesData.computeResult(ucla3, allAnswers(ucla3, 3))
+check(r.total === 9 && r.levelLabel === '完成自我了解', 'UCLA-3 最高分计分错误: ' + r.total)
+
+// K6：全 0 / 全 4 分别覆盖低困扰与进一步评估提示区间。
+var k6 = scalesData.getScaleById('k6')
+r = scalesData.computeResult(k6, allAnswers(k6, 0))
+check(r.total === 0 && r.levelLabel === '困扰程度较低', 'K6 最低分计分错误: ' + r.total)
+r = scalesData.computeResult(k6, allAnswers(k6, 4))
+check(r.total === 24 && r.levelLabel === '建议进一步评估', 'K6 最高分计分错误: ' + r.total)
+
+// GSES：总分 10~40，呈现自我效能感描述。
+var gses = scalesData.getScaleById('gses')
+r = scalesData.computeResult(gses, allAnswers(gses, 1))
+check(r.total === 10 && r.levelLabel === '效能信心较低', 'GSES 最低分计分错误: ' + r.total)
+r = scalesData.computeResult(gses, allAnswers(gses, 4))
+check(r.total === 40 && r.levelLabel === '效能信心较强', 'GSES 最高分计分错误: ' + r.total)
+
 if (failures.length > 0) {
   console.error('FAIL (' + failures.length + '):')
   failures.forEach(function (f) { console.error('  - ' + f) })
   process.exit(1)
 } else {
-  console.log('OK: 9 个量表数据完整性 + 计分逻辑全部通过')
+  console.log('OK: ' + scalesData.scales.length + ' 个量表数据完整性 + 计分逻辑全部通过')
 }

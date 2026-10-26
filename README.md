@@ -1,6 +1,6 @@
 # 心晴测 · 心理测评小程序
 
-一款页面温馨、开箱即用的微信小程序，收录 9 份国际通行的专业心理量表，支持计分、解读、本地历史记录。
+一款页面温馨、开箱即用的微信小程序，收录 13 份心理与幸福感自评量表，支持计分、解读、本地历史记录。
 
 ## 量表清单
 
@@ -15,6 +15,10 @@
 | SES 自尊量表 | 10 | 自我 | 总分分级（10~40，含反向题） |
 | ISI 失眠严重程度指数 | 7 | 睡眠 | 总分分级（0~28） |
 | BFI-10 大五人格简式量表 | 10 | 人格 | 五维度画像（无好坏之分） |
+| WHO-5 世界卫生组织五项幸福感指数 | 5 | 幸福感 | 原始分 0~25；低于 13 分提示可进一步评估 |
+| UCLA-3 三题孤独感量表 | 3 | 人际 | 总分 3~9；不设个人诊断分界值 |
+| K6 六项心理困扰量表 | 6 | 情绪 | 总分 0~24；13 分为常见研究筛查提示值 |
+| GSES 一般自我效能感量表 | 10 | 自我 | 总分 10~40；描述性区间，不作诊断 |
 
 ## 功能
 
@@ -45,7 +49,7 @@ xinqingce-mp/
 
 ## 使用方式
 
-1. 用微信开发者工具「导入项目」选择本目录（appid 已配置：wx7f10a7307dfd4e55）
+1. 用微信开发者工具「导入项目」选择本仓库根目录（`project.config.json` 中登记的 AppID 为 `wxce2c4be552d5867f`；上传前请确认该账号对小程序有开发权限）
 2. 直接编译即可预览全部功能；数据保存在手机本地（wx storage），无需任何后端配置
 3. app_secret 等私密凭据不入项目代码（统一存于 secrets-manager）
 
@@ -53,7 +57,7 @@ xinqingce-mp/
 
 - **sitemap.json**：仅收录首页与量表库（有独立内容），答题/报告/记录等动态参数页 `disallow`，避免蜘蛛抓到空页拉低质量分
 - **页面标题关键词**：每个页面的 `navigationBarTitleText` 均为「心晴测 + 核心关键词」结构（如「心晴测量表库 · 抑郁焦虑压力睡眠测评」），这是搜一搜最主要的抓取字段
-- **正文关键词锚文本**：首页与量表库底部有包含全部量表名称的热门测评文案，供蜘蛛索引
+- **正文内容**：首页与量表库提供量表分类、题数和时长，帮助用户选择适合的测评
 - **分享卡片**：全部页面实现 `onShareAppMessage`，首页/量表库/报告页支持 `onShareTimeline`（朋友圈），分享标题自带搜索关键词，分享量直接影响搜一搜权重
 - **小程序后台（需手动在 MP 平台完成）**：
   - 名称与简介：名称「心晴测」，简介建议含「心理测评、抑郁测试、焦虑测试、心理健康」等关键词
@@ -65,6 +69,14 @@ xinqingce-mp/
 - 所有量表计分规则（含反向计分题）均按公开的标准版本实现
 - 测评结果仅供自我了解，页面已内置免责声明，不构成医学诊断
 - 若未来需要多端同步历史记录，可在此项目上接入云数据库，把 `utils/store.js` 替换为云端读写即可
+
+## 新增量表来源与许可
+
+- **WHO-5**：题目参考 WHO 官方简体中文版；官方 2024 版列明 CC BY-NC-SA 3.0 IGO，适用于非商业用途，改编/翻译需署名并按相同或兼容许可分享，也需附注该中文翻译并非 WHO 制作或背书。WHO 建议原始分低于 13 可提示进一步评估可能性，不是个人诊断界值。[WHO-5 官方资料](https://www.who.int/publications/m/item/WHO-UCN-MSD-MHE-2024.01) · [官方评分说明](https://cdn.who.int/media/docs/default-source/mental-health/who-5_english-original4da539d6ed4b49389e3afe47cda2326a.pdf)
+- **UCLA-3**：题目依据英国国家统计局公布的成人三题条目翻译，响应计分 1~3，总分 3~9；官方说明没有标准的个人诊断界值。[ONS 量表与计分说明](https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/methodologies/measuringlonelinessguidanceforuseofthenationalindicatorsonsurveys)
+- **K6**：Kessler 六项心理困扰筛查工具，总分 0~24；13 分常用作研究中的高困扰筛查提示，不等于个人诊断。原作者资料说明可免费使用并要求引用原始文献；本项目中文题目为易读性翻译，未声称经过本土化验证。[K6/K10 作者资料](https://rckessler.scholars.harvard.edu/k10-and-k6-scales) · [计量说明](https://cih.jhu.edu/measurement/kessler-psychological-distress-scale/)
+- **GSES**：依一般自我效能感量表十题、四级响应结构编写易读中文表达，总分 10~40。分段仅为本项目的描述性提示，不是原量表诊断阈值；未声称中文表达与已验证版本等效。请引用 Schwarzer 与 Jerusalem（1995）。[作者量表 FAQ](https://userpage.fu-berlin.de/~health/faq_gse.pdf) · [量表简介](https://www.sralab.org/rehabilitation-measures/general-self-efficacy-scale)
+- WHO-5 中文题目为翻译表达，并非 WHO 制作；若项目改作商业用途，需先核实并取得相应授权，不能仅凭本仓库说明推断许可已覆盖商业发布。
 
 ## 仓库版本说明
 

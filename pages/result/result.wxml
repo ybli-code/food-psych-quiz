@@ -16,7 +16,7 @@
 
   <!-- 解读 -->
   <view class="card section">
-    <view class="section-title">📖 结果解读</view>
+    <view class="section-title">📖 这次结果怎么理解</view>
     <view class="section-body">{{record.desc}}</view>
   </view>
 

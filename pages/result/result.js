@@ -38,7 +38,7 @@ Page({
     var maxTotal = ''
     if (record.total !== null && record.total !== undefined && scale) {
       if (scale.scoring.type === 'sum') {
-        maxTotal = String(scale.options.length * scale.items.length)
+        maxTotal = String(scale.scoring.maxTotal || scale.options.length * scale.items.length)
       } else if (scale.scoring.type === 'index') {
         maxTotal = '100'
       } else if (scale.scoring.type === 'factors') {

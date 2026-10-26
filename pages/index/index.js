@@ -5,7 +5,8 @@ Page({
     categories: scalesData.categories,
     catIndex: 0,
     recommend: {},
-    filtered: []
+    filtered: [],
+    total: scalesData.scales.length
   },
 
   onLoad: function () {
@@ -50,7 +51,7 @@ Page({
 
   onShareAppMessage: function () {
     return {
-      title: '心晴测 · 9 份专业心理量表，抑郁焦虑压力睡眠一键自评',
+      title: '心晴测 · 13 份心理与幸福感自评量表',
       path: '/pages/index/index'
     }
   },

@@ -35,14 +35,14 @@ Page({
 
   onShareAppMessage: function () {
     return {
-      title: '心晴测量表库 · SCL-90、PHQ-9、GAD-7 等专业量表免费测',
+      title: '心晴测量表库 · PHQ-9、GAD-7、WHO-5 等自评量表',
       path: '/pages/library/library'
     }
   },
 
   onShareTimeline: function () {
     return {
-      title: '心晴测量表库 · 9 份国际通行专业心理量表',
+      title: '心晴测量表库 · 13 份自我了解量表',
       query: ''
     }
   }

@@ -1,7 +1,8 @@
 <view class="page-wrap">
   <view class="lib-hero">
+    <view class="eyebrow">找到适合此刻的自我了解方式</view>
     <view class="title">量表库</view>
-    <view class="subtitle">收录 {{total}} 份国际通行的专业心理量表</view>
+    <view class="subtitle">共 {{filtered.length}} / {{total}} 份 · 按主题筛选，挑选适合你的测评</view>
   </view>
 
   <scroll-view scroll-x class="cat-scroll" enable-flex>
@@ -15,6 +16,7 @@
   </scroll-view>
 
   <view class="scale-list">
+    <view class="list-heading">测评清单</view>
     <view
       wx:for="{{filtered}}"
       wx:key="id"
@@ -35,5 +37,5 @@
     <view wx:if="{{filtered.length === 0}}" class="empty-tip">该分类暂无量表 🌱</view>
   </view>
 
-  <view class="seo-line">全部量表均可免费在线测评：症状自评 SCL-90、抑郁自评 SDS/PHQ-9、焦虑自评 SAS/GAD-7、压力知觉 PSS-10、自尊量表 SES、失眠指数 ISI、大五人格 BFI-10</view>
+  <view class="library-note">测评结果用于自我了解，不构成诊断或治疗建议。</view>
 </view>
